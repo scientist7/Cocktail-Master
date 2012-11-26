@@ -1,0 +1,4 @@
+Gin Beefeater 1 0 0
+Gin BombaySapphire 1 0 0
+Juice Lemon 0 0 1
+Sugar Caster 0 1 0
