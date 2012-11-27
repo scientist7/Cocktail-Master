@@ -14,24 +14,35 @@ using std::string;
 using std::vector;
 using std::multimap;
 
+typedef multimap<string, Ingredient> BarType;
+
 //--Declare functions
-void readDB(multimap<string, Ingredient> &);
-vector<Ingredient> GetIngredients(multimap<string, Ingredient> &);
+void readDB(BarType &);
+vector<Ingredient> getIngredients(BarType &);
+void balanceDrink(vector<Ingredient>);
 
 int main() {
 	//--Create map to store database
-	multimap<string, Ingredient> bar;
+	BarType bar;
 	//--Read database
 	readDB(bar);
-	//--Ask user for ingredients
-	vector<Ingredient> cocktail = GetIngredients(bar);
+
+	char command;
+	do {
+		//--Ask user for ingredients
+		//vector<Ingredient> cocktail = getIngredients(bar);
+		balanceDrink(getIngredients(bar));
+	    cout<<"Enter q to quit, or anything else to continue"<<endl;
+		cin >> command;
+	} while(command != 'q');
+
 	return 0;
 }
 
 //--Define functions
 
 //--This function reads database and stores info about known ingredients
-void readDB(multimap<string, Ingredient> &bar) {
+void readDB(BarType &bar) {
 	//--Open database file
 	ifstream input("Text.txt");
 	//--Read one ingredient at a time
@@ -46,7 +57,7 @@ void readDB(multimap<string, Ingredient> &bar) {
 }
 
 //--This function asks user to enter a set of ingredients and returns a vector of them
-vector<Ingredient> GetIngredients(multimap<string, Ingredient> &bar) {
+vector<Ingredient> getIngredients(BarType &bar) {
 
 	//--vector to hold ingredients
 	vector<Ingredient> cocktail;
@@ -91,9 +102,16 @@ vector<Ingredient> GetIngredients(multimap<string, Ingredient> &bar) {
 		//--Otherwise add ingredient to cocktail
 		auto ing_it=bar.find(Categories[catchoice-1]);
 		advance(ing_it,prodchoice-1);
+		//if(!count(cocktail.cbegin(),cocktail.cend(),*ing_it))
 	    cocktail.push_back(ing_it->second);	
 	} 
 
 	return cocktail;
 }
 
+//--this function returns a balanced cocktail
+void balanceDrink(vector<Ingredient> cocktail){
+	cout<<"List of ingredients"<<endl;
+	for(auto ing : cocktail)
+		cout<<ing.get_name()<<" "<<ing.get_category()<<endl;
+}
