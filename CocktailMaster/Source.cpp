@@ -30,7 +30,6 @@ int main() {
 	char command;
 	do {
 		//--Ask user for ingredients
-		//vector<Ingredient> cocktail = getIngredients(bar);
 		balanceDrink(getIngredients(bar));
 	    cout<<"Enter q to quit, or anything else to continue"<<endl;
 		cin >> command;
@@ -102,8 +101,9 @@ vector<Ingredient> getIngredients(BarType &bar) {
 		//--Otherwise add ingredient to cocktail
 		auto ing_it=bar.find(Categories[catchoice-1]);
 		advance(ing_it,prodchoice-1);
-		//if(!count(cocktail.cbegin(),cocktail.cend(),*ing_it))
-	    cocktail.push_back(ing_it->second);	
+		//--Add to cocktail vector if not duplicate
+		if(!count(cocktail.cbegin(),cocktail.cend(),ing_it->second))
+			cocktail.push_back(ing_it->second);	
 	} 
 
 	return cocktail;
