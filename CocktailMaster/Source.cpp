@@ -4,6 +4,7 @@
 #include <map>
 #include <string>
 #include "Ingredient.h"
+#include "Cocktail.h"
 
 using std::cout;
 using std::cin;
@@ -19,7 +20,7 @@ typedef multimap<string, Ingredient> BarType;
 //--Declare functions
 void readDB(BarType &);
 vector<Ingredient> getIngredients(BarType &);
-void balanceDrink(vector<Ingredient>);
+
 
 int main() {
 	//--Create map to store database
@@ -29,9 +30,13 @@ int main() {
 
 	char command;
 	do {
-		//--Ask user for ingredients
-		balanceDrink(getIngredients(bar));
-	    cout<<"Enter q to quit, or anything else to continue"<<endl;
+		//--Ask user for ingredients and create cocktail object
+		Cocktail cocktail(getIngredients(bar));
+		//--Calculate correct proportions
+		cocktail.balance_drink();
+		//--Print recipe
+		cout << cocktail << endl;
+	    cout << "Enter q to quit, or anything else to continue" << endl;
 		cin >> command;
 	} while(command != 'q');
 
@@ -109,9 +114,4 @@ vector<Ingredient> getIngredients(BarType &bar) {
 	return cocktail;
 }
 
-//--this function returns a balanced cocktail
-void balanceDrink(vector<Ingredient> cocktail){
-	cout<<"List of ingredients"<<endl;
-	for(auto ing : cocktail)
-		cout<<ing.get_name()<<" "<<ing.get_category()<<endl;
-}
+

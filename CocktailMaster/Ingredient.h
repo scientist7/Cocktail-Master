@@ -28,3 +28,4 @@ private:
 //--overloaded operators
 bool operator==(const Ingredient &, const Ingredient &);
 bool operator!=(const Ingredient &, const Ingredient &);
+std::ostream &operator<<(std::ostream &os, const Ingredient &item);
