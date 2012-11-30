@@ -13,8 +13,11 @@ void Cocktail::balance_drink() {
 
 //--overloaded operators
 std::ostream &operator<<(std::ostream &os, const Cocktail &item) {
-	for(auto el : item.elements)
-		os << std::get<0>(el) << " " << std::get<1>(el) << " oz"<< std::endl;
+	for(auto el : item.elements) {
+		os << std::left << std::setw(20) << std::get<0>(el) 
+		   << " " << std::right << std::get<1>(el) << " oz"
+		   << std::right << std::endl;
+	}
 	return os;
 }
 

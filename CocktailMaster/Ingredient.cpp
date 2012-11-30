@@ -12,6 +12,6 @@ bool operator!=(const Ingredient &lhs, const Ingredient &rhs) {
 }
 
 std::ostream &operator<<(std::ostream &os, const Ingredient &item) {
-	os << item.get_name() << " " << item.get_category();
+	os << item.get_name()+" "+item.get_category();
 	return os;
 }
