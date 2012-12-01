@@ -6,7 +6,8 @@
 
 class Cocktail
 {
-	typedef std::tuple<Ingredient, double> element;
+	typedef std::tuple<Ingredient, double, int> element;
+	typedef std::vector<element>::size_type eindex;
 public:
 	//--Constructors
 	Cocktail(const std::vector<Ingredient> &);
@@ -15,6 +16,7 @@ public:
 		                            const Cocktail &item);
 
 	void balance_drink();
+	void classify_ingredients();
 private:
 	std::vector<element> elements; 
 };

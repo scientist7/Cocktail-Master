@@ -25,6 +25,8 @@ private:
 	double sourness;
 };
 
+bool collinear(const Ingredient &, const Ingredient &);
+
 //--overloaded operators
 bool operator==(const Ingredient &, const Ingredient &);
 bool operator!=(const Ingredient &, const Ingredient &);
