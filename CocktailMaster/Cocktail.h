@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <tuple>
 #include <vector>
+#include <algorithm>
 #include "Ingredient.h"
 
 class Cocktail
@@ -16,8 +17,9 @@ public:
 		                            const Cocktail &item);
 
 	void balance_drink();
-	void classify_ingredients();
+	
 private:
 	std::vector<element> elements; 
+	void classify_ingredients();
 };
 

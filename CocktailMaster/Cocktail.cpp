@@ -10,6 +10,10 @@ Cocktail::Cocktail(const std::vector<Ingredient> &list) {
 void Cocktail::balance_drink() {
 	//--group similar ingredients together
 	this->classify_ingredients();
+	//--sort by group number
+	sort(this->elements.begin(), this->elements.end(),
+		[] (const element &lhs, const element &rhs)
+	       {return std::get<2>(lhs) < std::get<2>(rhs);});
 	return;
 }
 
