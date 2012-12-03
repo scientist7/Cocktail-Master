@@ -4,6 +4,8 @@
 #include <vector>
 #include <algorithm>
 #include "Ingredient.h"
+#include <Eigen/Eigen>
+
 
 class Cocktail
 {
@@ -20,6 +22,6 @@ public:
 	
 private:
 	std::vector<element> elements; 
-	void classify_ingredients();
+	int classify_ingredients();
 };
 
