@@ -35,7 +35,7 @@ int main() {
 		//--Calculate correct proportions
 		cocktail.balance_drink();
 		//--Print recipe
-		cout << cocktail << endl;
+		cout << endl << cocktail << endl;
 	    cout << "Enter q to quit, or anything else to continue" << endl;
 		cin >> command;
 	} while(command != 'q');

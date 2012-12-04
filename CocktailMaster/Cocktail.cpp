@@ -10,28 +10,71 @@ Cocktail::Cocktail(const std::vector<Ingredient> &list) {
 void Cocktail::balance_drink() {
 	//--group similar ingredients together
 	//--and find number of unique ingredients
-	int col=this->classify_ingredients();
+	eindex col=this->classify_ingredients();
 	
 	//--sort by group number
 	sort(this->elements.begin(), this->elements.end(),
 		[] (const element &lhs, const element &rhs)
 	       {return std::get<2>(lhs) < std::get<2>(rhs);});
 
+	//--compute overall flavor vector for each group
+	//--for a group of collinear ingredients, the overall flavor
+	//--vector is the weighted sum, where the weight is alpha/magnitude,
+	//--alpha=1/((1/m1)+(1/m2)+...)
+
+	std::vector<Eigen::Vector3d> grouped_ingredients(col);
+	for(eindex i = 0; i < 3; ++i)
+				grouped_ingredients[0](i) = 0;
+	std::vector<double> group_norm(col,0);
+	eindex gindex = 0;
+	double invalpha = 0;
+	for(eindex i = 0; i < elements.size(); ++i) {
+		//--next group
+		if(gindex != std::get<2>(elements[i])) {
+			group_norm[gindex] = (1/invalpha);
+			grouped_ingredients[gindex] *= group_norm[gindex];
+			invalpha = 0;
+			++gindex;
+			if(gindex < col) {
+				for(eindex i = 0; i < 3; ++i)
+					grouped_ingredients[gindex](i) = 0;
+			}
+		}
+
+		invalpha += 1/std::get<0>(elements[i]).get_flavor_magnitude();
+		grouped_ingredients[gindex](0) += (std::get<0>(elements[i]).get_alcoholic_bite()
+				                           /std::get<0>(elements[i]).get_flavor_magnitude());
+	    grouped_ingredients[gindex](1) += (std::get<0>(elements[i]).get_sweetness()
+				                           /std::get<0>(elements[i]).get_flavor_magnitude());
+		grouped_ingredients[gindex](2) += (std::get<0>(elements[i]).get_sourness()
+				                           /std::get<0>(elements[i]).get_flavor_magnitude());	
+	}
+	
+	//--Finish last group
+	group_norm[gindex] = (1/invalpha);
+	grouped_ingredients[gindex] *= group_norm[gindex];
+	
 	//-- goal is to solve Ax=[1,1,1] for x
+
 	//--x is a vector of coefficients for each ingredient
 	//--A is a 3 x n matrix with each column representing a flavor vector
 	const Eigen::Vector3d b(1,1,1);
 	Eigen::Matrix<double, 3, Eigen::Dynamic> A(3,col);
 	//--loop to fill A
-	for(auto el : elements) {
-		A.col(std::get<2>(el)) << std::get<0>(el).get_alcoholic_bite(),
-		                          std::get<0>(el).get_sweetness(),
-								  std::get<0>(el).get_sourness();
+	for(eindex gindex = 0; gindex < col; ++gindex) {
+		A.col(gindex) << grouped_ingredients[gindex](0),
+			             grouped_ingredients[gindex](1),
+						 grouped_ingredients[gindex](2);
+		                         
 	}
+
 	Eigen::VectorXd x = A.colPivHouseholderQr().solve(b);
+	
 	//--fill results into elements
 	for(eindex i = 0; i < elements.size(); ++i) 
-		std::get<1>(elements[i]) = x(std::get<2>(elements[i]));
+		std::get<1>(elements[i]) = x(std::get<2>(elements[i]))
+		                           *(group_norm[std::get<2>(elements[i])]
+	                                 /std::get<0>(elements[i]).get_flavor_magnitude());
 	return;
 }
 
