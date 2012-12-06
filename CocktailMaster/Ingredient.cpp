@@ -12,7 +12,7 @@ bool collinear(const Ingredient &lhs, const Ingredient &rhs) {
 				   + lhs.get_sourness()*rhs.get_sourness()
 				   + lhs.get_sweetness()*rhs.get_sweetness();
 	//--if they are close enough, consider them collinear
-	if(fabs(dotprod - (mag1 * mag2)) < 0.16) return true;
+	if(fabs(dotprod - (mag1 * mag2)) < 0.01) return true;
 	else return false;
 
 }

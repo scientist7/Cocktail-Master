@@ -20,6 +20,10 @@ public:
 
 	void balance_drink();
 	
+    //--Members controlling output
+	static double ozincrements;
+	static double tspperoz;
+
 private:
 	std::vector<element> elements; 
 	int classify_ingredients();

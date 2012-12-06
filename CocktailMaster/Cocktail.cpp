@@ -1,5 +1,9 @@
 #include "Cocktail.h"
 
+//--define static members
+double Cocktail::ozincrements=0.25;
+double Cocktail::tspperoz=6;
+
 //--Constructors
 Cocktail::Cocktail(const std::vector<Ingredient> &list) {
 	//--fill elements of cocktail
@@ -68,6 +72,14 @@ void Cocktail::balance_drink() {
 		                         
 	}
 
+	try {
+		if(col<3) throw 1;
+		if(col>3) throw 2;
+	} catch(int e) {
+		std::cout<<"Error code "<<e<<std::endl;
+		return;
+	}
+
 	Eigen::VectorXd x = A.colPivHouseholderQr().solve(b);
 	
 	//--fill results into elements
@@ -108,10 +120,28 @@ int Cocktail::classify_ingredients() {
 
 //--overloaded operators
 std::ostream &operator<<(std::ostream &os, const Cocktail &item) {
+	double oz=0,tsp=0;
 	for(auto el : item.elements) {
+		//--First convert raw oz amount to oz + tsp
+		oz=std::get<1>(el);
+		//--Report small amounts of strong flavors in tsp (e.g. sugar)
+		if(oz <= 0.5 && std::get<0>(el).get_flavor_magnitude() >= 3) {
+			tsp = oz;
+			oz = 0;
+		}
+		else {
+			tsp = fmod(oz,Cocktail::ozincrements);
+			//--Check for precision problems
+			if(fabs(tsp-Cocktail::ozincrements)<.001) tsp = 0;
+			oz -= tsp;
+		}
+		tsp*=Cocktail::tspperoz;
+		tsp=floor(tsp+0.5);
 		os << std::left << std::setw(20) << std::get<0>(el) 
-		   << " " << std::right << std::get<1>(el) << " oz"
-		   << std::endl;
+		   << " ";
+		if(oz > 0) os << std::right << oz << " oz ";
+		if(tsp > 0) os << tsp << " tsp";   
+		os << std::endl;
 	}
 	return os;
 }
