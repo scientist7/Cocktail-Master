@@ -75,18 +75,26 @@ void Cocktail::balance_drink() {
 	try {
 		if(col<3) throw 1;
 		if(col>3) throw 2;
+	
+	
+		//Eigen::VectorXd x = A.colPivHouseholderQr().solve(b);
+		Eigen::ColPivHouseholderQR<Eigen::Matrix3d> lu(A);
+		Eigen::Vector3d x = lu.solve(b);
+		if(x(0) < 0 || x(1) < 0 || x(2) < 0) throw 3;
+		double dwRelErr = ( A* x - b ).norm() / b.norm() ;
+
+
+	
+		//--fill results into elements
+		for(eindex i = 0; i < elements.size(); ++i) 
+			std::get<1>(elements[i]) = x(std::get<2>(elements[i]))
+					                   *(group_norm[std::get<2>(elements[i])]
+									     /std::get<0>(elements[i]).get_flavor_magnitude());
+										 
 	} catch(int e) {
 		std::cout<<"Error code "<<e<<std::endl;
 		return;
 	}
-
-	Eigen::VectorXd x = A.colPivHouseholderQr().solve(b);
-	
-	//--fill results into elements
-	for(eindex i = 0; i < elements.size(); ++i) 
-		std::get<1>(elements[i]) = x(std::get<2>(elements[i]))
-		                           *(group_norm[std::get<2>(elements[i])]
-	                                 /std::get<0>(elements[i]).get_flavor_magnitude());
 	return;
 }
 
