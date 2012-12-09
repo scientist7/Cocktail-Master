@@ -29,6 +29,7 @@ private:
 	double flavor_magnitude;
 };
 
+double CosAngleIngredients(const Ingredient &, const Ingredient &);
 bool collinear(const Ingredient &, const Ingredient &);
 
 //--overloaded operators

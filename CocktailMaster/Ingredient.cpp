@@ -1,7 +1,7 @@
 #include "Ingredient.h"
 #include <string>
 
-bool collinear(const Ingredient &lhs, const Ingredient &rhs) {
+double CosAngleIngredients(const Ingredient &lhs, const Ingredient &rhs) {
 	double mag1 = sqrt(lhs.get_alcoholic_bite()*lhs.get_alcoholic_bite()
 				     + lhs.get_sourness()*lhs.get_sourness()
 				     + lhs.get_sweetness()*lhs.get_sweetness());
@@ -11,8 +11,13 @@ bool collinear(const Ingredient &lhs, const Ingredient &rhs) {
 	double dotprod = lhs.get_alcoholic_bite()*rhs.get_alcoholic_bite()
 				   + lhs.get_sourness()*rhs.get_sourness()
 				   + lhs.get_sweetness()*rhs.get_sweetness();
+
+	return dotprod/(mag1*mag2);
+}
+
+bool collinear(const Ingredient &lhs, const Ingredient &rhs) {
 	//--if they are close enough, consider them collinear
-	if(fabs(dotprod - (mag1 * mag2)) < 0.01) return true;
+	if(fabs(CosAngleIngredients(lhs,rhs)-1) < .00001) return true;
 	else return false;
 
 }
