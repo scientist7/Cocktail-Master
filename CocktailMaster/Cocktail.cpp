@@ -74,13 +74,15 @@ void Cocktail::balance_drink() {
 
 	try {
 		if(col<3) throw 1;
-		if(col>3) throw 2;
+		if(col>3) 
+			throw multiple_solutions("More than 3 unique ingredients for only 3 constraints");
 	
 	
 		//Eigen::VectorXd x = A.colPivHouseholderQr().solve(b);
 		Eigen::ColPivHouseholderQR<Eigen::Matrix3d> lu(A);
 		Eigen::Vector3d x = lu.solve(b);
-		if(x(0) < 0 || x(1) < 0 || x(2) < 0) throw 3;
+		if(x(0) < 0 || x(1) < 0 || x(2) < 0) 
+				throw no_solution("Unphysical solution");
 		double dwRelErr = ( A* x - b ).norm() / b.norm() ;
 
 
@@ -91,7 +93,14 @@ void Cocktail::balance_drink() {
 					                   *(group_norm[std::get<2>(elements[i])]
 									     /std::get<0>(elements[i]).get_flavor_magnitude());
 										 
-	} catch(int e) {
+	} catch(const no_solution &e) {
+		std::cerr << e.what() << std::endl;
+        //--Try adding some standard ingredients to find a solution
+	} catch(const multiple_solutions &e) {
+		std::cerr << e.what() << std::endl;
+		//--Condense ingredients with small opening angles together
+	}
+	catch(int e) {
 		std::cout<<"Error code "<<e<<std::endl;
 		return;
 	}
