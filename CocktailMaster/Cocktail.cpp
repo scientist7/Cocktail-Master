@@ -84,8 +84,8 @@ void Cocktail::balance_drink() {
 		if(x(0) < 0 || x(1) < 0 || x(2) < 0) 
 				throw no_solution("Unphysical solution");
 		double dwRelErr = ( A* x - b ).norm() / b.norm() ;
-
-
+		if(dwRelErr>0.001) throw no_solution("Inaccurate solution");
+		
 	
 		//--fill results into elements
 		for(eindex i = 0; i < elements.size(); ++i) 

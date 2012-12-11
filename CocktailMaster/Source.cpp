@@ -5,6 +5,7 @@
 #include <string>
 #include "Ingredient.h"
 #include "Cocktail.h"
+#include "no_solution.h"
 
 using std::cout;
 using std::cin;
@@ -22,13 +23,14 @@ void readDB(BarType &);
 vector<Ingredient> getIngredients(BarType &);
 
 
-int main() {
+int main() { 
 	//--Create map to store database
 	BarType bar;
 	//--Read database
 	readDB(bar);
 
 	char command;
+
 	do {
 		//--Ask user for ingredients and create cocktail object
 		Cocktail cocktail(getIngredients(bar));
