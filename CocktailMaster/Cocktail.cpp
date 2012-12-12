@@ -5,10 +5,17 @@ double Cocktail::ozincrements=0.25;
 double Cocktail::tspperoz=6;
 
 //--Constructors
-Cocktail::Cocktail(const std::vector<Ingredient> &list) {
+Cocktail::Cocktail(const std::vector<Ingredient> &list, 
+				   const std::vector<Ingredient> &backup) {
+	
 	//--fill elements of cocktail
 	for(auto el : list)
 		elements.push_back(std::make_tuple(el,0,-1));
+
+	//--fill reserve ingredients 
+	for(auto el : backup)
+		reserves.push_back(el);
+
 }
 
 void Cocktail::balance_drink() {
@@ -78,7 +85,6 @@ void Cocktail::balance_drink() {
 			throw multiple_solutions("More than 3 unique ingredients for only 3 constraints");
 	
 	
-		//Eigen::VectorXd x = A.colPivHouseholderQr().solve(b);
 		Eigen::ColPivHouseholderQR<Eigen::Matrix3d> lu(A);
 		Eigen::Vector3d x = lu.solve(b);
 		if(x(0) < 0 || x(1) < 0 || x(2) < 0) 
@@ -96,6 +102,20 @@ void Cocktail::balance_drink() {
 	} catch(const no_solution &e) {
 		std::cerr << e.what() << std::endl;
         //--Try adding some standard ingredients to find a solution
+		bool skip = false;
+		for(eindex i = 0; i < reserves.size(); ++i) {
+			skip = false;
+			//--Check that it's not collinear with any existing ingredients
+			for(eindex j = 0; j < elements.size(); ++j) {
+				if(collinear(reserves[i], std::get<0>(elements[j]))) {
+					skip=true;
+					break;
+				}
+			}
+			if(skip) continue;
+			//--Here this reserve ingredient is tried
+			
+		}
 	} catch(const multiple_solutions &e) {
 		std::cerr << e.what() << std::endl;
 		//--Condense ingredients with small opening angles together

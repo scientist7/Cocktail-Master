@@ -15,7 +15,8 @@ class Cocktail
 	typedef std::vector<element>::size_type eindex;
 public:
 	//--Constructors
-	Cocktail(const std::vector<Ingredient> &);
+	Cocktail(const std::vector<Ingredient> &, 
+		     const std::vector<Ingredient> &);
 	
 	friend std::ostream &operator<<(std::ostream &os, 
 		                            const Cocktail &item);
@@ -29,5 +30,6 @@ public:
 private:
 	std::vector<element> elements; 
 	int classify_ingredients();
+	std::vector<Ingredient> reserves;
 };
 

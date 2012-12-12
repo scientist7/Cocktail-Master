@@ -21,6 +21,7 @@ typedef multimap<string, Ingredient> BarType;
 //--Declare functions
 void readDB(BarType &);
 vector<Ingredient> getIngredients(BarType &);
+vector<Ingredient> getReserveIngredients(BarType &);
 
 
 int main() { 
@@ -33,7 +34,7 @@ int main() {
 
 	do {
 		//--Ask user for ingredients and create cocktail object
-		Cocktail cocktail(getIngredients(bar));
+		Cocktail cocktail(getIngredients(bar), getReserveIngredients(bar));
 		//--Calculate correct proportions
 		cocktail.balance_drink();
 		//--Print recipe
@@ -116,4 +117,26 @@ vector<Ingredient> getIngredients(BarType &bar) {
 	return cocktail;
 }
 
+//--This function returns ingredients used in case of no solution
+vector<Ingredient> getReserveIngredients(BarType &bar) {
+	//--vector to hold reserve ingredients
+	vector<Ingredient> reserves;
 
+	//--Define reserve ingredients
+	const string reservecat[3]={"Juice","Sugar","Vodka"};
+	const string reservename[3]={"Lemon","Caster","BlueIce"}; 
+	//--Look for these in bar
+	for(int i=0; i<3; ++i) {
+		for(auto bar_it = bar.lower_bound(reservecat[i]); 
+				bar_it != bar.upper_bound(reservecat[i]);
+				++bar_it) {
+					if((bar_it->second).get_name()==reservename[i]) {
+						reserves.push_back(bar_it->second);
+						break;
+					}
+		}
+	}
+
+	return reserves;
+
+}
