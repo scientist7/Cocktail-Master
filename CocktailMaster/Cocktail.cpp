@@ -70,29 +70,34 @@ void Cocktail::balance_drink() {
 	//--x is a vector of coefficients for each ingredient
 	//--A is a 3 x n matrix with each column representing a flavor vector
 	const Eigen::Vector3d b(1,1,1);
-	Eigen::Matrix<double, 3, Eigen::Dynamic> A(3,col);
-	//--loop to fill A
-	for(eindex gindex = 0; gindex < col; ++gindex) {
-		A.col(gindex) << grouped_ingredients[gindex](0),
-			             grouped_ingredients[gindex](1),
-						 grouped_ingredients[gindex](2);
-		                         
-	}
+	Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> A(col,col);
+	Eigen::VectorXd x;
 
 	try {
-		if(col<3) throw 1;
-		if(col>3) 
+		//--fewer than 3 unique ingredients
+		if(col<3) {
+			throw 1;
+		}
+		//--more than 3 unique ingredients
+		else if(col>3) 
 			throw multiple_solutions("More than 3 unique ingredients for only 3 constraints");
 	
-	
-		Eigen::ColPivHouseholderQR<Eigen::Matrix3d> lu(A);
-		Eigen::Vector3d x = lu.solve(b);
-		if(x(0) < 0 || x(1) < 0 || x(2) < 0) 
-				throw no_solution("Unphysical solution");
-		double dwRelErr = ( A* x - b ).norm() / b.norm() ;
-		if(dwRelErr>0.001) throw no_solution("Inaccurate solution");
-		
-	
+		//--exactly 3 unique ingredients
+		else {	
+			//--loop to fill A
+			for(eindex gindex = 0; gindex < col; ++gindex) {
+				A.col(gindex) << grouped_ingredients[gindex](0),
+				                 grouped_ingredients[gindex](1),
+							     grouped_ingredients[gindex](2);
+			}
+			Eigen::ColPivHouseholderQR<Eigen::Matrix3d> lu(A);
+			x = lu.solve(b);
+			if(x(0) < 0 || x(1) < 0 || x(2) < 0) 
+					throw no_solution("Unphysical solution");
+			double dwRelErr = ( A* x - b ).norm() / b.norm() ;
+			if(dwRelErr>0.001) throw no_solution("Inaccurate solution");
+		}
+
 		//--fill results into elements
 		for(eindex i = 0; i < elements.size(); ++i) 
 			std::get<1>(elements[i]) = x(std::get<2>(elements[i]))
