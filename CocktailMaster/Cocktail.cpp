@@ -84,11 +84,16 @@ void Cocktail::balance_drink() {
 	try {
 		//--fewer than 3 unique ingredients
 		if(col<3) {
+			//--find least squares solution
 			Eigen::JacobiSVD<Eigen::MatrixXd> svd(3,col);
 			x=svd.compute(A,Eigen::ComputeThinU | Eigen::ComputeThinV).solve(b);
 			double dwRelErr = ( A* x - b ).norm() / b.norm();
 			if(dwRelErr>solprecision)
-				throw no_solution("Overdetermined system with on solution");
+				throw no_solution("Overdetermined system with no solution");
+			//--check for unphysical solution
+			for(eindex i = 0; i < col; ++i) {
+				if(x(i) < 0) throw no_solution("Overdetermined system with unphysical solution");
+			}
 		}
 		//--more than 3 unique ingredients
 		else if(col>3) 
