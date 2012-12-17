@@ -102,6 +102,8 @@ void Cocktail::balance_drink() {
 		//--exactly 3 unique ingredients
 		else {	
 			Eigen::ColPivHouseholderQR<Eigen::Matrix3d> lu(A);
+			//--check that ingredients are linearly independent
+		    if(lu.rank() < 3) throw multiple_solutions("3 ingredients, but not linearly independent");
 			x = lu.solve(b);
 			if(x(0) < 0 || x(1) < 0 || x(2) < 0) 
 					throw no_solution("Unphysical solution");
