@@ -33,6 +33,7 @@ public:
 
 private:
 	std::vector<element> elements; 
+	bool add_ingredient(const CMatrix &, CMatrix &, eindex);
 	int classify_ingredients();
 	void give_up();
 	std::vector<Ingredient> reserves;
