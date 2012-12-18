@@ -119,18 +119,25 @@ void Cocktail::balance_drink() {
 										 
 	} catch(const no_solution &e) {
 		std::cerr << e.what() << std::endl;
+		if(col >= 3) {
+			this->give_up();
+		    std::cerr << "Can't deal with this set of ingredients" << std::endl;
+			return;
+		}
         //--Try adding some standard ingredients to find a solution
-		bool skip = false;
 		for(eindex i = 0; i < reserves.size(); ++i) {
-			skip = false;
-			//--Check that it's not collinear with any existing ingredients
-			for(eindex j = 0; j < elements.size(); ++j) {
-				if(collinear(reserves[i], std::get<0>(elements[j]))) {
-					skip=true;
-					break;
-				}
-			}
-			if(skip) continue;
+		    //--Add ingredient and check that rank increases
+			CMatrix Atest(3,col+1);
+			for(eindex gindex = 0; gindex < col; ++gindex) {
+				Atest.col(gindex) = A.col(gindex);
+	        }
+			Atest.col(col) << reserves[i].get_alcoholic_bite(),
+				              reserves[i].get_sweetness(),
+							  reserves[i].get_sourness();
+			Eigen::ColPivHouseholderQR<CMatrix> lu(A);
+			Eigen::ColPivHouseholderQR<CMatrix> lutest(Atest);
+			//--Don't add unless linearly independent from other ingredients
+			if(lutest.rank() == lu.rank()) continue;
 			//--Here this reserve ingredient is tried
 			
 		}
@@ -138,10 +145,7 @@ void Cocktail::balance_drink() {
 		std::cerr << e.what() << std::endl;
 		//--Condense ingredients with small opening angles together
 	}
-	catch(int e) {
-		std::cout<<"Error code "<<e<<std::endl;
-		return;
-	}
+
 	return;
 }
 
@@ -171,6 +175,12 @@ int Cocktail::classify_ingredients() {
 	}
 	//--return number of unique ingredients (not related by collinearity)
 	return group_number;
+}
+
+void Cocktail::give_up() {
+	//--Just flag all amounts to zero
+	for(auto el : elements)
+		std::get<1>(el) = 0;
 }
 
 //--overloaded operators

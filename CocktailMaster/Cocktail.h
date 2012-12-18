@@ -34,6 +34,7 @@ public:
 private:
 	std::vector<element> elements; 
 	int classify_ingredients();
+	void give_up();
 	std::vector<Ingredient> reserves;
 };
 
