@@ -83,34 +83,14 @@ void Cocktail::balance_drink() {
 	
 	try {
 		//--fewer than 3 unique ingredients
-		if(col<3) {
-			//--find least squares solution
-			Eigen::JacobiSVD<Eigen::MatrixXd> svd(3,col);
-			x=svd.compute(A,Eigen::ComputeThinU | Eigen::ComputeThinV).solve(b);
-			double dwRelErr = ( A* x - b ).norm() / b.norm();
-			if(dwRelErr>solprecision)
-				throw no_solution("Overdetermined system with no solution");
-			//--check for unphysical solution
-			for(eindex i = 0; i < col; ++i) {
-				if(x(i) < 0) throw no_solution("Overdetermined system with unphysical solution");
-			}
-		}
+		if(col<3) solve_overdetermined(A,x,true);
 		//--more than 3 unique ingredients
 		else if(col>3) 
 			throw multiple_solutions("More than 3 unique ingredients for only 3 constraints");
 	
 		//--exactly 3 unique ingredients
-		else {	
-			Eigen::ColPivHouseholderQR<Eigen::Matrix3d> lu(A);
-			//--check that ingredients are linearly independent
-		    if(lu.rank() < 3) throw multiple_solutions("3 ingredients, but not linearly independent");
-			x = lu.solve(b);
-			if(x(0) < 0 || x(1) < 0 || x(2) < 0) 
-					throw no_solution("Unphysical solution");
-			double dwRelErr = ( A* x - b ).norm() / b.norm();
-			if(dwRelErr>solprecision) throw no_solution("Inaccurate solution");
-		}
-
+		else solve_squarematrix(A,x,true);
+		
 		//--fill results into elements
 		for(eindex i = 0; i < elements.size(); ++i) 
 			std::get<1>(elements[i]) = x(std::get<2>(elements[i]))
@@ -141,9 +121,9 @@ void Cocktail::balance_drink() {
 	return;
 }
 
-bool Cocktail::add_ingredient(const CMatrix &A, CMatrix &Anew, eindex i) {
+bool Cocktail::add_ingredient(const CMatrix &A, CMatrix &Anew, const eindex i) {
 	//--Construct new matrix
-	for(eindex gindex = 0; gindex < A.cols(); ++gindex) {
+	for(eindex gindex = 0; gindex < eindex(A.cols()); ++gindex) {
 				Anew.col(gindex) = A.col(gindex);
 	}
 	Anew.col(A.cols()) << reserves[i].get_alcoholic_bite(),
@@ -158,7 +138,7 @@ bool Cocktail::add_ingredient(const CMatrix &A, CMatrix &Anew, eindex i) {
 	return true;
 }
 
-int Cocktail::classify_ingredients() {
+Cocktail::eindex Cocktail::classify_ingredients() {
 	//--Any two vectors in flavor space are classified
 	//--as equivalent if they are collinear
 	eindex group_number=0;
@@ -190,6 +170,49 @@ void Cocktail::give_up() {
 	//--Just flag all amounts to zero
 	for(auto el : elements)
 		std::get<1>(el) = 0;
+}
+
+bool solve_overdetermined(const CMatrix &A, Eigen::VectorXd &x, bool throwflag) {
+	const Eigen::Vector3d b(1,1,1);
+	//--find least squares solution
+	Eigen::JacobiSVD<Eigen::MatrixXd> svd(3,A.cols());
+	x=svd.compute(A,Eigen::ComputeThinU | Eigen::ComputeThinV).solve(b);
+	double dwRelErr = ( A* x - b ).norm() / b.norm();
+	if(dwRelErr>Cocktail::solprecision) {
+		if(throwflag) throw no_solution("Overdetermined system with no solution");
+		return false;
+	}
+	//--check for unphysical solution
+	for(Cocktail::eindex i = 0; i < Cocktail::eindex(A.cols()); ++i) {
+		if(x(i) < 0) {
+			if(throwflag) throw no_solution("Overdetermined system with unphysical solution");
+			return false;
+		}
+	}
+	//--success if we reach here
+	return true;
+}
+
+bool solve_squarematrix(const CMatrix &A, Eigen::VectorXd &x, bool throwflag) {
+	const Eigen::Vector3d b(1,1,1);
+	Eigen::ColPivHouseholderQR<Eigen::Matrix3d> lu(A);
+	//--check that ingredients are linearly independent
+    if(lu.rank() < 3) {
+		if(throwflag) throw multiple_solutions("3 ingredients, but not linearly independent");
+		return false;
+	}
+	x = lu.solve(b);
+	if(x(0) < 0 || x(1) < 0 || x(2) < 0) {
+		if(throwflag) throw no_solution("Unphysical solution");
+		return false;
+	}
+	double dwRelErr = ( A* x - b ).norm() / b.norm();
+	if(dwRelErr>Cocktail::solprecision) {
+		if(throwflag) throw no_solution("Inaccurate solution");
+		return false;
+	}
+	//--success if we reach here
+	return true;
 }
 
 //--overloaded operators

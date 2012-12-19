@@ -8,12 +8,13 @@
 #include "no_solution.h"
 #include "multiple_solutions.h"
 
+typedef Eigen::Matrix<double, 3, Eigen::Dynamic> CMatrix;
 
 class Cocktail
 {
 	typedef std::tuple<Ingredient, double, int> element;
 	typedef std::vector<element>::size_type eindex;
-	typedef Eigen::Matrix<double, 3, Eigen::Dynamic> CMatrix;
+	
 public:
 	//--Constructors
 	Cocktail(const std::vector<Ingredient> &, 
@@ -34,8 +35,13 @@ public:
 private:
 	std::vector<element> elements; 
 	bool add_ingredient(const CMatrix &, CMatrix &, eindex);
-	int classify_ingredients();
+	eindex classify_ingredients();
 	void give_up();
+	friend bool solve_overdetermined(const CMatrix &, Eigen::VectorXd &, 
+		                            bool throwflag = false);
+	friend bool solve_squarematrix(const CMatrix &, Eigen::VectorXd &, 
+		                            bool throwflag = false);
 	std::vector<Ingredient> reserves;
 };
+
 
