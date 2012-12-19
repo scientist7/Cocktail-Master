@@ -90,38 +90,61 @@ void Cocktail::balance_drink() {
 	
 		//--exactly 3 unique ingredients
 		else solve_squarematrix(A,x,true);
-		
-		//--fill results into elements
-		for(eindex i = 0; i < elements.size(); ++i) 
-			std::get<1>(elements[i]) = x(std::get<2>(elements[i]))
-					                   *(group_norm[std::get<2>(elements[i])]
-									     /std::get<0>(elements[i]).get_flavor_magnitude());
 										 
 	} catch(const no_solution &e) {
 		std::cerr << e.what() << std::endl;
 		if(col >= 3) {
 			this->give_up();
-		    std::cerr << "Can't deal with this set of ingredients" << std::endl;
 			return;
 		}
+		bool success = false;
         //--Try adding some standard ingredients to find a solution
 		for(eindex i = 0; i < reserves.size(); ++i) {
 			CMatrix Atest(3,col+1);
 			//--Here this reserve ingredient is tried
-			if(this->add_ingredient(A,Atest,i)){
+			if(this->add_ingredient(A,Atest,x,i)){
 				++col;
-			    //--Check for solution
+				group_norm.push_back(std::get<0>(elements[elements.size()-1]).get_flavor_magnitude());
+				success = true;
+				break;
 			}
+		}
+		//--here if no single added ingredient can fix the problem
+		if(!success && col < 2){
+			for(eindex i = 0; i < reserves.size()-1; ++i) {
+				for(eindex j = i+1; j < reserves.size(); ++j) {
+					CMatrix Atest(3,col+2);
+					if(this->add_ingredient(A,Atest,x,i,j)) {
+						col+=2;
+						group_norm.push_back(std::get<0>(elements[elements.size()-2]).get_flavor_magnitude());
+						group_norm.push_back(std::get<0>(elements[elements.size()-1]).get_flavor_magnitude());
+						success = true;
+						break;
+					}
+				}
+			}
+		}
+		if(!success) {
+			this->give_up();
+			return;
 		}
 	} catch(const multiple_solutions &e) {
 		std::cerr << e.what() << std::endl;
 		//--Condense ingredients with small opening angles together
+		this->give_up();
+		return;
 	}
-
+	
+	//--fill results into elements
+	for(eindex i = 0; i < elements.size(); ++i) 
+		std::get<1>(elements[i]) = x(std::get<2>(elements[i]))
+					               *(group_norm[std::get<2>(elements[i])]
+					    		     /std::get<0>(elements[i]).get_flavor_magnitude());
 	return;
 }
 
-bool Cocktail::add_ingredient(const CMatrix &A, CMatrix &Anew, const eindex i) {
+bool Cocktail::add_ingredient(const CMatrix &A, CMatrix &Anew, Eigen::VectorXd &x, 
+							  const eindex i, const eindex j) {
 	//--Construct new matrix
 	for(eindex gindex = 0; gindex < eindex(A.cols()); ++gindex) {
 				Anew.col(gindex) = A.col(gindex);
@@ -129,12 +152,26 @@ bool Cocktail::add_ingredient(const CMatrix &A, CMatrix &Anew, const eindex i) {
 	Anew.col(A.cols()) << reserves[i].get_alcoholic_bite(),
 				          reserves[i].get_sweetness(),
 						  reserves[i].get_sourness();
+	if(j) { 
+		Anew.col(A.cols()+1) << reserves[j].get_alcoholic_bite(),
+		     		          reserves[j].get_sweetness(),
+			    			  reserves[j].get_sourness();
+	}
 	Eigen::ColPivHouseholderQR<CMatrix> lu(A);
 	Eigen::ColPivHouseholderQR<CMatrix> lutest(Anew);
 	//--Don't add unless linearly independent from other ingredients
-	if(lutest.rank() == lu.rank()) return false;
+	if(eindex(lutest.rank()) < eindex(lu.rank()) + 1 + j) return false;
+
+	//--Check for solution
+	if(A.cols()==3 && !solve_squarematrix(Anew,x,false)) return false;
+	if(A.cols()<3 && !solve_overdetermined(Anew,x,false)) return false;
+	//--Here we can successfully add the ingredient
 	eindex currgindex=std::get<2>(elements[elements.size()-1]);
 	elements.push_back(std::make_tuple(reserves[i],0,++currgindex));
+	if(j) {
+		currgindex=std::get<2>(elements[elements.size()-1]);
+		elements.push_back(std::make_tuple(reserves[j],0,++currgindex));
+	}
 	return true;
 }
 
@@ -170,6 +207,8 @@ void Cocktail::give_up() {
 	//--Just flag all amounts to zero
 	for(auto el : elements)
 		std::get<1>(el) = 0;
+
+	std::cerr << "Can't deal with this set of ingredients" << std::endl;
 }
 
 bool solve_overdetermined(const CMatrix &A, Eigen::VectorXd &x, bool throwflag) {
