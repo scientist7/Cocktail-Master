@@ -85,7 +85,7 @@ void Cocktail::balance_drink() {
 		//--fewer than 3 unique ingredients
 		if(col<3) solve_overdetermined(A,x,true);
 		//--more than 3 unique ingredients
-		else if(col>3) 
+		else if(col>3) //--what about no solutions?
 			throw multiple_solutions("More than 3 unique ingredients for only 3 constraints");
 	
 		//--exactly 3 unique ingredients
@@ -236,7 +236,8 @@ bool solve_squarematrix(const CMatrix &A, Eigen::VectorXd &x, bool throwflag) {
 	const Eigen::Vector3d b(1,1,1);
 	Eigen::ColPivHouseholderQR<Eigen::Matrix3d> lu(A);
 	//--check that ingredients are linearly independent
-    if(lu.rank() < 3) {
+    if(lu.rank() < 3) { //--what about no solutions?
+
 		if(throwflag) throw multiple_solutions("3 ingredients, but not linearly independent");
 		return false;
 	}
