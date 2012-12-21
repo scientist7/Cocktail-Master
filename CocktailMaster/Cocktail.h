@@ -41,7 +41,10 @@ private:
 		                            bool throwflag = false);
 	friend bool solve_squarematrix(const CMatrix &, Eigen::VectorXd &, 
 		                            bool throwflag = false);
+	friend bool check_nosolutions(const CMatrix &, const Eigen::Vector3d &);
 	std::vector<Ingredient> reserves;
 };
+
+
 
 

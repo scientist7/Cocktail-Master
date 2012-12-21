@@ -85,9 +85,10 @@ void Cocktail::balance_drink() {
 		//--fewer than 3 unique ingredients
 		if(col<3) solve_overdetermined(A,x,true);
 		//--more than 3 unique ingredients
-		else if(col>3) //--what about no solutions?
+		else if(col>3) {
+			if(check_nosolutions(A,b)) throw no_solution("More than 3 ingredients, but no solution");
 			throw multiple_solutions("More than 3 unique ingredients for only 3 constraints");
-	
+		}
 		//--exactly 3 unique ingredients
 		else solve_squarematrix(A,x,true);
 										 
@@ -236,8 +237,8 @@ bool solve_squarematrix(const CMatrix &A, Eigen::VectorXd &x, bool throwflag) {
 	const Eigen::Vector3d b(1,1,1);
 	Eigen::ColPivHouseholderQR<Eigen::Matrix3d> lu(A);
 	//--check that ingredients are linearly independent
-    if(lu.rank() < 3) { //--what about no solutions?
-
+    if(lu.rank() < 3) { 
+		if(check_nosolutions(A,b)) throw no_solution("3 ingredients, but no solution");
 		if(throwflag) throw multiple_solutions("3 ingredients, but not linearly independent");
 		return false;
 	}
@@ -252,6 +253,19 @@ bool solve_squarematrix(const CMatrix &A, Eigen::VectorXd &x, bool throwflag) {
 		return false;
 	}
 	//--success if we reach here
+	return true;
+}
+
+bool check_nosolutions(const CMatrix &A, const Eigen::Vector3d &b) {
+	//--Construct augmented matrix
+	CMatrix Atest(3,A.cols()+1);
+	for(Cocktail::eindex gindex = 0; gindex < Cocktail::eindex(A.cols()); ++gindex) {
+				Atest.col(gindex) = A.col(gindex);
+	}
+	Atest.col(A.cols()) = b;
+	Eigen::ColPivHouseholderQR<CMatrix> lu(A);
+	Eigen::ColPivHouseholderQR<CMatrix> lutest(Atest);
+	if(lu.rank() == lutest.rank()) return false;
 	return true;
 }
 
