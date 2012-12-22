@@ -72,7 +72,7 @@ void Cocktail::balance_drink() {
 	//--A is a 3 x n matrix with each column representing a flavor vector
 	const Eigen::Vector3d b(1,1,1);
 	CMatrix A(3,col);
-	Eigen::VectorXd x;
+	Eigen::VectorXd x(col);
 	//--loop to fill A
 	for(eindex gindex = 0; gindex < col; ++gindex) {
 		A.col(gindex) << grouped_ingredients[gindex](0),
@@ -131,7 +131,8 @@ void Cocktail::balance_drink() {
 		}
 	} catch(const multiple_solutions &e) {
 		std::cerr << e.what() << std::endl;
-		//--Condense ingredients with small opening angles together
+		//--Send to optimizer
+		find_optimum(x,A,b);
 		this->give_up();
 		return;
 	}
@@ -238,6 +239,7 @@ bool solve_squarematrix(const CMatrix &A, Eigen::VectorXd &x, bool throwflag) {
 	Eigen::ColPivHouseholderQR<Eigen::Matrix3d> lu(A);
 	//--check that ingredients are linearly independent
     if(lu.rank() < 3) { 
+
 		if(check_nosolutions(A,b)) throw no_solution("3 ingredients, but no solution");
 		if(throwflag) throw multiple_solutions("3 ingredients, but not linearly independent");
 		return false;
@@ -267,6 +269,49 @@ bool check_nosolutions(const CMatrix &A, const Eigen::Vector3d &b) {
 	Eigen::ColPivHouseholderQR<CMatrix> lutest(Atest);
 	if(lu.rank() == lutest.rank()) return false;
 	return true;
+}
+
+void find_optimum(Eigen::VectorXd &x, const CMatrix &A, const Eigen::Vector3d &b) {
+	double figure_of_merit = 1.e9;
+	x.setZero(A.cols());
+	search(0,A,x,b);
+}
+
+void search(Cocktail::eindex i, const CMatrix &A, Eigen::VectorXd &x, const Eigen::Vector3d &b) {
+	Eigen::Vector3d minvec;
+	minvec.setZero();
+	//--calculate total vector from fixed amounts so far
+	for(Cocktail::eindex j = 0; j < i; ++j) {
+		minvec += x(j)*A.col(j);
+	}
+	//--calculate 3 upper bounds and take smallest
+	double minubound = 1/A.col(i).maxCoeff();
+	for(Cocktail::eindex j = 0; j < 3; ++j) {
+		if(x(j) > 0) {
+			double tempubound = (1-minvec(j))/A(j,i);
+			if(tempubound < minubound) minubound = tempubound;
+		}
+	}
+	//--compute nbins
+	if(minubound < 0) minubound = 0;
+	Cocktail::eindex nbins = 
+		Cocktail::eindex(floor(minubound*Cocktail::tspperoz+0.5));
+	//std::cout<<"i= "<<i<<" and nbins= "<<nbins<<std::endl;
+	if(i < Cocktail::eindex(A.cols()-1)) {
+		for(Cocktail::eindex bin = 0; bin < nbins; ++bin) {
+			x(i) = bin/(Cocktail::tspperoz);
+			search(i+1,A,x,b);
+		}
+	}
+	else {
+		for(Cocktail::eindex bin = 0; bin < nbins; ++bin) {
+			x(i) = bin/Cocktail::tspperoz;
+			double dwRelErr = ( A* x - b ).norm() / b.norm();
+			if(dwRelErr>.2) continue; 
+			std::cout<<"err= "<<dwRelErr<<std::endl;
+			std::cout<<"x= "<<x<<std::endl;
+		}
+	}
 }
 
 //--overloaded operators
