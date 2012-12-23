@@ -42,8 +42,10 @@ private:
 	friend bool solve_squarematrix(const CMatrix &, Eigen::VectorXd &, 
 		                            bool throwflag = false);
 	friend bool check_nosolutions(const CMatrix &, const Eigen::Vector3d &);
-	friend void find_optimum(Eigen::VectorXd &, const CMatrix &, const Eigen::Vector3d &);
-	friend void search(eindex, const CMatrix &, Eigen::VectorXd &, const Eigen::Vector3d &);
+	friend bool find_optimum(Eigen::VectorXd &, const CMatrix &, const Eigen::Vector3d &);
+	friend void search(eindex, const CMatrix &, Eigen::VectorXd &, const Eigen::Vector3d &,
+		               bool &, double &, Eigen::VectorXd &);
+	friend double figure_of_merit(const Eigen::VectorXd &x, const CMatrix &A);
 	std::vector<Ingredient> reserves;
 };
 
