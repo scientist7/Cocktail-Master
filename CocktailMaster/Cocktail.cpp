@@ -301,27 +301,29 @@ void search(Cocktail::eindex i, const CMatrix &A, Eigen::VectorXd &x,
 			if(tempubound > maxlbound) maxlbound = tempubound;
 		}
 	}
+	//--compute bin size
+	double binsize = 1/(2*Cocktail::tspperoz*A.col(i).maxCoeff());
 	//--compute nbins
 	if(minubound < 0) minubound = 0;
 	Cocktail::eindex nbins = 
-		Cocktail::eindex(floor(minubound*Cocktail::tspperoz+0.5));
+		Cocktail::eindex(minubound/binsize)+1;
 	
 	if(i < Cocktail::eindex(A.cols()-1)) {
 		for(Cocktail::eindex bin = 0; bin < nbins; ++bin) {
-			x(i) = bin/(Cocktail::tspperoz);
+			x(i) = bin*binsize;
 			search(i+1,A,x,b,success,fom,bestx);
 		}
 	}
 	else {
 	    Cocktail::eindex minbins = 
-			Cocktail::eindex(maxlbound*Cocktail::tspperoz);
+			Cocktail::eindex(maxlbound/binsize);
 		double prevErr=1, tfom;
 		for(Cocktail::eindex bin = minbins; bin < nbins; ++bin) {
-			x(i) = bin/Cocktail::tspperoz;
+			x(i) = bin*binsize;
 			double currErr = ( A* x - b ).norm() / b.norm();
 			if(currErr>prevErr) break;
 			prevErr = currErr;
-			if(currErr>.2) continue; 
+			if(currErr>.01) continue; 
 			success = true;
 			tfom = figure_of_merit(x,A);
 			if(tfom < fom) {
