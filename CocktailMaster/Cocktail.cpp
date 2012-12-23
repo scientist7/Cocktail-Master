@@ -132,9 +132,10 @@ void Cocktail::balance_drink() {
 	} catch(const multiple_solutions &e) {
 		std::cerr << e.what() << std::endl;
 		//--Send to optimizer
-		find_optimum(x,A,b);
-		this->give_up();
-		return;
+		if(!find_optimum(x,A,b)) {
+			this->give_up();
+			return;
+		}
 	}
 	
 	//--fill results into elements
@@ -271,13 +272,19 @@ bool check_nosolutions(const CMatrix &A, const Eigen::Vector3d &b) {
 	return true;
 }
 
-void find_optimum(Eigen::VectorXd &x, const CMatrix &A, const Eigen::Vector3d &b) {
-	double figure_of_merit = 1.e9;
+bool find_optimum(Eigen::VectorXd &x, const CMatrix &A, const Eigen::Vector3d &b) {
+	double fom = 1.e9;
+	bool success = false;
 	x.setZero(A.cols());
-	search(0,A,x,b);
+	Eigen::VectorXd bestx(A.cols());
+	bestx.setZero(A.cols());
+	search(0,A,x,b,success,fom,bestx);
+	x = bestx;
+	return success;
 }
 
-void search(Cocktail::eindex i, const CMatrix &A, Eigen::VectorXd &x, const Eigen::Vector3d &b) {
+void search(Cocktail::eindex i, const CMatrix &A, Eigen::VectorXd &x, 
+			const Eigen::Vector3d &b, bool &success, double &fom, Eigen::VectorXd &bestx) {
 	Eigen::Vector3d minvec;
 	minvec.setZero();
 	//--calculate total vector from fixed amounts so far
@@ -285,33 +292,56 @@ void search(Cocktail::eindex i, const CMatrix &A, Eigen::VectorXd &x, const Eige
 		minvec += x(j)*A.col(j);
 	}
 	//--calculate 3 upper bounds and take smallest
-	double minubound = 1/A.col(i).maxCoeff();
+	//--when i=n, get lower bound as well (highest of 3)
+	double minubound = 1/A.col(i).maxCoeff(), maxlbound = 0;
 	for(Cocktail::eindex j = 0; j < 3; ++j) {
 		if(x(j) > 0) {
 			double tempubound = (1-minvec(j))/A(j,i);
 			if(tempubound < minubound) minubound = tempubound;
+			if(tempubound > maxlbound) maxlbound = tempubound;
 		}
 	}
 	//--compute nbins
 	if(minubound < 0) minubound = 0;
 	Cocktail::eindex nbins = 
 		Cocktail::eindex(floor(minubound*Cocktail::tspperoz+0.5));
-	//std::cout<<"i= "<<i<<" and nbins= "<<nbins<<std::endl;
+	
 	if(i < Cocktail::eindex(A.cols()-1)) {
 		for(Cocktail::eindex bin = 0; bin < nbins; ++bin) {
 			x(i) = bin/(Cocktail::tspperoz);
-			search(i+1,A,x,b);
+			search(i+1,A,x,b,success,fom,bestx);
 		}
 	}
 	else {
-		for(Cocktail::eindex bin = 0; bin < nbins; ++bin) {
+	    Cocktail::eindex minbins = 
+			Cocktail::eindex(maxlbound*Cocktail::tspperoz);
+		double prevErr=1, tfom;
+		for(Cocktail::eindex bin = minbins; bin < nbins; ++bin) {
 			x(i) = bin/Cocktail::tspperoz;
-			double dwRelErr = ( A* x - b ).norm() / b.norm();
-			if(dwRelErr>.2) continue; 
-			std::cout<<"err= "<<dwRelErr<<std::endl;
-			std::cout<<"x= "<<x<<std::endl;
+			double currErr = ( A* x - b ).norm() / b.norm();
+			if(currErr>prevErr) break;
+			prevErr = currErr;
+			if(currErr>.2) continue; 
+			success = true;
+			tfom = figure_of_merit(x,A);
+			if(tfom < fom) {
+				fom = tfom;
+				bestx = x;
+			}
+			//std::cout<<"err= "<<currErr<<std::endl;
+			//std::cout<<"x= "<<x<<std::endl;
 		}
 	}
+}
+
+double figure_of_merit(const Eigen::VectorXd &x, const CMatrix &A) {
+	double sum = 0;
+	for(Cocktail::eindex i = 0; i < Cocktail::eindex(A.cols()-1); ++i) {
+		for(Cocktail::eindex j = i+1; j < Cocktail::eindex(A.cols()); ++j) {
+			sum += pow((x(i)/A.col(j).norm()-x(j)/A.col(i).norm())*A.col(i).dot(A.col(j)),2);
+		}
+	}
+	return sum;
 }
 
 //--overloaded operators

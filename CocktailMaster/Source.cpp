@@ -22,6 +22,7 @@ typedef multimap<string, Ingredient> BarType;
 void readDB(BarType &);
 vector<Ingredient> getIngredients(BarType &);
 vector<Ingredient> getReserveIngredients(BarType &);
+void printIntro();
 
 
 int main() { 
@@ -80,6 +81,8 @@ vector<Ingredient> getIngredients(BarType &bar) {
 			Categories.push_back(bar_it->first);
 	}
 	
+	printIntro();
+
 	while(1) {
 		cout<<"Please select an ingredient category, or 0 if done"<<endl;	
 		catlabel=1;
@@ -138,5 +141,30 @@ vector<Ingredient> getReserveIngredients(BarType &bar) {
 	}
 
 	return reserves;
+
+}
+
+void printIntro() { 
+string graphic[15] = {
+"        Welcome",
+"          to",
+"    Cocktail Master"
+"	                  ",
+"	                  ",
+"     ____________",  
+"    |            |",
+"    \\            /",
+"      -.__  __.-  ",
+"          ..        ",
+"          ||",
+"          ||",
+"          ||",
+"       _.-  -._ ",
+"      <________>",
+};
+
+	cout << std::right << endl ;
+    for( const auto& line : graphic) cout << line << endl ;
+    cout << '\n' ;
 
 }
