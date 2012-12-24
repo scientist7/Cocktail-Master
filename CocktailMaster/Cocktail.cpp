@@ -94,16 +94,12 @@ void Cocktail::balance_drink() {
 										 
 	} catch(const no_solution &e) {
 		std::cerr << e.what() << std::endl;
-		if(col >= 3) {
-			this->give_up();
-			return;
-		}
 		bool success = false;
         //--Try adding some standard ingredients to find a solution
 		for(eindex i = 0; i < reserves.size(); ++i) {
 			CMatrix Atest(3,col+1);
 			//--Here this reserve ingredient is tried
-			if(this->add_ingredient(A,Atest,x,i)){
+			if(this->add_ingredient(A,Atest,x,b,i)){
 				++col;
 				group_norm.push_back(std::get<0>(elements[elements.size()-1]).get_flavor_magnitude());
 				success = true;
@@ -115,7 +111,7 @@ void Cocktail::balance_drink() {
 			for(eindex i = 0; i < reserves.size()-1; ++i) {
 				for(eindex j = i+1; j < reserves.size(); ++j) {
 					CMatrix Atest(3,col+2);
-					if(this->add_ingredient(A,Atest,x,i,j)) {
+					if(this->add_ingredient(A,Atest,x,b,i,j)) {
 						col+=2;
 						group_norm.push_back(std::get<0>(elements[elements.size()-2]).get_flavor_magnitude());
 						group_norm.push_back(std::get<0>(elements[elements.size()-1]).get_flavor_magnitude());
@@ -147,7 +143,7 @@ void Cocktail::balance_drink() {
 }
 
 bool Cocktail::add_ingredient(const CMatrix &A, CMatrix &Anew, Eigen::VectorXd &x, 
-							  const eindex i, const eindex j) {
+							  const Eigen::Vector3d &b, const eindex i, const eindex j) {
 	//--Construct new matrix
 	for(eindex gindex = 0; gindex < eindex(A.cols()); ++gindex) {
 				Anew.col(gindex) = A.col(gindex);
@@ -164,10 +160,13 @@ bool Cocktail::add_ingredient(const CMatrix &A, CMatrix &Anew, Eigen::VectorXd &
 	Eigen::ColPivHouseholderQR<CMatrix> lutest(Anew);
 	//--Don't add unless linearly independent from other ingredients
 	if(eindex(lutest.rank()) < eindex(lu.rank()) + 1 + j) return false;
-
-	//--Check for solution
-	if(A.cols()==3 && !solve_squarematrix(Anew,x,false)) return false;
-	if(A.cols()<3 && !solve_overdetermined(Anew,x,false)) return false;
+	
+	//--Check for solution	
+	if(Anew.cols()>3 && (check_nosolutions(Anew,b) 
+	   || !find_optimum(x,Anew,b))) return false; 
+	if(Anew.cols()==3 && !solve_squarematrix(Anew,x,false)) return false;
+	if(Anew.cols()<3 && !solve_overdetermined(Anew,x,false)) return false;
+	
 	//--Here we can successfully add the ingredient
 	eindex currgindex=std::get<2>(elements[elements.size()-1]);
 	elements.push_back(std::make_tuple(reserves[i],0,++currgindex));
@@ -273,12 +272,12 @@ bool check_nosolutions(const CMatrix &A, const Eigen::Vector3d &b) {
 }
 
 bool find_optimum(Eigen::VectorXd &x, const CMatrix &A, const Eigen::Vector3d &b) {
-	double fom = 1.e9;
+	double fom = 1.e9; 
 	bool success = false;
 	x.setZero(A.cols());
 	Eigen::VectorXd bestx(A.cols());
 	bestx.setZero(A.cols());
-	search(0,A,x,b,success,fom,bestx);
+	search(0,A,x,b,success,fom,bestx); 
 	x = bestx;
 	return success;
 }

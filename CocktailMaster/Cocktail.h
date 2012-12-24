@@ -34,7 +34,8 @@ public:
 
 private:
 	std::vector<element> elements; 
-	bool add_ingredient(const CMatrix &, CMatrix &, Eigen::VectorXd &, eindex, eindex j = 0);
+	bool add_ingredient(const CMatrix &, CMatrix &, Eigen::VectorXd &, 
+		                const Eigen::Vector3d &, eindex, eindex j = 0);
 	eindex classify_ingredients();
 	void give_up();
 	friend bool solve_overdetermined(const CMatrix &, Eigen::VectorXd &, 
