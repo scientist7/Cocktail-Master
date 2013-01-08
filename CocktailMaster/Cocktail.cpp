@@ -364,7 +364,7 @@ std::ostream &operator<<(std::ostream &os, const Cocktail &item) {
 		}
 		tsp*=Cocktail::tspperoz;
 		tsp=floor(tsp+0.5);
-		os << std::left << std::setw(20) << std::get<0>(el) 
+		os << std::left << std::setw(35) << std::get<0>(el) 
 		   << " ";
 		if(oz > 0) os << std::right << oz << " oz ";
 		if(tsp > 0) os << tsp << " tsp";   
