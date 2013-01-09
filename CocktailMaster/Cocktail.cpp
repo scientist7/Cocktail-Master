@@ -4,6 +4,7 @@
 double Cocktail::ozincrements=0.25;
 double Cocktail::tspperoz=6;
 double Cocktail::solprecision=0.001;
+double Cocktail::mlperoz=30;
 
 //--Constructors
 Cocktail::Cocktail(const std::vector<Ingredient> &list, 
@@ -347,10 +348,11 @@ double figure_of_merit(const Eigen::VectorXd &x, const CMatrix &A) {
 
 //--overloaded operators
 std::ostream &operator<<(std::ostream &os, const Cocktail &item) {
-	double oz=0,tsp=0;
+	double oz = 0, tsp = 0, ml = 0;
 	for(auto el : item.elements) {
-		//--First convert raw oz amount to oz + tsp
+		//--First convert raw oz amount to oz + tsp and to ml
 		oz=std::get<1>(el);
+		ml=oz*Cocktail::mlperoz;
 		//--Report small amounts of strong flavors in tsp (e.g. sugar)
 		if(oz <= 0.5 && std::get<0>(el).get_flavor_magnitude() >= 3) {
 			tsp = oz;
@@ -365,9 +367,10 @@ std::ostream &operator<<(std::ostream &os, const Cocktail &item) {
 		tsp*=Cocktail::tspperoz;
 		tsp=floor(tsp+0.5);
 		os << std::left << std::setw(35) << std::get<0>(el) 
-		   << " ";
-		if(oz > 0) os << std::right << oz << " oz ";
-		if(tsp > 0) os << tsp << " tsp";   
+		   << " " << std::right;
+		if(oz > 0) os << oz << " oz ";
+		if(tsp > 0) os << tsp << " tsp"; 
+		if(ml > 0) os << std::setprecision(3) << std::setw(2) << std::right << "[" << ml << " ml]";
 		os << std::endl;
 	}
 	return os;

@@ -28,6 +28,7 @@ public:
     //--Members controlling output
 	static double ozincrements;
 	static double tspperoz;
+	static double mlperoz;
 
 	//--Algorithm parameters
 	static double solprecision;
