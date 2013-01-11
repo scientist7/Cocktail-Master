@@ -2,6 +2,7 @@ Gin Beefeater 0.5 0 0
 Gin BombaySapphire 0.5 0 0
 Gin Hendricks 0.3333 0 0
 Juice Lemon 0 0 1
+Juice Lime 0 0 1.3333
 Sugar Caster 0 3 0
 SimpleSyrup 1:1_WhiteGranulated 0 1.3333 0
 TripleSec Cointreau 0.5 1 0
