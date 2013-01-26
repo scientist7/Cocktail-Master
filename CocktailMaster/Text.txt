@@ -5,6 +5,5 @@ RyeWhiskey RussellsReserve 0.5 0 0
 Juice Lemon 0 0 1
 Juice Lime 0 0 1.3333
 Sugar Caster 0 3 0
-SimpleSyrup 1:1_WhiteGranulated 0 1.3333 0
+SimpleSyrup 1:1WhiteGranulated 0 1.3333 0
 TripleSec Cointreau 0.5 1 0
-crap farts 1 2 3

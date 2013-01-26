@@ -22,6 +22,7 @@ typedef multimap<string, Ingredient> BarType;
 void readDB(BarType &);
 vector<Ingredient> getIngredients(BarType &);
 vector<Ingredient> getReserveIngredients(BarType &);
+string SeparateWords(string text);
 void printIntro();
 
 
@@ -58,6 +59,9 @@ void readDB(BarType &bar) {
 		string category, name;
 		double alcoholic_bite, sweetness, sourness;
 		input >> category >> name >> alcoholic_bite >> sweetness >> sourness;
+		//--Find uppercase and insert space between words
+		category = SeparateWords(category);
+		name = SeparateWords(name);
 		//--Create Ingredient object and add it to map
 		bar.emplace(category, 
 			        Ingredient(category, name, alcoholic_bite, sweetness, sourness));
@@ -142,6 +146,20 @@ vector<Ingredient> getReserveIngredients(BarType &bar) {
 
 	return reserves;
 
+}
+
+string SeparateWords(string text)
+{
+	if (text.length() < 1) return text;
+	string newText;
+	newText.append(1,text[0]);
+        for (int i = 1; i < text.length(); ++i)
+        {
+            if (isupper(text[i]) && text[i - 1] != ' ')
+                newText.append(" ");
+            newText.append(1,text[i]);
+        }
+        return newText;
 }
 
 void printIntro() { 
