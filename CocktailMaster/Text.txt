@@ -1,6 +1,7 @@
 Gin Tanqueray 0.5 0 0
 Gin Hendricks 0.4 0 0
 RyeWhiskey RussellsReserve 0.6 0 0
+Bourbon BuffaloTrace 0.6 0 0
 Juice StoreLemon 0 0 1
 Juice TreeLemon 0 0 1.2
 Juice Lime 0 0 1.6
