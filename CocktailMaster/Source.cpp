@@ -130,8 +130,8 @@ vector<Ingredient> getReserveIngredients(BarType &bar) {
 	vector<Ingredient> reserves;
 
 	//--Define reserve ingredients
-	const string reservecat[3]={"Juice","Sugar","Vodka"};
-	const string reservename[3]={"Lemon","Caster","BlueIce"}; 
+	const string reservecat[3]={"Juice","SimpleSyrup","Vodka"};
+	const string reservename[3]={"Lemon","1:1Caster","BlueIce"}; 
 	//--Look for these in bar
 	for(int i=0; i<3; ++i) {
 		for(auto bar_it = bar.lower_bound(reservecat[i]); 
