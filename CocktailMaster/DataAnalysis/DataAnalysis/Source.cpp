@@ -17,6 +17,7 @@ using std::map;
 typedef map<string, Ingredient> BarType;
 
 void readStartList(BarType &);
+void readRecipes();
 
 int main() {
 	//--Create map to store database
