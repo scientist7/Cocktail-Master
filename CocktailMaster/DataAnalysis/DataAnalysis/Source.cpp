@@ -1,9 +1,11 @@
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <vector>
 #include <map>
 #include <string>
 #include "Ingredient.h"
+#include "Recipe.h"
 
 using std::cout;
 using std::cin;
@@ -17,14 +19,15 @@ using std::map;
 typedef map<string, Ingredient> BarType;
 
 void readStartList(BarType &);
-void readRecipes();
+void readRecipes(vector<Recipe> &);
 
 int main() {
-	//--Create map to store database
+	//--Create map to store database, vector for recipes
 	BarType bar;
-	//--Read database
+	vector<Recipe> recipes;
+	//--Read databases
 	readStartList(bar);
-
+	readRecipes(recipes);
 	return 0;
 }
 
@@ -42,4 +45,15 @@ void readStartList(BarType &bar) {
 		bar.emplace(name, 
 			        Ingredient(category, name, alcoholic_bite, sweetness, sourness));
 	}	
+}
+
+//--function to read list of well tested cocktail recipes
+void readRecipes(vector<Recipe> &recipes) {
+	string line; 
+	size_t numIng;
+	//--Open list of recipes
+	ifstream input("RecipeList.txt");
+	while(getline(input,line)) {
+		istringstream cocktail(line);
+	}
 }
