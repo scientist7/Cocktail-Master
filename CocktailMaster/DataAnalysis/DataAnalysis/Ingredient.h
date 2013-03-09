@@ -11,6 +11,9 @@ public:
 	void add_sw_measurement(double sw) {sweetness_measurements.push_back(sw);}
 	void add_sr_measurement(double sr) {sourness_measurements.push_back(sr);}
 
+	std::string get_category() const { return category; }
+	std::string get_name() const { return name; }
+
 private:
 	std::string category;
 	std::string name;
@@ -22,3 +25,5 @@ private:
 	std::vector<double> sourness_measurements;
 };
 
+//--overloaded operators
+std::ostream &operator<<(std::ostream &os, const Ingredient &item);

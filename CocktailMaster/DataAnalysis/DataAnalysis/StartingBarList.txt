@@ -7,4 +7,4 @@ TripleSec Cointreau -10 -10 0
 Juice StoreLemon 0 0 1
 Juice TreeLemon 0 0 -10
 Juice Lime 0 0 -10
-SimpleSyrup 1:1 0 -10 0
+SimpleSyrup 1:1Caster 0 -10 0

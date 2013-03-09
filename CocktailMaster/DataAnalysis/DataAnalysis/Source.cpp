@@ -4,10 +4,12 @@
 #include <vector>
 #include <map>
 #include <string>
+#include <tuple>
 #include "Ingredient.h"
 #include "Recipe.h"
 
 using std::cout;
+using std::cerr;
 using std::cin;
 using std::endl;
 using std::ifstream;
@@ -16,6 +18,7 @@ using std::istringstream;
 using std::string;
 using std::vector;
 using std::map;
+using std::make_tuple;
 
 typedef map<string, Ingredient> BarType;
 
@@ -29,6 +32,14 @@ int main() {
 	//--Read databases
 	readStartList(bar);
 	readRecipes(recipes,bar);
+
+	//--TEST
+	char c;
+	cout <<"hello"<<endl;
+	for(size_t i=0; i<recipes.size(); ++i) 
+		cout << recipes[i] << endl;
+	
+	cin >> c;
 	return 0;
 }
 
@@ -52,10 +63,11 @@ void readStartList(BarType &bar) {
 void readRecipes(vector<Recipe> &recipes, const BarType &bar) {
 	string line,temp; 
 	size_t numIng;
-	BarType::iterator it;
+	bool badRecipe;
 	//--Open list of recipes
 	ifstream input("RecipeList.txt");
 	while(getline(input,line)) {
+		badRecipe = true;
 		istringstream cocktail(line);
 		cocktail >> temp;
 		numIng = atoi(temp.c_str());
@@ -64,7 +76,25 @@ void readRecipes(vector<Recipe> &recipes, const BarType &bar) {
 		for(size_t i = 0; i < numIng; ++i) {
 			cocktail >> temp;
 			//--Retrieve correct ingredient from database
-			it = bar.find(temp);
+			auto it=bar.find(temp);
+			if(it == bar.end()) {
+				cerr << "Ingredient: " << temp << "not found in database!" << endl;
+				badRecipe = false;
+				break;
+			}
+			//--Add to vector
+			ingredients.push_back(it->second);
 		}
+		if(badRecipe) continue;	
+		vector<double> amounts;
+		for(size_t i = 0; i < numIng; ++i) {
+			cocktail >> temp;
+			amounts.push_back(atof(temp.c_str()));
+		}
+		//--Add all this info to recipes
+		vector<Recipe::component> rlist;
+		for(size_t i = 0; i < numIng; ++i) 
+			rlist.push_back(make_tuple(ingredients[i],amounts[i]));
+		recipes.emplace_back(rlist);
 	}
 }
