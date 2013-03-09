@@ -7,7 +7,8 @@ class Recipe
 {
 public:
 	typedef std::tuple<Ingredient, double> component;
-	Recipe(std::vector<component> cps) : components(cps) {};
+	Recipe(const std::vector<Ingredient> ins, 
+		   const std::vector<double> ams);
 
     friend std::ostream &operator<<(std::ostream &os, const Recipe &recipe);
 

@@ -35,7 +35,6 @@ int main() {
 
 	//--TEST
 	char c;
-	cout <<"hello"<<endl;
 	for(size_t i=0; i<recipes.size(); ++i) 
 		cout << recipes[i] << endl;
 	
@@ -67,7 +66,7 @@ void readRecipes(vector<Recipe> &recipes, const BarType &bar) {
 	//--Open list of recipes
 	ifstream input("RecipeList.txt");
 	while(getline(input,line)) {
-		badRecipe = true;
+		badRecipe = false;
 		istringstream cocktail(line);
 		cocktail >> temp;
 		numIng = atoi(temp.c_str());
@@ -79,7 +78,7 @@ void readRecipes(vector<Recipe> &recipes, const BarType &bar) {
 			auto it=bar.find(temp);
 			if(it == bar.end()) {
 				cerr << "Ingredient: " << temp << "not found in database!" << endl;
-				badRecipe = false;
+				badRecipe = true;
 				break;
 			}
 			//--Add to vector
@@ -92,9 +91,6 @@ void readRecipes(vector<Recipe> &recipes, const BarType &bar) {
 			amounts.push_back(atof(temp.c_str()));
 		}
 		//--Add all this info to recipes
-		vector<Recipe::component> rlist;
-		for(size_t i = 0; i < numIng; ++i) 
-			rlist.push_back(make_tuple(ingredients[i],amounts[i]));
-		recipes.emplace_back(rlist);
+		recipes.emplace_back(ingredients,amounts);
 	}
 }
