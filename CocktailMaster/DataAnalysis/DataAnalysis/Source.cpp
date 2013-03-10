@@ -23,7 +23,8 @@ using std::make_tuple;
 typedef map<string, Ingredient> BarType;
 
 void readStartList(BarType &);
-void readRecipes(vector<Recipe> &, const BarType &);
+void readRecipes(vector<Recipe> &,  BarType &);
+void analyzeRecipe(Recipe &);
 
 int main() {
 	//--Create map to store database, vector for recipes
@@ -59,7 +60,7 @@ void readStartList(BarType &bar) {
 }
 
 //--function to read list of well tested cocktail recipes
-void readRecipes(vector<Recipe> &recipes, const BarType &bar) {
+void readRecipes(vector<Recipe> &recipes, BarType &bar) {
 	string line,temp; 
 	size_t numIng;
 	bool badRecipe;
@@ -70,7 +71,7 @@ void readRecipes(vector<Recipe> &recipes, const BarType &bar) {
 		istringstream cocktail(line);
 		cocktail >> temp;
 		numIng = atoi(temp.c_str());
-		vector<Ingredient> ingredients;
+		vector<Ingredient*> ingredients;
 		//--Read ingredient names
 		for(size_t i = 0; i < numIng; ++i) {
 			cocktail >> temp;
@@ -82,7 +83,7 @@ void readRecipes(vector<Recipe> &recipes, const BarType &bar) {
 				break;
 			}
 			//--Add to vector
-			ingredients.push_back(it->second);
+			ingredients.push_back(&it->second);
 		}
 		if(badRecipe) continue;	
 		vector<double> amounts;
@@ -92,5 +93,12 @@ void readRecipes(vector<Recipe> &recipes, const BarType &bar) {
 		}
 		//--Add all this info to recipes
 		recipes.emplace_back(ingredients,amounts);
+
 	}
+}
+
+//--function to calculate unknown parameters in a recipe
+void analyzeRecipe(Recipe &recipe) {
+	
+
 }

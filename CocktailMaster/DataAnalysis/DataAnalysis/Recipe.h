@@ -6,9 +6,11 @@
 class Recipe
 {
 public:
-	typedef std::tuple<Ingredient, double> component;
-	Recipe(const std::vector<Ingredient> ins, 
+	typedef std::tuple<Ingredient*, double> component;
+	Recipe(const std::vector<Ingredient*> ins, 
 		   const std::vector<double> ams);
+
+	static double mlperoz;
 
     friend std::ostream &operator<<(std::ostream &os, const Recipe &recipe);
 

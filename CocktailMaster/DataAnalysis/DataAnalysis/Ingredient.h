@@ -15,8 +15,8 @@ public:
 	std::string get_name() const { return name; }
 
 private:
-	std::string category;
-	std::string name;
+	const std::string category;
+	const std::string name;
 	double alcoholic_bite;
 	double sweetness;
 	double sourness;
