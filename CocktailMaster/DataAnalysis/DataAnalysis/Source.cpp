@@ -11,6 +11,7 @@
 using std::cout;
 using std::cerr;
 using std::cin;
+using std::clog;
 using std::endl;
 using std::ifstream;
 using std::ostream;
@@ -24,7 +25,8 @@ typedef map<string, Ingredient> BarType;
 
 void readStartList(BarType &);
 void readRecipes(vector<Recipe> &,  BarType &);
-void analyzeRecipe(Recipe &);
+bool analyzeRecipe(Recipe &);
+void analyzeRecipes(vector<Recipe> &);
 
 int main() {
 	//--Create map to store database, vector for recipes
@@ -33,6 +35,7 @@ int main() {
 	//--Read databases
 	readStartList(bar);
 	readRecipes(recipes,bar);
+	analyzeRecipes(recipes);
 
 	//--TEST
 	char c;
@@ -98,7 +101,29 @@ void readRecipes(vector<Recipe> &recipes, BarType &bar) {
 }
 
 //--function to calculate unknown parameters in a recipe
-void analyzeRecipe(Recipe &recipe) {
+bool analyzeRecipe(Recipe &recipe) {
+	
+	return false;
+}
+
+//--function to go through all the recipes to do the analysis
+void analyzeRecipes(vector<Recipe> &recipes) {
+	vector<Recipe*> unprocessed_data;
+	for(auto r: recipes)
+		unprocessed_data.push_back(&r);
+	size_t passcounter = 0;
 	
 
+	//--Process list of recipes
+	while(unprocessed_data.size() && passcounter<4) {
+		vector<Recipe*> leftover_recipes;
+		for(size_t i = 0; i < unprocessed_data.size(); ++i) {
+			if(!analyzeRecipe(*unprocessed_data[i])) 
+				leftover_recipes.push_back(unprocessed_data[i]);
+		}
+		++passcounter;
+		clog << "Completed pass " << passcounter << ", " 
+			 << leftover_recipes.size() << " recipes remain." << endl;
+		unprocessed_data = leftover_recipes;
+	}
 }
