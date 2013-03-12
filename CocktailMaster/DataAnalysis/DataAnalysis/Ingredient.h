@@ -13,6 +13,9 @@ public:
 
 	std::string get_category() const { return category; }
 	std::string get_name() const { return name; }
+	double get_alcoholic_bite() const { return alcoholic_bite; }
+	double get_sweetness() const { return sweetness; }
+	double get_sourness() const { return sourness; }
 
 private:
 	const std::string category;
