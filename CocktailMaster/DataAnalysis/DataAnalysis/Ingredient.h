@@ -1,6 +1,8 @@
 #pragma once
+#include <iostream>
 #include <string>
 #include <vector>
+#include <numeric>
 class Ingredient
 {
 public:
@@ -10,6 +12,8 @@ public:
 	void add_ab_measurement(double ab) {alcoholic_bite_measurements.push_back(ab);}
 	void add_sw_measurement(double sw) {sweetness_measurements.push_back(sw);}
 	void add_sr_measurement(double sr) {sourness_measurements.push_back(sr);}
+	void update_flavor_vector();
+	void print_properties(std::ostream &os);
 
 	std::string get_category() const { return category; }
 	std::string get_name() const { return name; }

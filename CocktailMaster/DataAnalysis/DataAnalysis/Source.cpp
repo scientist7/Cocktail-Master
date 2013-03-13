@@ -5,6 +5,7 @@
 #include <map>
 #include <string>
 #include <tuple>
+#include <algorithm>
 #include "Ingredient.h"
 #include "Recipe.h"
 
@@ -14,11 +15,13 @@ using std::cin;
 using std::clog;
 using std::endl;
 using std::ifstream;
+using std::ofstream;
 using std::ostream;
 using std::istringstream;
 using std::string;
 using std::vector;
 using std::map;
+using std::pair;
 using std::tuple;
 using std::make_tuple;
 using std::get;
@@ -28,7 +31,8 @@ typedef map<string, Ingredient> BarType;
 void readStartList(BarType &);
 void readRecipes(vector<Recipe> &,  BarType &);
 bool analyzeRecipe(Recipe &);
-void analyzeRecipes(vector<Recipe> &);
+void analyzeRecipes(vector<Recipe> &, BarType &);
+void outputIngredientProperties(string, BarType &);
 
 int main() {
 	//--Create map to store database, vector for recipes
@@ -37,13 +41,12 @@ int main() {
 	//--Read databases
 	readStartList(bar);
 	readRecipes(recipes,bar);
-	analyzeRecipes(recipes);
-
-	//--TEST
+	//--Analyze recipes to get flavor vectors
+	analyzeRecipes(recipes,bar);
+	//--Print output file
+	outputIngredientProperties("Text.txt",bar);
 	char c;
-	for(size_t i=0; i<recipes.size(); ++i) 
-		cout << recipes[i] << endl;
-	
+	cout << "Press any key to exit." << endl;
 	cin >> c;
 	return 0;
 }
@@ -111,7 +114,7 @@ bool analyzeRecipe(Recipe &recipe) {
 	vector<parameter> parameters;
 	//--implement measurement weights later!!!!
 	
-	double sum = 0, amount; size_t unknownpar = 0;
+	double sum = 0, amount; size_t unknownpar = 0; bool mflag = true;
 	Ingredient* ing;
 	//--Find total alcoholic bite 
 	for(size_t i = 0; i < recipe.getnumberofingredients(); ++i) {
@@ -120,58 +123,59 @@ bool analyzeRecipe(Recipe &recipe) {
 		else { 
 			if(unknownpar) return false; //--can't have >1 unknown par of same type
 			++unknownpar;
-			sum = -10;
+			mflag = false;
 			ing = recipe.getingredientat(i);
 			amount = recipe.getamountat(i);
 		}
 	} 
 	//--If no unknowns, we have a measure of total flavor
-	if (sum>-10) measurements.push_back(sum);
+	if (mflag) measurements.push_back(sum);
 	//--Otherwise keep track of unknown to solve for it later (0 for bite)
 	else parameters.push_back(make_tuple(ing,0,sum,amount));
 
 	//--Find total sweetness
-	sum = 0; unknownpar = 0;
+	sum = 0; unknownpar = 0; mflag = true;
 	for(size_t i = 0; i < recipe.getnumberofingredients(); ++i) {
 		if(recipe.getingredientat(i)->get_sweetness()>-10) 
 			sum+=recipe.getamountat(i)*recipe.getingredientat(i)->get_sweetness();
 		else {
 			if(unknownpar) return false; //--can't have >1 unknown par of same type
 			++unknownpar;
-			sum = -10;
+			mflag = false;
 			ing = recipe.getingredientat(i);
 			amount = recipe.getamountat(i);
 		}
 	}
 	//--If no unknowns, we have a measure of total flavor
-	if (sum>-10) measurements.push_back(sum);
+	if (mflag) measurements.push_back(sum);
 	//--Otherwise keep track of unknown to solve for it later (1 for sweetness)
 	else parameters.push_back(make_tuple(ing,1,sum,amount));
 
 	//--Find total sourness
-	sum = 0; unknownpar = 0;
+	sum = 0; unknownpar = 0; mflag = true;
 	for(size_t i = 0; i < recipe.getnumberofingredients(); ++i) {
 		if(recipe.getingredientat(i)->get_sourness()>-10)
 			sum+=recipe.getamountat(i)*recipe.getingredientat(i)->get_sourness();
 		else {
 			if(unknownpar) return false; //--can't have >1 unknown par of same type
 			++unknownpar;
-			sum = -10;
+			mflag = false;
 			ing = recipe.getingredientat(i);
 			amount = recipe.getamountat(i);
 		}
 	}
 	//--If no unknowns, we have a measure of total flavor
-	if (sum>-10) measurements.push_back(sum);
+	if (mflag) measurements.push_back(sum);
 	//--Otherwise keep track of unknown to solve for it later (2 for sourness)
 	else parameters.push_back(make_tuple(ing,2,sum,amount));
 
 	//--Solve for unknown parameters
+	if(!measurements.size()) return false;
 	double bestmeasure = 0;
 	for(size_t m = 0; m < measurements.size(); ++m) 
-		bestmeasure += measurements[m];
-	bestmeasure /= measurements.size();
-	for(auto p : parameters) {
+		bestmeasure += measurements[m]; 
+	bestmeasure /= measurements.size(); 
+	for(auto p : parameters) { 
 		switch(get<1>(p)){
 		case 0:
 			get<0>(p)->add_ab_measurement((bestmeasure-get<2>(p))/get<3>(p));
@@ -189,7 +193,7 @@ bool analyzeRecipe(Recipe &recipe) {
 }
 
 //--function to go through all the recipes to do the analysis
-void analyzeRecipes(vector<Recipe> &recipes) {
+void analyzeRecipes(vector<Recipe> &recipes, BarType &bar) {
 	vector<Recipe*> unprocessed_data;
 	for(size_t r = 0; r < recipes.size(); ++r)
 		unprocessed_data.push_back(&recipes[r]);
@@ -206,5 +210,17 @@ void analyzeRecipes(vector<Recipe> &recipes) {
 		clog << "Completed pass " << passcounter << ", " 
 			 << leftover_recipes.size() << " recipes remain." << endl;
 		unprocessed_data = leftover_recipes;
+		//--Update flavor vectors
+		for(auto it = bar.begin(); it != bar.end(); ++it) 
+			it->second.update_flavor_vector();
 	}
+}
+
+void outputIngredientProperties(string fname, BarType &bar) {
+	ofstream out(fname);
+	if(out) {
+			for(auto it = bar.begin(); it != bar.end(); ++it) 
+				it->second.print_properties(out);
+	}
+	out.close();
 }
