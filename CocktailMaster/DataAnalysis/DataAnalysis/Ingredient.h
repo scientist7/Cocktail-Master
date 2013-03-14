@@ -7,7 +7,9 @@ class Ingredient
 {
 public:
 	Ingredient(std::string ct, std::string nm, double ab, double sw, double sr) :                                                    
-		       category(ct), name(nm), alcoholic_bite(ab), sweetness(sw), sourness(sr) {}
+		       category(ct), name(nm), alcoholic_bite(ab), sweetness(sw), sourness(sr),
+			   num_alcoholic_bite_measures((ab>-10)?1000000:0), num_sweetness_measures((sw>-10)?1000000:0), 
+			   num_sourness_measures((sr>-10)?1000000:0) {}
 	
 	void add_ab_measurement(double ab) {alcoholic_bite_measurements.push_back(ab);}
 	void add_sw_measurement(double sw) {sweetness_measurements.push_back(sw);}
@@ -20,6 +22,9 @@ public:
 	double get_alcoholic_bite() const { return alcoholic_bite; }
 	double get_sweetness() const { return sweetness; }
 	double get_sourness() const { return sourness; }
+	double get_num_alcoholic_bite_measures() const { return num_alcoholic_bite_measures; }
+	double get_num_sweetness_measures() const { return num_sweetness_measures; }
+	double get_num_sourness_measures() const { return num_sourness_measures; }
 
 private:
 	const std::string category;
@@ -30,6 +35,9 @@ private:
 	std::vector<double> alcoholic_bite_measurements;
 	std::vector<double> sweetness_measurements;
 	std::vector<double> sourness_measurements;
+	size_t num_alcoholic_bite_measures;
+	size_t num_sweetness_measures;
+	size_t num_sourness_measures;
 };
 
 //--overloaded operators

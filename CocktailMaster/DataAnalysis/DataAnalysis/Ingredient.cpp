@@ -1,20 +1,26 @@
 #include "Ingredient.h"
 
 void Ingredient::update_flavor_vector() {
-	if(alcoholic_bite_measurements.size())
+	if(alcoholic_bite_measurements.size()) {
 		alcoholic_bite = std::accumulate(alcoholic_bite_measurements.cbegin(),
 										 alcoholic_bite_measurements.cend(),
 										 0.)/alcoholic_bite_measurements.size();	
+		num_alcoholic_bite_measures = alcoholic_bite_measurements.size();
+	}
 
-	if(sweetness_measurements.size()) 
+	if(sweetness_measurements.size()) {
 		sweetness = std::accumulate(sweetness_measurements.cbegin(),
 									sweetness_measurements.cend(),
 									0.)/sweetness_measurements.size();
+		num_sweetness_measures = sweetness_measurements.size();
+	}
 
-	if(sourness_measurements.size())
+	if(sourness_measurements.size()) {
 		sourness = std::accumulate(sourness_measurements.cbegin(),
 									sourness_measurements.cend(),
 									0.)/sourness_measurements.size();
+		num_sourness_measures = sourness_measurements.size();
+	}
 }
 
 void Ingredient::print_properties(std::ostream & os) {
