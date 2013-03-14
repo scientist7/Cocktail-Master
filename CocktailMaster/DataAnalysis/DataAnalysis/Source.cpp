@@ -33,6 +33,7 @@ void readRecipes(vector<Recipe> &,  BarType &);
 bool analyzeRecipe(Recipe &);
 void analyzeRecipes(vector<Recipe> &, BarType &);
 void outputIngredientProperties(string, BarType &);
+void outputIngredientMeasurements(BarType &);
 
 int main() {
 	//--Create map to store database, vector for recipes
@@ -45,6 +46,8 @@ int main() {
 	analyzeRecipes(recipes,bar);
 	//--Print output file
 	outputIngredientProperties("Text.txt",bar);
+	//--Print lists of measurements
+	outputIngredientMeasurements(bar);
 	char c;
 	cout << "Press any key to exit." << endl;
 	cin >> c;
@@ -248,4 +251,18 @@ void outputIngredientProperties(string fname, BarType &bar) {
 			it->second.print_properties(out);
 	}
 	out.close();
+}
+
+void outputIngredientMeasurements(BarType &bar) {
+	for(auto it = bar.begin(); it != bar.end(); ++it){
+		ofstream outab(it->second.get_name()+"_bite.txt");
+		it->second.print_alcoholic_bite(outab);
+		outab.close();
+		ofstream outsw(it->second.get_name()+"_sweet.txt");
+		it->second.print_sweetness(outsw);
+		outsw.close();
+		ofstream outsr(it->second.get_name()+"_sour.txt");
+		it->second.print_sourness(outsr);
+		outsr.close();
+	}
 }

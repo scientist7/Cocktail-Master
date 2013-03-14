@@ -1,5 +1,4 @@
 Gin Tanqueray -10 0 0
-Gin Hendricks -10 0 0
 RyeWhiskey RussellsReserve -10 0 0
 Bourbon BuffaloTrace -10 0 0
 Tequila 1800Silver -10 -10 0
@@ -8,3 +7,4 @@ Juice StoreLemon 0 0 1
 Juice TreeLemon 0 0 -10
 Juice Lime 0 0 -10
 SimpleSyrup 1:1Caster 0 -10 0
+Maraschino Luxardo -10 -10 0

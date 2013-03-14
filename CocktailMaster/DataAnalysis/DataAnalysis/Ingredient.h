@@ -16,7 +16,10 @@ public:
 	void add_sr_measurement(double sr) {sourness_measurements.push_back(sr);}
 	void update_flavor_vector();
 	void print_properties(std::ostream &os);
-
+	void print_alcoholic_bite(std::ostream &os);
+	void print_sweetness(std::ostream &os);
+	void print_sourness(std::ostream &os);
+	
 	std::string get_category() const { return category; }
 	std::string get_name() const { return name; }
 	double get_alcoholic_bite() const { return alcoholic_bite; }
@@ -25,6 +28,7 @@ public:
 	double get_num_alcoholic_bite_measures() const { return num_alcoholic_bite_measures; }
 	double get_num_sweetness_measures() const { return num_sweetness_measures; }
 	double get_num_sourness_measures() const { return num_sourness_measures; }
+	
 
 private:
 	const std::string category;
