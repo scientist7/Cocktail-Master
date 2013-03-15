@@ -255,14 +255,20 @@ void outputIngredientProperties(string fname, BarType &bar) {
 
 void outputIngredientMeasurements(BarType &bar) {
 	for(auto it = bar.begin(); it != bar.end(); ++it){
-		ofstream outab(it->second.get_name()+"_bite.txt");
-		it->second.print_alcoholic_bite(outab);
-		outab.close();
-		ofstream outsw(it->second.get_name()+"_sweet.txt");
-		it->second.print_sweetness(outsw);
-		outsw.close();
-		ofstream outsr(it->second.get_name()+"_sour.txt");
-		it->second.print_sourness(outsr);
-		outsr.close();
+		if(it->second.get_num_alcoholic_bite_measures()!=1000000) {
+			ofstream outab(it->second.get_name()+"_bite.txt");
+			it->second.print_alcoholic_bite(outab);
+			outab.close();
+		}
+		if(it->second.get_num_sweetness_measures()!=1000000) {
+			ofstream outsw(it->second.get_name()+"_sweet.txt");
+			it->second.print_sweetness(outsw);
+			outsw.close();
+		}
+		if(it->second.get_num_sourness_measures()!=1000000) {
+			ofstream outsr(it->second.get_name()+"_sour.txt");
+			it->second.print_sourness(outsr);
+			outsr.close();
+		}
 	}
 }

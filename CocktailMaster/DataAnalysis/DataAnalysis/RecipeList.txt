@@ -1,9 +1,9 @@
-3 Tanqueray TreeLemon 1:1Caster 60 25 25
-3 Tanqueray StoreLemon 1:1Caster 60 30 25
-4 Tanqueray StoreLemon Cointreau 1:1Caster 30 35 30 10
-4 Tanqueray StoreLemon Luxardo 1:1Caster 45 30 10 15
-3 1800Silver Lime 1:1Caster 45 30 20
-3 RussellsReserve StoreLemon 1:1Caster 60 35 25
-3 RussellsReserve TreeLemon 1:1Caster 60 30 25
-3 BuffaloTrace StoreLemon 1:1Caster 60 35 25
-3 BuffaloTrace Lime 1:1Caster 60 25 25
+3 Tanqueray TreeLemon 1To1Caster 60 25 25
+3 Tanqueray StoreLemon 1To1Caster 60 30 25
+4 Tanqueray StoreLemon Cointreau 1To1Caster 30 35 30 10
+4 Tanqueray StoreLemon Luxardo 1To1Caster 45 30 10 15
+3 1800Silver Lime 1To1Caster 45 30 20
+3 RussellsReserve StoreLemon 1To1Caster 60 35 25
+3 RussellsReserve TreeLemon 1To1Caster 60 30 25
+3 BuffaloTrace StoreLemon 1To1Caster 60 35 25
+3 BuffaloTrace Lime 1To1Caster 60 25 25
