@@ -34,6 +34,7 @@ bool analyzeRecipe(Recipe &);
 void analyzeRecipes(vector<Recipe> &, BarType &);
 void outputIngredientProperties(string, BarType &);
 void outputIngredientMeasurements(BarType &);
+void outputRecipeMeasurements(vector<Recipe> &);
 
 int main() {
 	//--Create map to store database, vector for recipes
@@ -48,6 +49,8 @@ int main() {
 	outputIngredientProperties("Text.txt",bar);
 	//--Print lists of measurements
 	outputIngredientMeasurements(bar);
+    outputRecipeMeasurements(recipes); 
+
 	char c;
 	cout << "Press any key to exit." << endl;
 	cin >> c;
@@ -254,7 +257,7 @@ void outputIngredientProperties(string fname, BarType &bar) {
 }
 
 void outputIngredientMeasurements(BarType &bar) {
-	for(auto it = bar.begin(); it != bar.end(); ++it){
+	for(auto it = bar.begin(); it != bar.end(); ++it) {
 		if(it->second.get_num_alcoholic_bite_measures()!=1000000) {
 			ofstream outab(it->second.get_name()+"_bite.txt");
 			it->second.print_alcoholic_bite(outab);
@@ -271,4 +274,27 @@ void outputIngredientMeasurements(BarType &bar) {
 			outsr.close();
 		}
 	}
+}
+
+void outputRecipeMeasurements(vector<Recipe> &recipes) {
+	double alcoholic_bite = 0, sweetness = 0, sourness = 0;
+	ofstream abswdiff("alcoholic_bite_minus_sweetness.txt");
+	ofstream absrdiff("alcoholic_bite_minus_sourness.txt");
+	ofstream srswdiff("sourness_minus_sweetness.txt");
+	//--loop over recipes
+	for(auto it = recipes.begin(); it != recipes.end(); ++it) {
+		alcoholic_bite = 0, sweetness = 0, sourness = 0;
+		//--Calculate total bite,sweetness,sourness for each recipe
+		for(size_t i = 0; i < it->getnumberofingredients(); ++i) {
+			alcoholic_bite += it->getamountat(i)*it->getingredientat(i)->get_alcoholic_bite();
+			sweetness += it->getamountat(i)*it->getingredientat(i)->get_sweetness();
+			sourness += it->getamountat(i)*it->getingredientat(i)->get_sourness();
+		}
+		abswdiff << 2 * (alcoholic_bite - sweetness) / (alcoholic_bite + sweetness)  << endl;
+		absrdiff << 2 * (alcoholic_bite - sourness) / (alcoholic_bite + sourness) << endl;
+		srswdiff << 2 * (sourness - sweetness) / (sourness + sweetness) << endl;
+	}
+	abswdiff.close();
+	absrdiff.close();
+	srswdiff.close();
 }
