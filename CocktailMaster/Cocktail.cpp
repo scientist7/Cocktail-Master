@@ -323,7 +323,7 @@ void search(Cocktail::eindex i, const CMatrix &A, Eigen::VectorXd &x,
 			double currErr = ( A* x - b ).norm() / b.norm();
 			if(currErr>prevErr) break;
 			prevErr = currErr;
-			if(currErr>.02) continue; 
+			if(currErr>.05) continue; 
 			success = true;
 			tfom = figure_of_merit(x,A);
 			if(tfom < fom) {

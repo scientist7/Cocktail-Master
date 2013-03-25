@@ -8,3 +8,4 @@ RyeWhiskey RussellsReserve 0.583333 0 0
 Juice StoreLemon 0 0 1
 Gin Tanqueray 0.5 0 0
 Juice TreeLemon 0 0 1.2125
+VioletLiqueur TheBitterTruth 3.5 0 1.9375
