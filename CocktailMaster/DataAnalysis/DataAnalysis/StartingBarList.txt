@@ -2,6 +2,7 @@ Gin Tanqueray -10 0 0
 RyeWhiskey RussellsReserve -10 0 0
 Bourbon BuffaloTrace -10 0 0
 Tequila 1800Silver -10 -10 0
+Armagnac ChateauDuTariquet -10 0 0
 TripleSec Cointreau -10 -10 0
 Juice StoreLemon 0 0 1
 Juice TreeLemon 0 0 -10

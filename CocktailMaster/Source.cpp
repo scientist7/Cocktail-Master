@@ -155,7 +155,8 @@ string SeparateWords(string text)
 	newText.append(1,text[0]);
         for (int i = 1; i < text.length(); ++i)
         {
-            if (isupper(text[i]) && text[i - 1] != ' ')
+            if ((isupper(text[i]) || isdigit(text[i])) 
+				&& text[i - 1] != ' ')
                 newText.append(" ");
             newText.append(1,text[i]);
         }

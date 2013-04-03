@@ -8,3 +8,4 @@
 3 RussellsReserve TreeLemon 1To1Caster 60 30 25
 3 BuffaloTrace StoreLemon 1To1Caster 60 35 25
 3 BuffaloTrace Lime 1To1Caster 60 25 25
+3 ChateauDuTariquet StoreLemon 1To1Caster 60 35 25
