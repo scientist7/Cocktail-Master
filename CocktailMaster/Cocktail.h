@@ -27,6 +27,7 @@ public:
 	
     //--Members controlling output
 	static double ozincrements;
+	static double mlincrements;
 	static double tspperoz;
 	static double mlperoz;
 

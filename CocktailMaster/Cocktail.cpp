@@ -2,6 +2,7 @@
 
 //--define static members
 double Cocktail::ozincrements=0.25;
+double Cocktail::mlincrements=5;
 double Cocktail::tspperoz=6;
 double Cocktail::solprecision=0.001;
 double Cocktail::mlperoz=30;
@@ -348,11 +349,16 @@ double figure_of_merit(const Eigen::VectorXd &x, const CMatrix &A) {
 
 //--overloaded operators
 std::ostream &operator<<(std::ostream &os, const Cocktail &item) {
-	double oz = 0, tsp = 0, ml = 0;
+	double oz = 0, tsp = 0, ml = 0, mlrem = 0, exact = 0;
+	os << "INGREDIENT" << std::string(25,' ') << "APPROX [oz,tsp]"
+	   << std::string(2,' ') << "APPROX [ml]" << std::string(2,' ') 
+	   << "EXACT [ml]" << std::endl;
+	os << std::string(75,'-') << std::endl;
 	for(auto el : item.elements) {
 		//--First convert raw oz amount to oz + tsp and to ml
-		oz=std::get<1>(el);
-		ml=oz*Cocktail::mlperoz;
+		oz = std::get<1>(el);
+		ml = oz*Cocktail::mlperoz;
+		exact = ml;
 		//--Report small amounts of strong flavors in tsp (e.g. sugar)
 		if(oz <= 0.5 && std::get<0>(el).get_flavor_magnitude() >= 3) {
 			tsp = oz;
@@ -364,13 +370,20 @@ std::ostream &operator<<(std::ostream &os, const Cocktail &item) {
 			if(fabs(tsp-Cocktail::ozincrements)<.001) tsp = 0;
 			oz -= tsp;
 		}
-		tsp*=Cocktail::tspperoz;
-		tsp=floor(tsp+0.5);
-		os << std::left << std::setw(35) << std::get<0>(el) 
+		//--Round to nearest tsp
+		tsp *= Cocktail::tspperoz;
+		tsp = floor(tsp + 0.5);
+		
+		//--Round to nearest ml increment
+		mlrem = fmod(ml,Cocktail::mlincrements);
+		ml = ml - mlrem + floor((mlrem/Cocktail::mlincrements) + 0.5)*Cocktail::mlincrements;
+
+
+		os << std::left << std::setw(30) << std::get<0>(el) 
 		   << " " << std::right;
-		if(oz > 0) os << oz << " oz ";
-		if(tsp > 0) os << tsp << " tsp"; 
-		if(ml > 0) os << std::setprecision(3) << std::setw(2) << std::right << "[" << ml << " ml]";
+		if(oz > 0 || tsp > 0) os << std::setw(10) << oz << " oz " << tsp << " tsp"; 
+		if(ml > 0) os << std::setprecision(3) << std::setw(10) << std::right << ml << " ml";
+		if(exact > 0) os <<std::setprecision(3) << std::setw(9) << exact << " ml";
 		os << std::endl;
 	}
 	return os;
