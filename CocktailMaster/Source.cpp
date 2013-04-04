@@ -39,6 +39,8 @@ int main() {
 		Cocktail cocktail(getIngredients(bar), getReserveIngredients(bar));
 		//--Calculate correct proportions
 		cocktail.balance_drink();
+		//--Scale recipe for convenience
+		cocktail.scale_recipe();
 		//--Print recipe
 		cout << endl << cocktail << endl;
 	    cout << "Enter q to quit, or anything else to continue" << endl;
@@ -153,8 +155,7 @@ string SeparateWords(string text)
 	if (text.length() < 1) return text;
 	string newText;
 	newText.append(1,text[0]);
-        for (int i = 1; i < text.length(); ++i)
-        {
+        for (size_t i = 1; i < text.length(); ++i) {
             if ((isupper(text[i]) && text[i - 1] != ' ') 
 				|| isdigit(text[i]) && !isdigit(text[i - 1]))
                 newText.append(" ");

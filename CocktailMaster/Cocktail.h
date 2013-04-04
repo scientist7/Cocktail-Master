@@ -24,6 +24,7 @@ public:
 		                            const Cocktail &item);
 
 	void balance_drink();
+	void scale_recipe();
 	
     //--Members controlling output
 	static double ozincrements;

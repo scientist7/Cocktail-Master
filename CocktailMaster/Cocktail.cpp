@@ -144,6 +144,15 @@ void Cocktail::balance_drink() {
 	return;
 }
 
+void Cocktail::scale_recipe() {
+	//--Goal is to scale recipe to get even measures on the ingredients
+	//--while preserving the proportions accurately
+
+	//--Place upper bound, that sum of alcoholic ingredients <= 2.5 oz
+
+	return;
+}
+
 bool Cocktail::add_ingredient(const CMatrix &A, CMatrix &Anew, Eigen::VectorXd &x, 
 							  const Eigen::Vector3d &b, const eindex i, const eindex j) {
 	//--Construct new matrix
