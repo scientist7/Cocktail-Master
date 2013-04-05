@@ -149,6 +149,51 @@ void Cocktail::scale_recipe() {
 	//--while preserving the proportions accurately
 
 	//--Place upper bound, that sum of alcoholic ingredients <= 2.5 oz
+	//--lower bound, at 1.5 oz
+	//--Ideal scaling give total of 2 oz
+	double booze_total = 0, scale_bounds[2], ideal_scale;
+	for(eindex i = 0; i < elements.size(); ++i) {
+		if(std::get<0>(elements[i]).get_alcoholic_bite())
+			booze_total += std::get<1>(elements[i]);
+	}
+	if(!booze_total) {
+		std::cerr << "NO BOOZE IN RECIPE!" << std::endl;
+		return;
+	}
+	scale_bounds[0] = 1.0/booze_total;
+	scale_bounds[1] = 3.0/booze_total;
+	ideal_scale = 2.0/booze_total;
+
+	//--Search range of scale factors on recipe and choose the best
+	double total_discrepancy, min_scale_dev = 100, curr_scale_dev, best_scale = 1;
+	for(double scale = scale_bounds[0]; scale <= scale_bounds[1]; scale = scale + 0.005) {
+		total_discrepancy = 0; 
+        //--Loop through ingredients, find total discrepancy
+		for(eindex i = 0; i < elements.size(); ++i) {
+			double mlrem = fmod(scale * std::get<1>(elements[i]) * Cocktail::mlperoz,
+				                      Cocktail::mlincrements);
+			total_discrepancy += std::min(mlrem,5-mlrem);
+		} 
+		//--Here we have an acceptable discrepancy
+		if(total_discrepancy < 1) {
+			curr_scale_dev = fabs(scale - ideal_scale);
+			if(curr_scale_dev < min_scale_dev) {
+				min_scale_dev = curr_scale_dev;
+			    best_scale = scale;
+			}
+			else break;
+		}
+	}
+
+	if(min_scale_dev == 100) {
+		std::cerr << "Could not find acceptable rescaling of recipe!" << std::endl; 
+		return;
+	}
+
+	//--Here we have a good rescale factor, apply it to recipe
+	for(eindex i = 0; i < elements.size(); ++i) {
+		std::get<1>(elements[i]) *= best_scale;
+	}
 
 	return;
 }
