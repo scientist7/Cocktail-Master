@@ -3,6 +3,7 @@ SimpleSyrup 1To1Caster 0 1.35 0
 Bourbon BuffaloTrace 0.583333 0 0
 Armagnac ChateauDuTariquet 0.583333 0 0
 TripleSec Cointreau 0.666667 0.716667 0
+WhiteRum FlorDeCana4YearOldExtraDry 0.68 0.23 0
 Juice Lime 0 0 1.36
 Maraschino Luxardo 0.75 0.975 0
 RyeWhiskey RussellsReserve 0.583333 0 0
