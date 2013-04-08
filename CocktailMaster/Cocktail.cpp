@@ -404,10 +404,10 @@ double figure_of_merit(const Eigen::VectorXd &x, const CMatrix &A) {
 //--overloaded operators
 std::ostream &operator<<(std::ostream &os, const Cocktail &item) {
 	double oz = 0, tsp = 0, ml = 0, mlrem = 0, exact = 0;
-	os << "INGREDIENT" << std::string(25,' ') << "APPROX [oz,tsp]"
-	   << std::string(2,' ') << "APPROX [ml]" << std::string(2,' ') 
+	os << "INGREDIENT" << std::string(60,' ') << "APPROX [oz,tsp]"
+	   << std::string(10,' ') << "APPROX [ml]" << std::string(10,' ') 
 	   << "EXACT [ml]" << std::endl;
-	os << std::string(75,'-') << std::endl;
+	os << std::string(130,'-') << std::endl;
 	for(auto el : item.elements) {
 		//--First convert raw oz amount to oz + tsp and to ml
 		oz = std::get<1>(el);
@@ -433,11 +433,11 @@ std::ostream &operator<<(std::ostream &os, const Cocktail &item) {
 		ml = ml - mlrem + floor((mlrem/Cocktail::mlincrements) + 0.5)*Cocktail::mlincrements;
 
 
-		os << std::left << std::setw(30) << std::get<0>(el) 
+		os << std::left << std::setw(65) << std::get<0>(el) 
 		   << " " << std::right;
 		if(oz > 0 || tsp > 0) os << std::setw(10) << oz << " oz " << tsp << " tsp"; 
-		if(ml > 0) os << std::setprecision(3) << std::setw(10) << std::right << ml << " ml";
-		if(exact > 0) os <<std::setprecision(3) << std::setw(9) << exact << " ml";
+		if(ml > 0) os << std::setprecision(3) << std::setw(18) << std::right << ml << " ml";
+		if(exact > 0) os <<std::setprecision(3) << std::setw(17) << exact << " ml";
 		os << std::endl;
 	}
 	return os;
