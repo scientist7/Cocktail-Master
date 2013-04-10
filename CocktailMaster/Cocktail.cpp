@@ -7,6 +7,16 @@ double Cocktail::tspperoz=6;
 double Cocktail::solprecision=0.001;
 double Cocktail::mlperoz=30;
 
+//--Non-member stuff
+double round_to_multiple(const double input, 
+						 const double multiple) {
+	//--Round to nearest increment
+	double remainder = fmod(input,multiple);
+	return input - remainder 
+		   + floor((remainder/multiple) + 0.5)*multiple;		 
+}
+
+
 //--Constructors
 Cocktail::Cocktail(const std::vector<Ingredient> &list, 
 				   const std::vector<Ingredient> &backup) {
@@ -164,18 +174,33 @@ void Cocktail::scale_recipe() {
 	scale_bounds[1] = 3.0/booze_total;
 	ideal_scale = 2.0/booze_total;
 
+	//--Fill ingredient matrix and vector
+	CMatrix A(3,elements.size());
+	Eigen::VectorXd x(elements.size()), result(elements.size());
+	//--loop to fill A & x
+	for(eindex i = 0; i < elements.size(); ++i) {
+		A.col(i) << std::get<0>(elements[i]).get_alcoholic_bite(),
+				    std::get<0>(elements[i]).get_sweetness(),
+					std::get<0>(elements[i]).get_sourness();
+	}
+	
+
 	//--Search range of scale factors on recipe and choose the best
 	double total_discrepancy, min_scale_dev = 100, curr_scale_dev, best_scale = 1;
-	for(double scale = scale_bounds[0]; scale <= scale_bounds[1]; scale = scale + 0.005) {
-		total_discrepancy = 0; 
-        //--Loop through ingredients, find total discrepancy
+	for(double scale = scale_bounds[0]; scale <= scale_bounds[1]; scale = scale + 0.025) {
+        //--Loop through ingredients
 		for(eindex i = 0; i < elements.size(); ++i) {
-			double mlrem = fmod(scale * std::get<1>(elements[i]) * Cocktail::mlperoz,
-				                      Cocktail::mlincrements);
-			total_discrepancy += std::min(mlrem,5-mlrem);
+			x(i) = ::round_to_multiple(scale*std::get<1>(elements[i])*Cocktail::mlperoz, 
+				                       Cocktail::mlincrements)/Cocktail::mlperoz;
 		} 
+		//--Calulate discrepancy from ideal solution
+		result = A*x;
+		result /= result.mean();
+		total_discrepancy = fabs(result(0)-result(1))
+			              + fabs(result(0)-result(2))
+						  + fabs(result(1)-result(2));
 		//--Here we have an acceptable discrepancy
-		if(total_discrepancy < 1) {
+		if(total_discrepancy < .05) {
 			curr_scale_dev = fabs(scale - ideal_scale);
 			if(curr_scale_dev < min_scale_dev) {
 				min_scale_dev = curr_scale_dev;
@@ -385,8 +410,6 @@ void search(Cocktail::eindex i, const CMatrix &A, Eigen::VectorXd &x,
 				fom = tfom;
 				bestx = x;
 			}
-			//std::cout<<"err= "<<currErr<<std::endl;
-			//std::cout<<"x= "<<x<<std::endl;
 		}
 	}
 }
@@ -426,11 +449,10 @@ std::ostream &operator<<(std::ostream &os, const Cocktail &item) {
 		}
 		//--Round to nearest tsp
 		tsp *= Cocktail::tspperoz;
-		tsp = floor(tsp + 0.5);
+		tsp = round_to_multiple(tsp,1);
 		
 		//--Round to nearest ml increment
-		mlrem = fmod(ml,Cocktail::mlincrements);
-		ml = ml - mlrem + floor((mlrem/Cocktail::mlincrements) + 0.5)*Cocktail::mlincrements;
+		ml = round_to_multiple(ml,Cocktail::mlincrements);
 
 
 		os << std::left << std::setw(65) << std::get<0>(el) 

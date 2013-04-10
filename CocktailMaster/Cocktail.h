@@ -14,6 +14,8 @@ class Cocktail
 {
 	typedef std::tuple<Ingredient, double, int> element;
 	typedef std::vector<element>::size_type eindex;
+
+	double round_to_multiple(const double, const double);
 	
 public:
 	//--Constructors
