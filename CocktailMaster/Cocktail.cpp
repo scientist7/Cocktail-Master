@@ -109,7 +109,7 @@ void Cocktail::balance_drink() {
 		bool success = false;
         //--Try adding some standard ingredients to find a solution
 		for(eindex i = 0; i < reserves.size(); ++i) {
-			CMatrix Atest(3,col+1);
+			CMatrix Atest(3,col+1); 
 			//--Here this reserve ingredient is tried
 			if(this->add_ingredient(A,Atest,x,b,i)){
 				++col;
@@ -122,8 +122,8 @@ void Cocktail::balance_drink() {
 		if(!success && col < 2){
 			for(eindex i = 0; i < reserves.size()-1; ++i) {
 				for(eindex j = i+1; j < reserves.size(); ++j) {
-					CMatrix Atest(3,col+2);
-					if(this->add_ingredient(A,Atest,x,b,i,j)) {
+					CMatrix Atest(3,col+2); 
+					if(this->add_ingredient(A,Atest,x,b,i,j)) { 
 						col+=2;
 						group_norm.push_back(std::get<0>(elements[elements.size()-2]).get_flavor_magnitude());
 						group_norm.push_back(std::get<0>(elements[elements.size()-1]).get_flavor_magnitude());
@@ -241,13 +241,13 @@ bool Cocktail::add_ingredient(const CMatrix &A, CMatrix &Anew, Eigen::VectorXd &
 						  reserves[i].get_sourness();
 	if(j) { 
 		Anew.col(A.cols()+1) << reserves[j].get_alcoholic_bite(),
-		     		          reserves[j].get_sweetness(),
-			    			  reserves[j].get_sourness();
-	}
+		     		            reserves[j].get_sweetness(),
+			    			    reserves[j].get_sourness();
+	} 
 	Eigen::ColPivHouseholderQR<CMatrix> lu(A);
 	Eigen::ColPivHouseholderQR<CMatrix> lutest(Anew);
 	//--Don't add unless linearly independent from other ingredients
-	if(eindex(lutest.rank()) < eindex(lu.rank()) + 1 + j) return false;
+	if(eindex(lutest.rank()) < eindex(lu.rank()) + 1 + (j>0)?1:0) return false;
 	
 	//--Check for solution	
 	if(Anew.cols()>3 && (check_nosolutions(Anew,b) 

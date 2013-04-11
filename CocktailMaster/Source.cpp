@@ -132,8 +132,8 @@ vector<Ingredient> getReserveIngredients(BarType &bar) {
 	vector<Ingredient> reserves;
 
 	//--Define reserve ingredients
-	const string reservecat[3]={"Juice","SimpleSyrup","Vodka"};
-	const string reservename[3]={"Lemon","1:1Caster","BlueIce"}; 
+	const string reservecat[3]={"Juice","Simple Syrup","Gin"};
+	const string reservename[3]={"Store Lemon","1 To 1 Caster","Tanqueray"}; 
 	//--Look for these in bar
 	for(int i=0; i<3; ++i) {
 		for(auto bar_it = bar.lower_bound(reservecat[i]); 
@@ -165,7 +165,8 @@ string SeparateWords(string text)
 }
 
 void printIntro() { 
-string graphic[15] = {
+
+const string graphic[15] = {
 "        Welcome",
 "          to",
 "    Cocktail Master"
@@ -184,7 +185,7 @@ string graphic[15] = {
 };
 
 	cout << std::right << endl ;
-    for( const auto& line : graphic) cout << line << endl ;
+    for(const auto& line : graphic) cout << line << endl ;
     cout << '\n' ;
 
 }
