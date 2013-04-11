@@ -186,7 +186,7 @@ void Cocktail::scale_recipe() {
 	
 
 	//--Search range of scale factors on recipe and choose the best
-	double total_discrepancy, min_scale_dev = 100, curr_scale_dev, best_scale = 1;
+	double total_discrepancy, min_scale_dev = 100, curr_scale_dev, best_scale = 1, best_discrepancy = 100;
 	for(double scale = scale_bounds[0]; scale <= scale_bounds[1]; scale = scale + 0.025) {
         //--Loop through ingredients
 		for(eindex i = 0; i < elements.size(); ++i) {
@@ -208,10 +208,17 @@ void Cocktail::scale_recipe() {
 			}
 			else break;
 		}
+		//--If no discrepancy meets threshold, we choose the minimum
+		else {
+			if(total_discrepancy < best_discrepancy){
+				best_discrepancy = total_discrepancy;
+				best_scale = scale;
+			}
+		}
 	}
 
 	if(min_scale_dev == 100) {
-		std::cerr << "Could not find acceptable rescaling of recipe!" << std::endl; 
+		std::cerr << "Using scaling with least error = " << best_discrepancy << std::endl; 
 		return;
 	}
 
