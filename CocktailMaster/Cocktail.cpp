@@ -217,10 +217,8 @@ void Cocktail::scale_recipe() {
 		}
 	}
 
-	if(min_scale_dev == 100) {
+	if(min_scale_dev == 100) 
 		std::cerr << "Using scaling with least error = " << best_discrepancy << std::endl; 
-		return;
-	}
 
 	//--Here we have a good rescale factor, apply it to recipe
 	for(eindex i = 0; i < elements.size(); ++i) {
