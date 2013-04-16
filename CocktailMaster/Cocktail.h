@@ -4,6 +4,7 @@
 #include <vector>
 #include <algorithm>
 #include "Ingredient.h"
+//#include <Eigen>
 #include <Eigen/Eigen>
 #include "no_solution.h"
 #include "multiple_solutions.h"

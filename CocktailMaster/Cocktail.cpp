@@ -10,7 +10,8 @@ double Cocktail::mlperoz=30;
 //--Non-member stuff
 double round_to_multiple(const double input, 
 						 const double multiple) {
-	//--Round to nearest increment
+	//--Round to nearest increment\
+
 	double remainder = fmod(input,multiple);
 	return input - remainder 
 		   + floor((remainder/multiple) + 0.5)*multiple;		 
@@ -119,7 +120,7 @@ void Cocktail::balance_drink() {
 			}
 		}
 		//--here if no single added ingredient can fix the problem
-		if(!success && col < 2){
+		if(!success && col < 2){ 
 			for(eindex i = 0; i < reserves.size()-1; ++i) {
 				for(eindex j = i+1; j < reserves.size(); ++j) {
 					CMatrix Atest(3,col+2); 
@@ -243,7 +244,8 @@ bool Cocktail::add_ingredient(const CMatrix &A, CMatrix &Anew, Eigen::VectorXd &
 			    			    reserves[j].get_sourness();
 	} 
 	Eigen::ColPivHouseholderQR<CMatrix> lu(A);
-	Eigen::ColPivHouseholderQR<CMatrix> lutest(Anew);
+	Eigen::ColPivHouseholderQR<CMatrix> lutest(Anew); 
+	
 	//--Don't add unless linearly independent from other ingredients
 	if(eindex(lutest.rank()) < eindex(lu.rank()) + 1 + (j>0)?1:0) return false;
 	

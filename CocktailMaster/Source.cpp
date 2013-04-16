@@ -88,6 +88,7 @@ vector<Ingredient> getIngredients(BarType &bar) {
 	}
 	
 	printIntro();
+	bool badinput = false;
 
 	while(1) {
 		cout<<"Please select an ingredient category, or 0 if done"<<endl;	
@@ -96,7 +97,15 @@ vector<Ingredient> getIngredients(BarType &bar) {
 			cout<<"("<<catlabel<<") "<<element<<endl;
 			++catlabel;
 		}
-		cin >> catchoice;
+
+		do {
+			badinput = false;
+			cin >> catchoice;
+			if(catchoice >= catlabel) {
+				badinput = true;
+				cout << "Invalid choice, please select again: " << endl;
+			}
+		} while (badinput);
 
 		//--Exit on catchoice<1
 		if(catchoice<1) break;
@@ -110,8 +119,16 @@ vector<Ingredient> getIngredients(BarType &bar) {
 			cout<<"("<<catlabel<<") "<<(bar_it->second).get_name()<<endl;
 			++catlabel;
 		}
-		cin >> prodchoice;
-	
+
+		do {
+			badinput = false;
+			cin >> prodchoice;
+			if(prodchoice >= catlabel) {
+				badinput = true;
+				cout << "Invalid choice, please select again: " << endl;
+			}
+		} while (badinput);
+
 		//--Exit on prodchoice<1
 		if(prodchoice<1) break;
 	
