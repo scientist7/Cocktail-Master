@@ -11,3 +11,4 @@ SimpleSyrup 1To1Caster 0 -10 0
 Maraschino Luxardo -10 -10 0
 VioletLiqueur TheBitterTruth -10 0 -10
 WhiteRum FlorDeCana4YearOldExtraDry -10 -10 0
+Vodka Gvori -10 0 0

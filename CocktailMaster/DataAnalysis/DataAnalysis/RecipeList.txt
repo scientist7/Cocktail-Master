@@ -10,3 +10,6 @@
 3 BuffaloTrace Lime 1To1Caster 60 25 25
 3 ChateauDuTariquet StoreLemon 1To1Caster 30 20 15
 3 FlorDeCana4YearOldExtraDry Lime 1To1Caster 60 30 20
+3 Gvori TreeLemon 1To1Caster 60 25 25
+3 Gvori StoreLemon 1To1Caster 60 30 25
+3 Gvori Lime 1To1Caster 60 25 25
