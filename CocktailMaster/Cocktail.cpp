@@ -159,8 +159,8 @@ void Cocktail::scale_recipe() {
 	//--Goal is to scale recipe to get even measures on the ingredients
 	//--while preserving the proportions accurately
 
-	//--Place upper bound, that sum of alcoholic ingredients <= 2.5 oz
-	//--lower bound, at 1.5 oz
+	//--Place upper bound, that sum of alcoholic ingredients <= 3 oz
+	//--lower bound, at 1 oz
 	//--Ideal scaling give total of 2 oz
 	double booze_total = 0, scale_bounds[2], ideal_scale;
 	for(eindex i = 0; i < elements.size(); ++i) {

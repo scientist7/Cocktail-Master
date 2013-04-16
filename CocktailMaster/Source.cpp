@@ -101,7 +101,7 @@ vector<Ingredient> getIngredients(BarType &bar) {
 		do {
 			badinput = false;
 			cin >> catchoice;
-			if(catchoice >= catlabel) {
+			if(size_t(catchoice) >= catlabel) {
 				badinput = true;
 				cout << "Invalid choice, please select again: " << endl;
 			}
@@ -123,7 +123,7 @@ vector<Ingredient> getIngredients(BarType &bar) {
 		do {
 			badinput = false;
 			cin >> prodchoice;
-			if(prodchoice >= catlabel) {
+			if(size_t(prodchoice) >= catlabel) {
 				badinput = true;
 				cout << "Invalid choice, please select again: " << endl;
 			}
