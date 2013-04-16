@@ -10,8 +10,7 @@ double Cocktail::mlperoz=30;
 //--Non-member stuff
 double round_to_multiple(const double input, 
 						 const double multiple) {
-	//--Round to nearest increment\
-
+	//--Round to nearest increment
 	double remainder = fmod(input,multiple);
 	return input - remainder 
 		   + floor((remainder/multiple) + 0.5)*multiple;		 
@@ -105,7 +104,7 @@ void Cocktail::balance_drink() {
 		//--exactly 3 unique ingredients
 		else solve_squarematrix(A,x,true);
 										 
-	} catch(const no_solution &e) {
+	} catch(const no_solution &e) { 
 		std::cerr << e.what() << std::endl;
 		bool success = false;
         //--Try adding some standard ingredients to find a solution
@@ -129,9 +128,10 @@ void Cocktail::balance_drink() {
 						group_norm.push_back(std::get<0>(elements[elements.size()-2]).get_flavor_magnitude());
 						group_norm.push_back(std::get<0>(elements[elements.size()-1]).get_flavor_magnitude());
 						success = true;
-						break;
+						break; //--break out of inner loop
 					}
 				}
+				if(success) break; //--break out of outer loop
 			}
 		}
 		if(!success) {

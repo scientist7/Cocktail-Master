@@ -139,7 +139,7 @@ vector<Ingredient> getIngredients(BarType &bar) {
 		if(!count(cocktail.cbegin(),cocktail.cend(),ing_it->second))
 			cocktail.push_back(ing_it->second);	
 	} 
-
+	
 	return cocktail;
 }
 
@@ -162,7 +162,7 @@ vector<Ingredient> getReserveIngredients(BarType &bar) {
 					}
 		}
 	}
-
+	
 	return reserves;
 
 }

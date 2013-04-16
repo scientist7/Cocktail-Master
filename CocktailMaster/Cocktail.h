@@ -39,7 +39,7 @@ public:
 	static double solprecision;
 
 private:
-	std::vector<element> elements; 
+	 
 	bool add_ingredient(const CMatrix &, CMatrix &, Eigen::VectorXd &, 
 		                const Eigen::Vector3d &, eindex, eindex j = 0);
 	eindex classify_ingredients();
@@ -53,6 +53,9 @@ private:
 	friend void search(eindex, const CMatrix &, Eigen::VectorXd &, const Eigen::Vector3d &,
 		               bool &, double &, Eigen::VectorXd &);
 	friend double figure_of_merit(const Eigen::VectorXd &x, const CMatrix &A);
+
+	//--Data members
+	std::vector<element> elements;
 	std::vector<Ingredient> reserves;
 };
 
