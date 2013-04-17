@@ -119,7 +119,7 @@ void Cocktail::balance_drink() {
 			}
 		}
 		//--here if no single added ingredient can fix the problem
-		if(!success && col < 2){ 
+		if(!success){ 
 			for(eindex i = 0; i < reserves.size()-1; ++i) {
 				for(eindex j = i+1; j < reserves.size(); ++j) {
 					CMatrix Atest(3,col+2); 
@@ -231,6 +231,12 @@ void Cocktail::scale_recipe() {
 
 bool Cocktail::add_ingredient(const CMatrix &A, CMatrix &Anew, Eigen::VectorXd &x, 
 							  const Eigen::Vector3d &b, const eindex i, const eindex j) {
+	//--Don't add anything collinear with existing elements
+	for(eindex test = 0; test < elements.size(); ++test) {
+		if(collinear(reserves[i],std::get<0>(elements[test]))) return false;
+		if(j && collinear(reserves[j],std::get<0>(elements[test]))) return false;
+	}
+	
 	//--Construct new matrix
 	for(eindex gindex = 0; gindex < eindex(A.cols()); ++gindex) {
 				Anew.col(gindex) = A.col(gindex);
@@ -243,11 +249,6 @@ bool Cocktail::add_ingredient(const CMatrix &A, CMatrix &Anew, Eigen::VectorXd &
 		     		            reserves[j].get_sweetness(),
 			    			    reserves[j].get_sourness();
 	} 
-	Eigen::ColPivHouseholderQR<CMatrix> lu(A);
-	Eigen::ColPivHouseholderQR<CMatrix> lutest(Anew); 
-	
-	//--Don't add unless linearly independent from other ingredients
-	if(eindex(lutest.rank()) < eindex(lu.rank()) + 1 + (j>0)?1:0) return false;
 	
 	//--Check for solution	
 	if(Anew.cols()>3 && (check_nosolutions(Anew,b) 
@@ -325,14 +326,16 @@ bool solve_overdetermined(const CMatrix &A, Eigen::VectorXd &x, bool throwflag) 
 bool solve_squarematrix(const CMatrix &A, Eigen::VectorXd &x, bool throwflag) {
 	const Eigen::Vector3d b(1,1,1);
 	Eigen::ColPivHouseholderQR<Eigen::Matrix3d> lu(A);
-	//--check that ingredients are linearly independent
-    if(lu.rank() < 3) { 
-
-		if(check_nosolutions(A,b)) throw no_solution("3 ingredients, but no solution");
-		if(throwflag) throw multiple_solutions("3 ingredients, but not linearly independent");
-		return false;
+	
+	//--Check that solution exists
+	if(check_nosolutions(A,b)) {
+		if(throwflag) throw no_solution("3 ingredients, but no solution");
+		else return false;
 	}
+
+	//--Here solution must exist
 	x = lu.solve(b);
+	//--Check that solution is physical
 	if(x(0) < 0 || x(1) < 0 || x(2) < 0) {
 		if(throwflag) throw no_solution("Unphysical solution");
 		return false;
