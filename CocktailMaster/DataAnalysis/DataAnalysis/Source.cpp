@@ -68,7 +68,7 @@ void readStartList(BarType &bar) {
 		double alcoholic_bite, sweetness, sourness;
 		input >> category >> name >> alcoholic_bite >> sweetness >> sourness;
 		//--Create Ingredient object and add it to map
-		bar.emplace(name, 
+		bar.emplace(category+"-"+name, 
 			        Ingredient(category, name, alcoholic_bite, sweetness, sourness));
 	}	
 }

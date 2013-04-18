@@ -10,5 +10,5 @@ Maraschino Luxardo 0.75 1.04 0
 RyeWhiskey RussellsReserve 0.583333 0 0
 Juice StoreLemon 0 0 1
 Gin Tanqueray 0.5 0 0
-VioletLiqueur TheBitterTruth 3.34 0 1.70728
+VioletLiqueur TheBitterTruth 1.67 0 0.92
 Juice TreeLemon 0 0 1.22654

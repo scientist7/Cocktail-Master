@@ -1,15 +1,15 @@
-3 Tanqueray TreeLemon 1To1Caster 60 25 25
-3 Tanqueray StoreLemon 1To1Caster 60 30 25
-4 Tanqueray StoreLemon Cointreau 1To1Caster 30 35 30 10
-4 Tanqueray StoreLemon Luxardo 1To1Caster 45 30 10 15
-4 Tanqueray TreeLemon TheBitterTruth 1To1Caster 45 25 5 30
-3 1800Silver Lime 1To1Caster 45 30 20
-3 RussellsReserve StoreLemon 1To1Caster 60 35 25
-3 RussellsReserve TreeLemon 1To1Caster 60 30 25
-3 BuffaloTrace StoreLemon 1To1Caster 60 35 25
-3 BuffaloTrace Lime 1To1Caster 60 25 25
-3 ChateauDuTariquet StoreLemon 1To1Caster 30 20 15
-3 FlorDeCana4YearOldExtraDry Lime 1To1Caster 60 30 20
-3 Gvori TreeLemon 1To1Caster 60 25 25
-3 Gvori StoreLemon 1To1Caster 60 30 25
-3 Gvori Lime 1To1Caster 60 25 25
+3 Gin-Tanqueray Juice-TreeLemon SimpleSyrup-1To1Caster 60 25 25
+3 Gin-Tanqueray Juice-StoreLemon SimpleSyrup-1To1Caster 60 30 25
+4 Gin-Tanqueray Juice-StoreLemon TripleSec-Cointreau SimpleSyrup-1To1Caster 30 35 30 10
+4 Gin-Tanqueray Juice-StoreLemon Maraschino-Luxardo SimpleSyrup-1To1Caster 45 30 10 15
+4 Gin-Tanqueray Juice-StoreLemon VioletLiqueur-TheBitterTruth SimpleSyrup-1To1Caster 45 30 10 30
+3 Tequila-1800Silver Juice-Lime SimpleSyrup-1To1Caster 45 30 20
+3 RyeWhiskey-RussellsReserve Juice-StoreLemon SimpleSyrup-1To1Caster 60 35 25
+3 RyeWhiskey-RussellsReserve Juice-TreeLemon SimpleSyrup-1To1Caster 60 30 25
+3 Bourbon-BuffaloTrace Juice-StoreLemon SimpleSyrup-1To1Caster 60 35 25
+3 Bourbon-BuffaloTrace Juice-Lime SimpleSyrup-1To1Caster 60 25 25
+3 Armagnac-ChateauDuTariquet Juice-StoreLemon SimpleSyrup-1To1Caster 30 20 15
+3 WhiteRum-FlorDeCana4YearOldExtraDry Juice-Lime SimpleSyrup-1To1Caster 60 30 20
+3 Vodka-Gvori Juice-TreeLemon SimpleSyrup-1To1Caster 60 25 25
+3 Vodka-Gvori Juice-StoreLemon SimpleSyrup-1To1Caster 60 30 25
+3 Vodka-Gvori Juice-Lime SimpleSyrup-1To1Caster 60 25 25
