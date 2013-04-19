@@ -1,0 +1,13 @@
+2 Amaretto-Generic Juice-Lemon 60 30
+6 Gin-Generic ApplePucker-Generic Juice-Lime SimpleSyrup-1To1 Maraschino-Generic Juice-Grapefruit 30 30 22.5 15 7.5 15
+5 Vodka-Generic AppleBrandy-ClearCreek Juice-Lemon SimpleSyrup-1To1 Juice-Tangerine 45 15 30 30 15
+2 ApricotBrandy-Generic Juice-Lemon 60 30
+3 Gin-Generic Maraschino-Generic Juice-Lemon 60 15 15
+3 LightRum-Generic Juice-Lime FlavoredSyrup-Grenadine 60 30 15
+4 LightRum-Generic TripleSec-Generic Maraschino-Generic Juice-Lime 60 30 7.5 15
+3 Gin-Generic Juice-Lime SimpleSyrup-1To1 60 30 15
+4 Brandy-Generic LightRum-Generic TripleSec-Generic Juice-Lemon 30 30 30 22.5
+3 Gin-Generic TripleSec-Generic Juice-Lime 45 30 22.5
+5 Brandy-Generic Tuaca-Tuaca NutLiqueur-Frangelico Juice-Lemon Juice-Tangerine 45 15 15 7.5 15
+3 Gin-Generic TripleSec-Generic Juice-Lemon 45 30 15
+5 DarkRum-Generic Brandy-Generic Juice-Orange Juice-Lime SimpleSyrup-1To1 30 30 15 30 15
