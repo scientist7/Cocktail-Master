@@ -11,3 +11,10 @@
 5 Brandy-Generic Tuaca-Tuaca NutLiqueur-Frangelico Juice-Lemon Juice-Tangerine 45 15 15 7.5 15
 3 Gin-Generic TripleSec-Generic Juice-Lemon 45 30 15
 5 DarkRum-Generic Brandy-Generic Juice-Orange Juice-Lime SimpleSyrup-1To1 30 30 15 30 15
+3 Gin-Generic NutLiqueur-Frangelico Juice-Lime 45 22.5 22.5
+3 Cachaca-Generic TripleSec-Generic Juice-Lime 45 45 15
+4 Calvados-Generic TripleSec-Generic Juice-Orange Juice-Lemon 60 15 15 15
+4 LightRum-Generic PeachLiqueur-SouthernComfort Amaretto-Generic Juice-Lime 45 45 15 15
+5 LightRum-Generic TripleSec-Generic Juice-Lime Juice-Pineapple Juice-Cranberry 60 15 15 7.5 7.5
+3 LightRum-Generic NutLiqueur-Frangelico Juice-Lime 45 22.5 22.5
+

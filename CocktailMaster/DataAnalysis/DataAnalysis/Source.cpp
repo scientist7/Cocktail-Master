@@ -28,28 +28,29 @@ using std::get;
 
 typedef map<string, Ingredient> BarType;
 
-void readStartList(BarType &);
-void readRecipes(vector<Recipe> &,  BarType &);
+void readStartList(BarType &, string);
+void readRecipes(vector<Recipe> &,  BarType &, string);
 bool analyzeRecipe(Recipe &);
 void analyzeRecipes(vector<Recipe> &, BarType &);
 void outputIngredientProperties(string, BarType &);
-void outputIngredientMeasurements(BarType &);
-void outputRecipeMeasurements(vector<Recipe> &);
+void outputIngredientMeasurements(BarType &, string);
+void outputRecipeMeasurements(vector<Recipe> &, string);
 
 int main() {
 	//--Create map to store database, vector for recipes
 	BarType bar;
 	vector<Recipe> recipes;
 	//--Read databases
-	readStartList(bar);
-	readRecipes(recipes,bar);
+	string Dir="./";  //--set directory to read and write
+	readStartList(bar,Dir);
+	readRecipes(recipes,bar,Dir);
 	//--Analyze recipes to get flavor vectors
 	analyzeRecipes(recipes,bar);
 	//--Print output file
-	outputIngredientProperties("Text.txt",bar);
+	outputIngredientProperties(Dir+"Text.txt",bar);
 	//--Print lists of measurements
-	outputIngredientMeasurements(bar);
-    outputRecipeMeasurements(recipes); 
+	outputIngredientMeasurements(bar,Dir);
+    outputRecipeMeasurements(recipes,Dir); 
 
 	char c;
 	cout << "Press any key to exit." << endl;
@@ -59,9 +60,9 @@ int main() {
 
 //--function to read list of ingredients with assumptions about 
 //--their properties
-void readStartList(BarType &bar) {
+void readStartList(BarType &bar, string Dir) {
 	//--Open database file
-	ifstream input("StartingBarList.txt");
+	ifstream input(Dir+"StartingBarList.txt"); 
 	//--Read one ingredient at a time
 	while(!input.eof()) {
 		string category, name;
@@ -70,16 +71,17 @@ void readStartList(BarType &bar) {
 		//--Create Ingredient object and add it to map
 		bar.emplace(category+"-"+name, 
 			        Ingredient(category, name, alcoholic_bite, sweetness, sourness));
-	}	
+	}		
+	input.close();
 }
 
 //--function to read list of well tested cocktail recipes
-void readRecipes(vector<Recipe> &recipes, BarType &bar) {
+void readRecipes(vector<Recipe> &recipes, BarType &bar, string Dir) {
 	string line,temp; 
 	size_t numIng;
 	bool badRecipe;
 	//--Open list of recipes
-	ifstream input("RecipeList.txt");
+	ifstream input(Dir+"RecipeList.txt");
 	while(getline(input,line)) {
 		badRecipe = false;
 		istringstream cocktail(line);
@@ -256,31 +258,31 @@ void outputIngredientProperties(string fname, BarType &bar) {
 	out.close();
 }
 
-void outputIngredientMeasurements(BarType &bar) {
+void outputIngredientMeasurements(BarType &bar, string Dir) {
 	for(auto it = bar.begin(); it != bar.end(); ++it) {
 		if(it->second.get_num_alcoholic_bite_measures()!=1000000) {
-			ofstream outab(it->second.get_name()+"_bite.txt");
+			ofstream outab(Dir+it->second.get_name()+"_bite.txt");
 			it->second.print_alcoholic_bite(outab);
 			outab.close();
 		}
 		if(it->second.get_num_sweetness_measures()!=1000000) {
-			ofstream outsw(it->second.get_name()+"_sweet.txt");
+			ofstream outsw(Dir+it->second.get_name()+"_sweet.txt");
 			it->second.print_sweetness(outsw);
 			outsw.close();
 		}
 		if(it->second.get_num_sourness_measures()!=1000000) {
-			ofstream outsr(it->second.get_name()+"_sour.txt");
+			ofstream outsr(Dir+it->second.get_name()+"_sour.txt");
 			it->second.print_sourness(outsr);
 			outsr.close();
 		}
 	}
 }
 
-void outputRecipeMeasurements(vector<Recipe> &recipes) {
+void outputRecipeMeasurements(vector<Recipe> &recipes, string Dir) {
 	double alcoholic_bite = 0, sweetness = 0, sourness = 0;
-	ofstream abswdiff("alcoholic_bite_minus_sweetness.txt");
-	ofstream absrdiff("alcoholic_bite_minus_sourness.txt");
-	ofstream srswdiff("sourness_minus_sweetness.txt");
+	ofstream abswdiff(Dir+"alcoholic_bite_minus_sweetness.txt");
+	ofstream absrdiff(Dir+"alcoholic_bite_minus_sourness.txt");
+	ofstream srswdiff(Dir+"sourness_minus_sweetness.txt");
 	//--loop over recipes
 	for(auto it = recipes.begin(); it != recipes.end(); ++it) {
 		alcoholic_bite = 0, sweetness = 0, sourness = 0;
