@@ -19,8 +19,34 @@
 3 LightRum-Generic NutLiqueur-Frangelico Juice-Lime 45 22.5 22.5
 3 ApricotBrandy-Generic SloeGin-Generic Juice-Lime 30 30 30
 3 Gin-Generic GingerLiqueur-Generic Juice-Lemon 60 15 15
+4 Vodka-VanGoghWildAppel Misc-CuarantaYTres Juice-Lime Juice-Cranberry 45 15 15 15
 4 Brandy-Generic CherryBrandy-Generic TripleSec-Generic Juice-Lemon 30 30 15 15
 4 Brandy-Generic TripleSec-Generic Maraschino-Generic Juice-Lemon 45 15 15 15
 4 Brandy-Generic Dubonnet-Rouge TripleSec-Generic Juice-Lemon 22.5 22.5 22.5 22.5
 3 LightRum-Generic Juice-Lime SimpleSyrup-1To1 60 30 15
+4 Brandy-Generic Calvados-Generic TripleSec-Generic Juice-Lemon 22.5 22.5 22.5 22.5
+3 Gin-Tanqueray10 Juice-Lime SimpleSyrup-1To1 60 30 30
+4 RyeWhiskey-Generic DryVermouth-Generic CremeDeMenth-Generic Juice-Lemon 60 15 15 15
+4 RyeWhiskey-Generic DryVermouth-Generic CremeDeCacao-Generic Juice-Lemon 60 15 15 15
+4 RyeWhiskey-Generic DryVermouth-Generic Amaretto-Generic Juice-Lemon 60 15 15 22.5
+3 WhiteTequila-Generic Amaretto-Generic Juice-Lime 45 15 15
+3 Vodka-VanGoghWildAppel NutLiqueur-Frangelico Juice-Lemon 60 22.5 22.5
+4 WhiteRum-BacardiSpice RaspberryLiqueur-Chambord Juice-Orange Juice-Lime 60 15 15 15
+6 DarkRum-Generic Brandy-Generic PeachBrandy-Generic SimpleSyrup-1To1 Juice-Lime Juice-Lemon 45 15 15 15 7.5 7.5
+3 Brandy-Generic NutLiqueur-Frangelico Juice-Lemon 60 15 15
+3 IrishWhiskey-Generic NutLiqueur-Frangelico Juice-Lemon 45 22.5 15
+4 IrishWhiskey-Generic SweetVermouth-Generic TripleSec-Generic Juice-Lime 45 22.5 22.5 15
+3 Vodka-Generic TripleSec-Generic Juice-Lime 45 30 15
+3 Bourbon-Generic NutLiqueur-Frangelico Juice-Lemon 45 22.5 15
+4 Gin-Generic Curacao-GrandMarnier SweetVermouth-Generic Juice-Lemon 60 15 15 7.5
+3 Vodka-Citrus Juice-Lemon SimpleSyrup-1To1 60 30 15
+4 Gin-Gemeric TripleSec-Generic Juice-Orange Juice-Lemon 30 30 15 15
+3 WhiteTequila-Generic TripleSec-Generic Juice-Lime 45 30 15
+3 RyeWhiskey-Generic NutLiqueur-Frangelico Juice-Lemon 45 22.5 15
+3 WhiteTequila-Generic NutLiqueur-Frangelico Juice-Lime 60 22.5 22.5
+4 DarkRum-Myers SloeGin-Generic ApricotBrandy-Generic Juice-Lime 60 30 30 30
+3 DarkRum-Generic TripleSec-Generic Juice-Lemon 45 30 15
+3 GoldRum-MountGay TripleSec-Cointreau Juice-Lime 45 30 15
+3 Calvados-AppleJack NutLiqueur-Frangelico Juice-Lemon 45 22.5 22.5
+
 
