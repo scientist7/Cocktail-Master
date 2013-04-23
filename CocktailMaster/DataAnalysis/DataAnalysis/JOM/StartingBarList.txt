@@ -2,11 +2,15 @@ Gin Tanqueray10 -10 0 0
 Gin Generic -10 0 0
 Juice Lime 0 0 -10
 Juice Lemon 0 0 1
-Amaretto-Generic -10 -10 0
-ApplePucker-Generic -10 -10 -10
-SimpleSyrup-1To1 0 -10 0
-Maraschino-Generic -10 -10 0
-Juice-Grapefruit 0 0 -10
-Vodka-Generic -10 0 0
-AppleBrandy-ClearCreek -10 -10 0
-Juice-Tangerine 0 -10 -10
+Amaretto Generic -10 -10 0
+ApplePucker Generic -10 -10 -10
+SimpleSyrup 1To1 0 -10 0
+Maraschino Generic -10 -10 0
+Juice Grapefruit 0 0 -10
+Vodka Generic -10 0 0
+AppleBrandy ClearCreek -10 -10 0
+Juice Tangerine 0 -10 -10
+ApricotBrandy Generic -10 -10 0
+LightRum-Generic -10 -10 0
+FlavoredSyrup-Grenadine 0 -10 -10
+TripleSec-Generic -10 -10 0
