@@ -12,3 +12,4 @@ Maraschino Luxardo -10 -10 0
 VioletLiqueur TheBitterTruth -10 0 -10
 WhiteRum FlorDeCana4YearOldExtraDry -10 -10 0
 Vodka Gvori -10 0 0
+FlavoredSyrup 1To1StrawberryCaster 0 -10 0
