@@ -1,21 +1,21 @@
 2 Amaretto-Generic Juice-Lemon 60 30
-6 Gin-Generic ApplePucker-Generic Juice-Lime SimpleSyrup-1To1 Maraschino-Generic Juice-Grapefruit 30 30 22.5 15 7.5 15
+6 Gin-Gordons ApplePucker-Generic Juice-Lime SimpleSyrup-1To1 Maraschino-Generic Juice-Grapefruit 30 30 22.5 15 7.5 15
 5 Vodka-Generic AppleBrandy-ClearCreek Juice-Lemon SimpleSyrup-1To1 Juice-Tangerine 45 15 30 30 15
 2 ApricotBrandy-Generic Juice-Lemon 60 30
 3 Gin-Generic Maraschino-Generic Juice-Lemon 60 15 15
-3 LightRum-Generic Juice-Lime FlavoredSyrup-Grenadine 60 30 15
+3 LightRum-Bacardi Juice-Lime FlavoredSyrup-Grenadine 60 30 15
 4 LightRum-Generic TripleSec-Generic Maraschino-Generic Juice-Lime 60 30 7.5 15
 3 Gin-Generic Juice-Lime SimpleSyrup-1To1 60 30 15
 4 Brandy-Generic LightRum-Generic TripleSec-Generic Juice-Lemon 30 30 30 22.5
 3 Gin-Generic TripleSec-Generic Juice-Lime 45 30 22.5
 5 Brandy-Generic Tuaca-Tuaca NutLiqueur-Frangelico Juice-Lemon Juice-Tangerine 45 15 15 7.5 15
-3 Gin-Generic TripleSec-Generic Juice-Lemon 45 30 15
+3 Gin-Generic BlueCuracao-Generic Juice-Lemon 45 30 15
 5 DarkRum-Generic Brandy-Generic Juice-Orange Juice-Lime SimpleSyrup-1To1 30 30 15 30 15
 3 Gin-Generic NutLiqueur-Frangelico Juice-Lime 45 22.5 22.5
 3 Cachaca-Generic TripleSec-Generic Juice-Lime 45 45 15
 4 Calvados-Generic TripleSec-Generic Juice-Orange Juice-Lemon 60 15 15 15
 4 LightRum-Generic PeachLiqueur-SouthernComfort Amaretto-Generic Juice-Lime 45 45 15 15
-5 LightRum-Generic TripleSec-Generic Juice-Lime Juice-Pineapple Juice-Cranberry 60 15 15 7.5 7.5
+5 LightRum-BacardiLimon TripleSec-Generic Juice-Lime Juice-Pineapple Juice-Cranberry 60 15 15 7.5 7.5
 3 LightRum-Generic NutLiqueur-Frangelico Juice-Lime 45 22.5 22.5
 3 ApricotBrandy-Generic SloeGin-Generic Juice-Lime 30 30 30
 3 Gin-Generic GingerLiqueur-Generic Juice-Lemon 60 15 15
@@ -53,5 +53,18 @@
 4 Bourbon-Generic SweetVermouth-Generic TripleSec-Generic Juice-Lime 45 22.5 22.5 15
 4 Gin-Generic ApricotBrandy-Generic Juice-Orange Juice-Lemon 45 22.5 15 15
 3 Gin-Generic TripleSec-Generic Juice-Lime 60 30 15
-
+4 LightRum-BacardiLimon TripleSec-Generic Juice-Lemon Juice-Cranberry 60 22.5 15 7.5
+3 Pisco-Generic Juice-Lemon SimpleSyrup-1To1 60 30 15
+4 Bourbon-MakersMark Amaro-BrancaMenta Juice-Lemon SimpleSyrup-1To1 22.5 7.5 15 22.5
+4 RyeWhiskey-WildTurkey Kummel-Gilka Juice-Lemon FlavoredSyrup-Grenadine 60 7.5 15 7.5
+4 Vodka-Citrus TripleSec-Generic Juice-Grapefruit Juice-Lime 45 30 15 7.5
+3 Vodka-Generic NutLiqueur-Frangelico Juice-Lime 60 15 15
+4 Bourbon-Generic DryVermouth-Generic Juice-Lemon FlavoredSyrup-Grenadine 60 30 15 7.5
+4 RyeWhiskey-Generic DryVermouth-Generic Juice-Lemon FlavoredSyrup-Grenadine 60 30 15 7.5
+3 Scotch-Generic NutLiqueur-Frangelico Juice-Lemon 45 22.5 22.5
+3 Brandy-Generic TripleSec-Generic Juice-Lemon 45 30 15
+3 Bourbon-Generic Amaretto-Generic Juice-Lime 60 15 15
+4 Gin-Generic Lillet-Blonde CremeDeCacao-Generic Juice-Lemon 45 15 15 15
+3 Bourbon-Generic Juice-Lemon SimpleSyrup-1To1 60 30 15
+3 RyeWhiskey-Generic Juice-Lemon SimpleSyrup-1To1 60 30 15
 

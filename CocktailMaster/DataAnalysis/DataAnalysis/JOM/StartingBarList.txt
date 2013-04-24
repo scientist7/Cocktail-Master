@@ -11,6 +11,12 @@ Vodka Generic -10 0 0
 AppleBrandy ClearCreek -10 -10 0
 Juice Tangerine 0 -10 -10
 ApricotBrandy Generic -10 -10 0
-LightRum-Generic -10 -10 0
-FlavoredSyrup-Grenadine 0 -10 -10
-TripleSec-Generic -10 -10 0
+LightRum Generic -10 -10 0
+FlavoredSyrup Grenadine 0 -10 -10
+TripleSec Generic -10 -10 0
+Brandy Generic -10 0 0
+Tuaca Tuaca -10 -10 0
+NutLiqueur Frangelico -10 -10 0
+Juice Tangerine 0 -10 -10
+DarkRum Generic -10 -10 0
+Juice Orange 0 -10 -10
