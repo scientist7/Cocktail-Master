@@ -14,3 +14,4 @@
 3 Vodka-Gvori Juice-StoreLemon SimpleSyrup-1To1Caster 60 30 25
 3 Vodka-Gvori Juice-Lime SimpleSyrup-1To1Caster 60 25 25
 3 Bourbon-BuffaloTrace Juice-StoreLemon FlavoredSyrup-1To1StrawberryCaster 60 35 40
+3 Gin-Tanqueray Juice-StoreLemon FlavoredSyrup-1To1StrawberryCaster 60 30 35
