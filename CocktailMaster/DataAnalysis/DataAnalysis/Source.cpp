@@ -208,16 +208,19 @@ bool analyzeRecipe(Recipe &recipe) {
 	}
 	bestmeasure /= sum_weights; 
 
-	for(auto p : parameters) { 
+	double measure;
+
+	for(auto p : parameters) {
+		measure = (bestmeasure-get<2>(p))/get<3>(p);
 		switch(get<1>(p)){
 		case 0:
-			get<0>(p)->add_ab_measurement((bestmeasure-get<2>(p))/get<3>(p));
+			get<0>(p)->add_ab_measurement(measure>0 ? measure : 0);
 			break;
 		case 1:
-			get<0>(p)->add_sw_measurement((bestmeasure-get<2>(p))/get<3>(p));
+			get<0>(p)->add_sw_measurement(measure>0 ? measure : 0);
 			break;
 		case 2:
-			get<0>(p)->add_sr_measurement((bestmeasure-get<2>(p))/get<3>(p));
+			get<0>(p)->add_sr_measurement(measure>0 ? measure : 0);
 			break;
 		}
 	}
@@ -233,7 +236,7 @@ void analyzeRecipes(vector<Recipe> &recipes, BarType &bar) {
 	size_t passcounter = 0;
 
 	//--Process list of recipes
-	while(unprocessed_data.size() && passcounter<4) {
+	while(unprocessed_data.size() && passcounter<10) {
 		vector<Recipe*> leftover_recipes;
 		for(size_t i = 0; i < unprocessed_data.size(); ++i) {
 			if(!analyzeRecipe(*unprocessed_data[i])) 
@@ -280,21 +283,33 @@ void outputIngredientMeasurements(BarType &bar, string Dir) {
 
 void outputRecipeMeasurements(vector<Recipe> &recipes, string Dir) {
 	double alcoholic_bite = 0, sweetness = 0, sourness = 0;
+	bool incomplete_recipe = false;
 	ofstream abswdiff(Dir+"alcoholic_bite_minus_sweetness.txt");
 	ofstream absrdiff(Dir+"alcoholic_bite_minus_sourness.txt");
 	ofstream srswdiff(Dir+"sourness_minus_sweetness.txt");
 	//--loop over recipes
 	for(auto it = recipes.begin(); it != recipes.end(); ++it) {
 		alcoholic_bite = 0, sweetness = 0, sourness = 0;
+		incomplete_recipe = false;
 		//--Calculate total bite,sweetness,sourness for each recipe
 		for(size_t i = 0; i < it->getnumberofingredients(); ++i) {
-			alcoholic_bite += it->getamountat(i)*it->getingredientat(i)->get_alcoholic_bite();
-			sweetness += it->getamountat(i)*it->getingredientat(i)->get_sweetness();
-			sourness += it->getamountat(i)*it->getingredientat(i)->get_sourness();
+			if(it->getingredientat(i)->get_alcoholic_bite() > -10 
+		    	&& it->getingredientat(i)->get_sweetness() > -10 
+				&& it->getingredientat(i)->get_sourness() > -10){
+					alcoholic_bite += it->getamountat(i)*it->getingredientat(i)->get_alcoholic_bite();
+					sweetness += it->getamountat(i)*it->getingredientat(i)->get_sweetness();
+					sourness += it->getamountat(i)*it->getingredientat(i)->get_sourness();
+			}
+			else {
+				incomplete_recipe = true;
+				break;
+			}
 		}
-		abswdiff << 2 * (alcoholic_bite - sweetness) / (alcoholic_bite + sweetness)  << endl;
-		absrdiff << 2 * (alcoholic_bite - sourness) / (alcoholic_bite + sourness) << endl;
-		srswdiff << 2 * (sourness - sweetness) / (sourness + sweetness) << endl;
+		if(!incomplete_recipe){
+			abswdiff << 2 * (alcoholic_bite - sweetness) / (alcoholic_bite + sweetness)  << endl;
+			absrdiff << 2 * (alcoholic_bite - sourness) / (alcoholic_bite + sourness) << endl;
+			srswdiff << 2 * (sourness - sweetness) / (sourness + sweetness) << endl;
+		}
 	}
 	abswdiff.close();
 	absrdiff.close();

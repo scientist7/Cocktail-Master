@@ -31,7 +31,7 @@
 4 RyeWhiskey-Generic DryVermouth-Generic Amaretto-Generic Juice-Lemon 60 15 15 22.5
 3 WhiteTequila-Generic Amaretto-Disaronno Juice-Lime 45 15 15
 3 Vodka-VanGoghWildAppel NutLiqueur-Frangelico Juice-Lemon 60 22.5 22.5
-4 WhiteRum-BacardiSpice RaspberryLiqueur-Chambord Juice-Orange Juice-Lime 60 15 15 15
+4 LightRum-BacardiSpice RaspberryLiqueur-Chambord Juice-Orange Juice-Lime 60 15 15 15
 6 DarkRum-Generic Brandy-Generic PeachBrandy-Generic SimpleSyrup-1To1 Juice-Lime Juice-Lemon 45 15 15 15 7.5 7.5
 3 Vodka-StolichnayaRazberi TripleSec-Generic Juice-Lime 60 30 15
 3 Brandy-Generic NutLiqueur-Frangelico Juice-Lemon 60 15 15
@@ -70,4 +70,3 @@
 4 Gin-Generic Lillet-Blonde CremeDeCacao-Generic Juice-Lemon 45 15 15 15
 3 Bourbon-Generic Juice-Lemon SimpleSyrup-1To1 60 30 15
 3 RyeWhiskey-Generic Juice-Lemon SimpleSyrup-1To1 60 30 15
-
