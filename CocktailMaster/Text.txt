@@ -10,6 +10,6 @@ RyeWhiskey RussellsReserve 0.583333 0 0
 SimpleSyrup 1To1Caster 0 1.30667 0
 Tequila 1800Silver 0.874074 0.293333 0
 TripleSec Cointreau 0.666667 0.731111 0
-VioletLiqueur TheBitterTruth 1.67 0 0.92
+VioletLiqueur TheBitterTruth 0.750003 0 0
 Vodka Gvori 0.5 0 0
 WhiteRum FlorDeCana4YearOldExtraDry 0.655556 0.22 0

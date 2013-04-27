@@ -428,7 +428,10 @@ double figure_of_merit(const Eigen::VectorXd &x, const CMatrix &A) {
 	double sum = 0;
 	for(Cocktail::eindex i = 0; i < Cocktail::eindex(A.cols()-1); ++i) {
 		for(Cocktail::eindex j = i+1; j < Cocktail::eindex(A.cols()); ++j) {
-			sum += pow((x(i)/A.col(j).norm()-x(j)/A.col(i).norm())*A.col(i).dot(A.col(j)),2);
+			//--New way just minimizes difference in total flavors regardless of angle
+			sum += pow(x(i)*A.col(i).norm()-x(j)*A.col(j).norm(),2);
+			//--Old way weighs difference in flavor by cos(theta)
+			//sum += pow((x(i)/A.col(j).norm()-x(j)/A.col(i).norm())*A.col(i).dot(A.col(j)),2);
 		}
 	}
 	return sum;
