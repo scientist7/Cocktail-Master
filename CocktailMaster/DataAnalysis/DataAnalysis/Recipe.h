@@ -15,6 +15,11 @@ public:
 	Ingredient* getingredientat(size_t i) const { return std::get<0>(components[i]); }
 	double getamountat(size_t i) const { return std::get<1>(components[i]); }
 
+	//--Functions to calculate sum of flavor components
+	size_t check_alcoholic_bite_sum(double &sum, double &effnummeas, size_t &index);
+	size_t check_sweetness_sum(double &sum, double &effnummeas, size_t &index);
+	size_t check_sourness_sum(double &sum, double &effnummeas, size_t &index);
+
     friend std::ostream &operator<<(std::ostream &os, const Recipe &recipe);
 
 private: 
