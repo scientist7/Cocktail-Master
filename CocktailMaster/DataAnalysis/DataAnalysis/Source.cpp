@@ -171,32 +171,86 @@ bool analyzeRecipe(Recipe &recipe) {
 		weights.push_back(effnummeas);
 	}
 
-	//--Solve for unknown parameters
+
+	//--Too many free parameters 
 	if(!measurements.size()) return false;
-	double bestmeasure = 0, sum_weights = 0;
+
+	//--Get best estimate of average flavor
+	double best_measure = 0, sum_weights = 0;
 	for(size_t m = 0; m < measurements.size(); ++m) {
-		bestmeasure += measurements[m]*weights[m];
+		best_measure += measurements[m]*weights[m];
 		sum_weights += weights[m];
 	}
-	bestmeasure /= sum_weights; 
+	best_measure /= sum_weights; 
 
-	double measure;
+	//--If no free parameters, use recipe as additional info
+	//--on all ingredients
+	if(!parameters.size()) {
+		//--First identify unconstrained flavor parameters
+		vector<double> unconstrained_sum(3,0);
+		for(size_t i = 0; i < recipe.getnumberofingredients(); ++i) {
+			if(recipe.getingredientat(i)->get_num_alcoholic_bite_measures() 
+			   != Ingredient::num_meas_fixed)
+			   unconstrained_sum[0] += recipe.getingredientat(i)->get_alcoholic_bite()
+									 * recipe.getamountat(i);
 
-	for(auto p : parameters) {
-		measure = (bestmeasure-get<2>(p))/get<3>(p);
-		switch(get<1>(p)){
-		case 0:
-			get<0>(p)->add_ab_measurement(measure>0 ? measure : 0);
-			break;
-		case 1:
-			get<0>(p)->add_sw_measurement(measure>0 ? measure : 0);
-			break;
-		case 2:
-			get<0>(p)->add_sr_measurement(measure>0 ? measure : 0);
-			break;
+			if(recipe.getingredientat(i)->get_num_sweetness_measures() 
+			   != Ingredient::num_meas_fixed)
+			   unconstrained_sum[1] += recipe.getingredientat(i)->get_sweetness()
+									 * recipe.getamountat(i);
+
+			if(recipe.getingredientat(i)->get_num_sourness_measures() 
+			   != Ingredient::num_meas_fixed)
+			   unconstrained_sum[2] += recipe.getingredientat(i)->get_sourness()
+									 * recipe.getamountat(i);
+		}
+
+	    //--Then adjust all unconstrained flavor parameters according to this recipe;
+		//--this constitutes another measurement
+
+		//--Need scale factors for 3 flavor types
+		vector<double> scale_adjust(3);
+		for(size_t i = 0; i < 3; ++i) {
+			scale_adjust[i] = (best_measure - (measurements[i] - unconstrained_sum[i]))
+				              /unconstrained_sum[i];
+		}
+		//--Then calculate a new measurement for all unconstrained flavor parameters
+		for(size_t i = 0; i < recipe.getnumberofingredients(); ++i) {
+			if(recipe.getingredientat(i)->get_num_alcoholic_bite_measures() 
+			   != Ingredient::num_meas_fixed)
+			   recipe.getingredientat(i)->add_ab_measurement(scale_adjust[0]
+			                                                 *recipe.getingredientat(i)->get_alcoholic_bite());
+
+			if(recipe.getingredientat(i)->get_num_sweetness_measures() 
+			   != Ingredient::num_meas_fixed)
+			   recipe.getingredientat(i)->add_sw_measurement(scale_adjust[1]
+			                                                 *recipe.getingredientat(i)->get_sweetness());
+
+			if(recipe.getingredientat(i)->get_num_sourness_measures() 
+			   != Ingredient::num_meas_fixed)
+			   recipe.getingredientat(i)->add_sr_measurement(scale_adjust[2]
+			                                                 *recipe.getingredientat(i)->get_sourness());
 		}
 	}
-	
+
+	//--Otherwise solve for unknown parameters
+	else {
+		double measure;
+		for(auto p : parameters) {
+			measure = (best_measure-get<2>(p))/get<3>(p);
+			switch(get<1>(p)){
+			case 0:
+				get<0>(p)->add_ab_measurement(measure>0 ? measure : 0);
+				break;
+			case 1:
+				get<0>(p)->add_sw_measurement(measure>0 ? measure : 0);
+				break;
+			case 2:
+				get<0>(p)->add_sr_measurement(measure>0 ? measure : 0);
+				break;
+			}
+		}
+	}
 	return true;
 }
 

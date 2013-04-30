@@ -8,8 +8,9 @@ class Ingredient
 public:
 	Ingredient(std::string ct, std::string nm, double ab, double sw, double sr) :                                                    
 		       category(ct), name(nm), alcoholic_bite(ab), sweetness(sw), sourness(sr),
-			   num_alcoholic_bite_measures((ab>-10)?1000000:0), num_sweetness_measures((sw>-10)?1000000:0), 
-			   num_sourness_measures((sr>-10)?1000000:0) {}
+			   num_alcoholic_bite_measures((ab>-10)?num_meas_fixed:0), 
+			   num_sweetness_measures((sw>-10)?num_meas_fixed:0), 
+			   num_sourness_measures((sr>-10)?num_meas_fixed:0) {}
 	
 	void add_ab_measurement(double ab) {alcoholic_bite_measurements.push_back(ab);}
 	void add_sw_measurement(double sw) {sweetness_measurements.push_back(sw);}
@@ -29,6 +30,7 @@ public:
 	double get_num_sweetness_measures() const { return num_sweetness_measures; }
 	double get_num_sourness_measures() const { return num_sourness_measures; }
 	
+	static size_t num_meas_fixed;
 
 private:
 	const std::string category;
