@@ -37,6 +37,7 @@ public:
 
 	//--Algorithm parameters
 	static double solprecision;
+	static double scaleprecision;
 
 private:
 	 

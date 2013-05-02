@@ -5,6 +5,7 @@ double Cocktail::ozincrements=0.25;
 double Cocktail::mlincrements=5;
 double Cocktail::tspperoz=6;
 double Cocktail::solprecision=0.001;
+double Cocktail::scaleprecision=0.01;
 double Cocktail::mlperoz=30;
 
 //--Non-member stuff
@@ -178,6 +179,7 @@ void Cocktail::scale_recipe() {
 	//--Fill ingredient matrix and vector
 	CMatrix A(3,elements.size());
 	Eigen::VectorXd x(elements.size()), result(elements.size());
+	const Eigen::Vector3d b(1,1,1);
 	//--loop to fill A & x
 	for(eindex i = 0; i < elements.size(); ++i) {
 		A.col(i) << std::get<0>(elements[i]).get_alcoholic_bite(),
@@ -197,11 +199,9 @@ void Cocktail::scale_recipe() {
 		//--Calulate discrepancy from ideal solution
 		result = A*x;
 		result /= result.mean();
-		total_discrepancy = fabs(result(0)-result(1))
-			              + fabs(result(0)-result(2))
-						  + fabs(result(1)-result(2));
+		total_discrepancy = ( result - b ).norm() / b.norm();
 		//--Here we have an acceptable discrepancy
-		if(total_discrepancy < .05) {
+		if(total_discrepancy < Cocktail::scaleprecision) {
 			curr_scale_dev = fabs(scale - ideal_scale);
 			if(curr_scale_dev < min_scale_dev) {
 				min_scale_dev = curr_scale_dev;
