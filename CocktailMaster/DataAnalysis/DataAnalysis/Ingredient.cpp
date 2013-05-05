@@ -1,8 +1,5 @@
 #include "Ingredient.h"
 
-//--static variables
-size_t Ingredient::num_meas_fixed = 10000000;
-
 void Ingredient::update_flavor_vector() {
 	if(alcoholic_bite_measurements.size()) {
 		alcoholic_bite = std::accumulate(alcoholic_bite_measurements.cbegin(),

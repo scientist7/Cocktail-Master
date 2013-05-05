@@ -30,15 +30,15 @@ public:
 	void scale_recipe();
 	
     //--Members controlling output
-	static double ozincrements;
-	static double mlincrements;
-	static double tspperoz;
-	static double mlperoz;
+	static const double ozincrements;
+	static const double mlincrements;
+	static const double tspperoz;
+	static const double mlperoz;
 
 	//--Algorithm parameters
-	static double solprecision;
-	static double scaleprecision;
-
+	static const double solprecision;
+	static const double scaleprecision;
+	
 private:
 	 
 	bool add_ingredient(const CMatrix &, CMatrix &, Eigen::VectorXd &, 

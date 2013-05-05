@@ -30,7 +30,7 @@ public:
 	double get_num_sweetness_measures() const { return num_sweetness_measures; }
 	double get_num_sourness_measures() const { return num_sourness_measures; }
 	
-	static size_t num_meas_fixed;
+	static const size_t num_meas_fixed = 10000000;
 
 private:
 	const std::string category;

@@ -1,12 +1,12 @@
 #include "Cocktail.h"
 
 //--define static members
-double Cocktail::ozincrements=0.25;
-double Cocktail::mlincrements=5;
-double Cocktail::tspperoz=6;
-double Cocktail::solprecision=0.001;
-double Cocktail::scaleprecision=0.01;
-double Cocktail::mlperoz=30;
+const double Cocktail::ozincrements=0.25;
+const double Cocktail::mlincrements=5;
+const double Cocktail::tspperoz=6;
+const double Cocktail::solprecision=0.001;
+const double Cocktail::scaleprecision=0.01;
+const double Cocktail::mlperoz=30;
 
 //--Non-member stuff
 double round_to_multiple(const double input, 
