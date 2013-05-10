@@ -41,7 +41,7 @@ int main() {
 	BarType bar;
 	vector<Recipe> recipes;
 	//--Read databases
-	string Dir="./JOM/";  //--set directory to read and write
+	string Dir="./";  //--set directory to read and write
 	readStartList(bar,Dir);
 	readRecipes(recipes,bar,Dir);
 	//--Analyze recipes to get flavor vectors
