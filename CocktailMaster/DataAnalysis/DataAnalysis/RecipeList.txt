@@ -19,3 +19,4 @@
 3 Gin-Tanqueray Juice-StoreLemon SimpleSyrup-1To1RawCaneSugar 60 30 25
 3 Scotch-JohnnieWalkerBlackLabel Juice-StoreLemon SimpleSyrup-1To1RawCaneSugar 60 35 25
 4 Bitters-BittermensOrangeCreamCitrate Bourbon-BuffaloTrace Juice-StoreLemon SimpleSyrup-1To1RawCaneSugar 1.471 55 30 25
+4 Bitters-Campari Gin-Tanqueray Juice-StoreLemon SimpleSyrup-1To1RawCaneSugar 30 30 30 25
