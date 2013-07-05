@@ -1,6 +1,7 @@
 Gin Tanqueray -10 0 0
 RyeWhiskey RussellsReserve -10 0 0
 Bourbon BuffaloTrace -10 0 0
+Bourbon FourRoses -10 -10 0
 Scotch JohnnieWalkerBlackLabel -10 0 0
 Tequila 1800Silver -10 -10 0
 Armagnac ChateauDuTariquet -10 0 0
@@ -17,3 +18,4 @@ Vodka Gvori -10 0 0
 FlavoredSyrup 1To1StrawberryCaster 0 -10 0
 Bitters BittermensOrangeCreamCitrate -10 0 -10
 Bitters Campari -10 0 0
+Cachaca Pitu -10 -10 0
