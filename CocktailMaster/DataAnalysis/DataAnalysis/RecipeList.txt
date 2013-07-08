@@ -22,3 +22,4 @@
 4 Bitters-Campari Gin-Tanqueray Juice-StoreLemon SimpleSyrup-1To1RawCaneSugar 30 30 30 25
 3 Cachaca-Pitu Juice-Lime SimpleSyrup-1To1RawCaneSugar 60 35 25
 3 Bourbon-FourRoses Juice-StoreLemon SimpleSyrup-1To1Caster 60 30 20
+3 Tequila-MilagroSilver Juice-Lime SimpleSyrup-1To1Caster 55 30 15

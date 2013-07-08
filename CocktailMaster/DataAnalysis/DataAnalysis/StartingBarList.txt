@@ -4,6 +4,7 @@ Bourbon BuffaloTrace -10 0 0
 Bourbon FourRoses -10 -10 0
 Scotch JohnnieWalkerBlackLabel -10 0 0
 Tequila 1800Silver -10 -10 0
+Tequila MilagroSilver -10 -10 0
 Armagnac ChateauDuTariquet -10 0 0
 TripleSec Cointreau -10 -10 0
 Juice StoreLemon 0 0 1
