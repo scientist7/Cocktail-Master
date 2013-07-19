@@ -23,3 +23,4 @@ Bitters BittermensOrangeCreamCitrate -10 0 -10
 Bitters Campari -10 0 0
 Cachaca Pitu -10 -10 0
 OrangeCuracao PierreFerrand -10 -10 0
+AppleBrandy LairdsStraight -10 0 0
