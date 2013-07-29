@@ -27,3 +27,4 @@
 3 Gin-Plymouth Juice-StoreLemon SimpleSyrup-1To1Caster 60 30 25
 4 Gin-Plymouth Juice-StoreLemon OrangeCuracao-PierreFerrand SimpleSyrup-1To1Caster 45 30 15 20
 3 AppleBrandy-LairdsStraight Juice-StoreLemon SimpleSyrup-1To1Caster 60 40 30
+4 Bourbon-FourRoses ApricotLiqueur-RothmanAndWinter Juice-StoreLemon SimpleSyrup-1To1Caster 35 25 25 15 

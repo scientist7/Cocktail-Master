@@ -1,4 +1,5 @@
 AppleBrandy LairdsStraight 0.666667 0 0
+ApricotLiqueur RothmanAndWinter 0.3 0.127302 0
 Armagnac ChateauDuTariquet 0.666667 0 0
 Bitters BittermensOrangeCreamCitrate 0.283254 0 1.69952
 Bitters Campari 0.5 0 0
