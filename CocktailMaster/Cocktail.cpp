@@ -368,13 +368,41 @@ bool find_optimum(Eigen::VectorXd &x, const CMatrix &A, const Eigen::Vector3d &b
 	x.setZero(A.cols());
 	Eigen::VectorXd bestx(A.cols());
 	bestx.setZero(A.cols());
-	search(0,A,x,b,success,fom,bestx); 
+	Cocktail::candsolutions solutions;
+	search(0,A,x,b,success,bestx,solutions); 
+	double tfom,locmin1err=0;
+	//--Search candidate solutions from best to worst until 1st local min in fom is found
+	std::multimap<double, Eigen::VectorXd>::iterator it;
+	for(it=solutions.begin(); it != solutions.end(); ++it) {
+			std::cout<<"Error= "<<it->first<<std::endl;
+			tfom = figure_of_merit(it->second,A);
+			std::cout<<"-----"<<tfom<<std::endl;
+			if(tfom>fom) break;
+			fom=tfom;
+			bestx=it->second;
+			locmin1err=it->first;
+	}
+	//--Search for any nearby solutions with lower fom
+	const double maxErrorInc = .01;
+	++it;
+	while(it != solutions.end()) {
+		if(it->first-locmin1err>maxErrorInc) break;
+		tfom = figure_of_merit(it->second,A);
+		if(tfom<fom) {
+			fom=tfom;
+			bestx=it->second;
+		}
+		++it;
+	}
+	std::cout<<"best= "<<fom<<std::endl;
 	x = bestx;
 	return success;
 }
 
 void search(Cocktail::eindex i, const CMatrix &A, Eigen::VectorXd &x, 
-			const Eigen::Vector3d &b, bool &success, double &fom, Eigen::VectorXd &bestx) {
+			const Eigen::Vector3d &b, bool &success, Eigen::VectorXd &bestx, 
+			Cocktail::candsolutions &solutions) {
+	const double maxError=.1;
 	Eigen::Vector3d minvec;
 	minvec.setZero();
 	//--calculate total vector from fixed amounts so far
@@ -382,46 +410,47 @@ void search(Cocktail::eindex i, const CMatrix &A, Eigen::VectorXd &x,
 		minvec += x(j)*A.col(j);
 	}
 	//--calculate 3 upper bounds and take smallest
-	//--when i=n, get lower bound as well (highest of 3)
-	double minubound = 1/A.col(i).maxCoeff(), maxlbound = 0;
+	//--when i=n-1, get lower bound as well (highest of 3)
+	double minubound = 1/A.col(i).maxCoeff(), maxlbound=0;
 	for(Cocktail::eindex j = 0; j < 3; ++j) {
-		if(x(j) > 0) {
+		if(x(j) > 0 && A(j,i) > 0) {
 			double tempubound = (1-minvec(j))/A(j,i);
 			if(tempubound < minubound) minubound = tempubound;
-			if(tempubound > maxlbound) maxlbound = tempubound;
+			if(i == Cocktail::eindex(A.cols()-1) 
+			   && tempubound > maxlbound) maxlbound = tempubound;
 		}
 	}
 	//--compute bin size
 	double binsize = 1/(2*Cocktail::tspperoz*A.col(i).maxCoeff());
+	
 	//--compute nbins
 	if(minubound < 0) minubound = 0;
 	Cocktail::eindex nbins = 
 		Cocktail::eindex(minubound/binsize)+1;
-	
+	//--force each ingredient to be >0
+	Cocktail::eindex minbins = 
+			std::max(int(maxlbound/binsize),1);
+
 	if(i < Cocktail::eindex(A.cols()-1)) {
-		for(Cocktail::eindex bin = 0; bin < nbins; ++bin) {
+		for(Cocktail::eindex bin = minbins; bin < nbins; ++bin) {
 			x(i) = bin*binsize;
-			search(i+1,A,x,b,success,fom,bestx);
+			search(i+1,A,x,b,success,bestx,solutions);
 		}
 	}
 	else {
-	    Cocktail::eindex minbins = 
-			Cocktail::eindex(maxlbound/binsize);
-		double prevErr=1, tfom;
+		double prevErr=1;
 		for(Cocktail::eindex bin = minbins; bin < nbins; ++bin) {
 			x(i) = bin*binsize;
 			double currErr = ( A* x - b ).norm() / b.norm();
 			if(currErr>prevErr) break;
 			prevErr = currErr;
-			if(currErr>.05) continue; 
+			if(currErr>maxError) continue;
+			solutions.insert(std::pair<double,Eigen::VectorXd>(currErr,x));
 			success = true;
-			tfom = figure_of_merit(x,A);
-			if(tfom < fom) {
-				fom = tfom;
-				bestx = x;
-			}
 		}
 	}
+	
+	bestx=x;
 }
 
 double figure_of_merit(const Eigen::VectorXd &x, const CMatrix &A) {

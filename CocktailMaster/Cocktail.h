@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <tuple>
 #include <vector>
+#include <map>
 #include <algorithm>
 #include "Ingredient.h"
 //#include <Eigen>
@@ -15,6 +16,7 @@ class Cocktail
 {
 	typedef std::tuple<Ingredient, double, int> element;
 	typedef std::vector<element>::size_type eindex;
+	typedef std::multimap<double, Eigen::VectorXd> candsolutions;
 
 	double round_to_multiple(const double, const double);
 	
@@ -52,7 +54,7 @@ private:
 	friend bool check_nosolutions(const CMatrix &, const Eigen::Vector3d &);
 	friend bool find_optimum(Eigen::VectorXd &, const CMatrix &, const Eigen::Vector3d &);
 	friend void search(eindex, const CMatrix &, Eigen::VectorXd &, const Eigen::Vector3d &,
-		               bool &, double &, Eigen::VectorXd &);
+		               bool &, Eigen::VectorXd &, candsolutions &);
 	friend double figure_of_merit(const Eigen::VectorXd &x, const CMatrix &A);
 
 	//--Data members
