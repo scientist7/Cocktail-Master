@@ -9,6 +9,7 @@ Bourbon FourRoses 0.5 0.068254 0
 Cachaca Pitu 0.758873 0.217207 0
 DarkRum AppletonEstate12YearOld 0.780556 0.391984 0
 FlavoredSyrup 1To1StrawberryCaster 0 0.866071 0
+Genever Bols 0.5 0 0
 Gin Plymouth 0.5 0 0
 Gin Tanqueray 0.5 0 0
 Juice Lime 0 0 1.30093

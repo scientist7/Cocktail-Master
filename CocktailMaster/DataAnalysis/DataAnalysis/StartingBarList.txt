@@ -26,3 +26,4 @@ OrangeCuracao PierreFerrand -10 -10 0
 AppleBrandy LairdsStraight -10 0 0
 ApricotLiqueur RothmanAndWinter -10 -10 0
 Amaro Averna -10 -10 0
+Genever Bols -10 -10 0
