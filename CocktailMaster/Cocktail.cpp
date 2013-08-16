@@ -383,7 +383,7 @@ bool find_optimum(Eigen::VectorXd &x, const CMatrix &A, const Eigen::Vector3d &b
 			locmin1err=it->first;
 	}
 	//--Search for any nearby solutions with lower fom
-	const double maxErrorInc = .01;
+	const double maxErrorInc = .02;
 	++it;
 	while(it != solutions.end()) {
 		if(it->first-locmin1err>maxErrorInc) break;
