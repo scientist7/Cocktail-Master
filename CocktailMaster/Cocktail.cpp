@@ -374,9 +374,9 @@ bool find_optimum(Eigen::VectorXd &x, const CMatrix &A, const Eigen::Vector3d &b
 	//--Search candidate solutions from best to worst until 1st local min in fom is found
 	std::multimap<double, Eigen::VectorXd>::iterator it;
 	for(it=solutions.begin(); it != solutions.end(); ++it) {
-			std::cout<<"Error= "<<it->first<<std::endl;
+			std::cout<<"Error = "<<it->first<<std::endl;
 			tfom = figure_of_merit(it->second,A);
-			std::cout<<"-----"<<tfom<<std::endl;
+			std::cout<<"-----fom = "<<tfom<<std::endl;
 			if(tfom>fom) break;
 			fom=tfom;
 			bestx=it->second;
@@ -387,14 +387,18 @@ bool find_optimum(Eigen::VectorXd &x, const CMatrix &A, const Eigen::Vector3d &b
 	++it;
 	while(it != solutions.end()) {
 		if(it->first-locmin1err>maxErrorInc) break;
+		std::cout<<"Error = "<<it->first<<std::endl;
 		tfom = figure_of_merit(it->second,A);
-		if(tfom<fom) {
+		std::cout<<"-----fom = "<<tfom<<std::endl;
+		//--Require a decrease in fom by some fraction of fom
+		const double fomdecthresh=.05;
+		if(tfom<(1.-fomdecthresh)*fom) {
 			fom=tfom;
 			bestx=it->second;
 		}
 		++it;
 	}
-	std::cout<<"best= "<<fom<<std::endl;
+	std::cout<<"best fom= "<<fom<<std::endl;
 	x = bestx;
 	return success;
 }
@@ -425,11 +429,13 @@ void search(Cocktail::eindex i, const CMatrix &A, Eigen::VectorXd &x,
 	
 	//--compute nbins
 	if(minubound < 0) minubound = 0;
+	//--Allow search to extend one bin beyond that expected, which may still have small error
 	Cocktail::eindex nbins = 
-		Cocktail::eindex(minubound/binsize)+1;
+		Cocktail::eindex(minubound/binsize)+2;
 	//--force each ingredient to be >0
+	//--Allow search to extend one bin beyond that expected, which may still have small error
 	Cocktail::eindex minbins = 
-			std::max(int(maxlbound/binsize),1);
+			std::max(int(maxlbound/binsize)-1,1);
 
 	if(i < Cocktail::eindex(A.cols()-1)) {
 		for(Cocktail::eindex bin = minbins; bin < nbins; ++bin) {
@@ -458,7 +464,7 @@ double figure_of_merit(const Eigen::VectorXd &x, const CMatrix &A) {
 	for(Cocktail::eindex i = 0; i < Cocktail::eindex(A.cols()-1); ++i) {
 		for(Cocktail::eindex j = i+1; j < Cocktail::eindex(A.cols()); ++j) {
 			//--New way just minimizes difference in total flavors regardless of angle
-			sum += pow(x(i)*A.col(i).norm()-x(j)*A.col(j).norm(),2);
+			sum += (pow((x(i)*A.col(i).norm()-x(j)*A.col(j).norm()),2));
 			//--Old way weighs difference in flavor by cos(theta)
 			//sum += pow((x(i)/A.col(j).norm()-x(j)/A.col(i).norm())*A.col(i).dot(A.col(j)),2);
 		}
