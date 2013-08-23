@@ -13,6 +13,7 @@ FlavoredSyrup 1To1StrawberryCaster 0 0.866071 0
 Genever Bols 0.5 0 0
 Gin Plymouth 0.5 0 0
 Gin Tanqueray 0.5 0 0
+JapaneseWhiskey Hakushu12YearOld 0.538462 0.139927 0
 Juice Lime 0 0 1.30093
 Juice StoreLemon 0 0 1
 Juice TreeLemon 0 0 1.21343

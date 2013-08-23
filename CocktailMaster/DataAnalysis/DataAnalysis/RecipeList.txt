@@ -31,3 +31,4 @@
 4 Bourbon-FourRoses Juice-StoreLemon Amaro-Averna SimpleSyrup-1To1Caster 40 35 35 10
 3 Genever-Bols Juice-StoreLemon SimpleSyrup-1To1Caster 60 30 25
 3 Tequila-MilagroSilver Juice-Lime AgaveNectar-MadhavaLight 65 35 15
+3 JapaneseWhiskey-Hakushu12YearOld Juice-StoreLemon SimpleSyrup-1To1Caster 65 35 20
