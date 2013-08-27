@@ -1,5 +1,6 @@
 Gin Tanqueray -10 0 0
 Gin Plymouth -10 0 0
+Gin Beefeater -10 0 0
 RyeWhiskey RussellsReserve -10 0 0
 Bourbon BuffaloTrace -10 0 0
 Bourbon FourRoses -10 -10 0

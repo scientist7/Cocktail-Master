@@ -32,3 +32,4 @@
 3 Genever-Bols Juice-StoreLemon SimpleSyrup-1To1Caster 60 30 25
 3 Tequila-MilagroSilver Juice-Lime AgaveNectar-MadhavaLight 65 35 15
 3 JapaneseWhiskey-Hakushu12YearOld Juice-StoreLemon SimpleSyrup-1To1Caster 65 35 20
+3 Gin-Beefeater Juice-StoreLemon SimpleSyrup-1To1Caster 60 30 25
