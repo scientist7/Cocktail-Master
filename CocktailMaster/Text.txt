@@ -14,7 +14,7 @@ Genever Bols 0.5 0 0
 Gin Beefeater 0.5 0 0
 Gin Plymouth 0.5 0 0
 Gin Tanqueray 0.5 0 0
-JapaneseWhiskey Hakushu12YearOld 0.538462 0.14359 0
+JapaneseWhisky Hakushu12YearOld 0.538462 0.14359 0
 Juice Lime 0 0 1.29037
 Juice StoreLemon 0 0 1
 Juice TreeLemon 0 0 1.20498

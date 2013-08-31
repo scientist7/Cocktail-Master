@@ -29,4 +29,4 @@ ApricotLiqueur RothmanAndWinter -10 -10 0
 Amaro Averna -10 -10 0
 Genever Bols -10 -10 0
 AgaveNectar MadhavaLight 0 -10 0
-JapaneseWhiskey Hakushu12YearOld -10 -10 0
+JapaneseWhisky Hakushu12YearOld -10 -10 0
