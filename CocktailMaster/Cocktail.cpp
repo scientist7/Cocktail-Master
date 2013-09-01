@@ -327,13 +327,17 @@ bool solve_squarematrix(const CMatrix &A, Eigen::VectorXd &x, bool throwflag) {
 	const Eigen::Vector3d b(1,1,1);
 	Eigen::ColPivHouseholderQR<Eigen::Matrix3d> lu(A);
 	
-	//--Check that solution exists
+	//--Check that solutions exist
 	if(check_nosolutions(A,b)) {
 		if(throwflag) throw no_solution("3 ingredients, but no solution");
 		else return false;
 	}
 
-	//--Here solution must exist
+	//--Here, there is at least one solution, check whether it's unique
+	if (fabs(A.determinant())<Cocktail::solprecision)
+		if(throwflag) throw multiple_solutions("3 ingredients, multiple solutions");
+
+	//--Here solution must exist and it unique
 	x = lu.solve(b);
 	//--Check that solution is physical
 	if(x(0) < 0 || x(1) < 0 || x(2) < 0) {

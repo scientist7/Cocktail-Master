@@ -30,3 +30,6 @@ TripleSec Cointreau 0.666667 0.738889 0
 VioletLiqueur TheBitterTruth 0.75 0 0
 Vodka Gvori 0.5 0 0
 WhiteRum FlorDeCana4YearOldExtraDry 0.645185 0.217407 0
+test A 1 1 1
+test B 1 0 0
+test C 0 1 1
