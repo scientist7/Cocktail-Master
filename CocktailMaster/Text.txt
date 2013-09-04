@@ -1,7 +1,7 @@
 AgaveNectar MadhavaLight 0 1.4906 0
 Amaro Averna 0.428571 0.550794 0
 AppleBrandy LairdsStraight 0.666667 0 0
-ApricotLiqueur RothmanAndWinter 0.54037 0.648704 0
+ApricotLiqueur RothmanAndWinter 0.612963 0.650463 0
 Armagnac ChateauDuTariquet 0.666667 0 0
 Bitters BittermensOrangeCreamCitrate 0.283254 0 1.69952
 Bitters Campari 0.5 0 0
@@ -27,9 +27,7 @@ SimpleSyrup 1To1RawCaneSugar 0 1.3 0
 Tequila 1800Silver 0.860247 0.289877 0
 Tequila MilagroSilver 0.703838 0.353838 0
 TripleSec Cointreau 0.666667 0.738889 0
+Vermouth DolinDry 0.375 0 0
 VioletLiqueur TheBitterTruth 0.75 0 0
 Vodka Gvori 0.5 0 0
 WhiteRum FlorDeCana4YearOldExtraDry 0.645185 0.217407 0
-test A 1 1 1
-test B 1 0 0
-test C 0 1 1

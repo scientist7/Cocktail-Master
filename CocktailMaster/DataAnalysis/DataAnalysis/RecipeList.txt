@@ -27,9 +27,10 @@
 3 Gin-Plymouth Juice-StoreLemon SimpleSyrup-1To1Caster 60 30 25
 4 Gin-Plymouth Juice-StoreLemon OrangeCuracao-PierreFerrand SimpleSyrup-1To1Caster 45 30 15 20
 3 AppleBrandy-LairdsStraight Juice-StoreLemon SimpleSyrup-1To1Caster 60 40 30
-4 Gin-Plymouth ApricotLiqueur-RothmanAndWinter Juice-Lime SimpleSyrup-1To1Caster 30 20 20 10
+4 Gin-Beefeater ApricotLiqueur-RothmanAndWinter Juice-Lime SimpleSyrup-1To1Caster 40 20 25 15
 4 Bourbon-FourRoses Juice-StoreLemon Amaro-Averna SimpleSyrup-1To1Caster 40 35 35 10
 3 Genever-Bols Juice-StoreLemon SimpleSyrup-1To1Caster 60 30 25
 3 Tequila-MilagroSilver Juice-Lime AgaveNectar-MadhavaLight 65 35 15
 3 JapaneseWhisky-Hakushu12YearOld Juice-StoreLemon SimpleSyrup-1To1Caster 65 35 20
 3 Gin-Beefeater Juice-StoreLemon SimpleSyrup-1To1Caster 60 30 25
+4 Gin-Beefeater Vermouth-DolinDry Juice-StoreLemon SimpleSyrup-1To1Caster 30 40 30 25
