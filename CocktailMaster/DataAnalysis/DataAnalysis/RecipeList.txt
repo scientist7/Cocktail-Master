@@ -34,3 +34,4 @@
 3 JapaneseWhisky-Hakushu12YearOld Juice-StoreLemon SimpleSyrup-1To1Caster 65 35 20
 3 Gin-Beefeater Juice-StoreLemon SimpleSyrup-1To1Caster 60 30 25
 4 Gin-Beefeater Vermouth-DolinDry Juice-StoreLemon SimpleSyrup-1To1Caster 30 40 30 25
+3 RyeWhiskey-Rittenhouse Juice-StoreLemon SimpleSyrup-1To1Caster 60 35 25

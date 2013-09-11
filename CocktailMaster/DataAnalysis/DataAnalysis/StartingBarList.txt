@@ -31,3 +31,4 @@ Genever Bols -10 -10 0
 AgaveNectar MadhavaLight 0 -10 0
 JapaneseWhisky Hakushu12YearOld -10 -10 0
 Vermouth DolinDry -10 0 0
+RyeWhiskey Rittenhouse -10 0 0

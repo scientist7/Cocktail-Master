@@ -46,7 +46,7 @@ void Cocktail::balance_drink() {
 	//--for a group of collinear ingredients, the overall flavor
 	//--vector is the weighted sum, where the weight is alpha/magnitude,
 	//--alpha=1/((1/m1)+(1/m2)+...)
-
+	
 	std::vector<Eigen::Vector3d> grouped_ingredients(col);
 	for(eindex i = 0; i < 3; ++i)
 				grouped_ingredients[0](i) = 0;
