@@ -189,13 +189,22 @@ void Cocktail::scale_recipe() {
 	
 
 	//--Search range of scale factors on recipe and choose the best
+	bool rounded_to_zero = false;
 	double total_discrepancy, min_scale_dev = 100, curr_scale_dev, best_scale = 1, best_discrepancy = 100;
 	for(double scale = scale_bounds[0]; scale <= scale_bounds[1]; scale = scale + 0.025) {
+		rounded_to_zero = false;
         //--Loop through ingredients
 		for(eindex i = 0; i < elements.size(); ++i) {
 			x(i) = ::round_to_multiple(scale*std::get<1>(elements[i])*Cocktail::mlperoz, 
 				                       Cocktail::mlincrements)/Cocktail::mlperoz;
+			//--Flag whenever something gets rounded to zero
+			if(!x(i)) {
+				rounded_to_zero = true;
+				break;
+			}
 		} 
+		//--Keep trying if we've rounded something to zero
+		if(rounded_to_zero) continue;
 		//--Calulate discrepancy from ideal solution
 		result = A*x;
 		result /= result.mean();
