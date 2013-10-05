@@ -289,18 +289,18 @@ void outputIngredientProperties(string fname, BarType &bar) {
 
 void outputIngredientMeasurements(BarType &bar, string Dir) {
 	for(auto it = bar.begin(); it != bar.end(); ++it) {
-		if(it->second.get_num_alcoholic_bite_measures()!=1000000) {
-			ofstream outab(Dir+it->second.get_name()+"_bite.txt");
+		if(it->second.get_num_alcoholic_bite_measures()!=Ingredient::num_meas_fixed) {
+			ofstream outab(Dir+it->second.get_name()+it->second.get_category()+"_bite.txt");
 			it->second.print_alcoholic_bite(outab);
 			outab.close();
 		}
-		if(it->second.get_num_sweetness_measures()!=1000000) {
-			ofstream outsw(Dir+it->second.get_name()+"_sweet.txt");
+		if(it->second.get_num_sweetness_measures()!=Ingredient::num_meas_fixed) {
+			ofstream outsw(Dir+it->second.get_name()+it->second.get_category()+"_sweet.txt");
 			it->second.print_sweetness(outsw);
 			outsw.close();
 		}
-		if(it->second.get_num_sourness_measures()!=1000000) {
-			ofstream outsr(Dir+it->second.get_name()+"_sour.txt");
+		if(it->second.get_num_sourness_measures()!=Ingredient::num_meas_fixed) {
+			ofstream outsr(Dir+it->second.get_name()+it->second.get_category()+"_sour.txt");
 			it->second.print_sourness(outsr);
 			outsr.close();
 		}
