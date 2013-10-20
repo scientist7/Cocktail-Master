@@ -1,7 +1,6 @@
 3 Gin-Tanqueray Juice-TreeLemon SimpleSyrup-1To1Caster 60 25 25
 3 Gin-Tanqueray Juice-StoreLemon SimpleSyrup-1To1Caster 60 30 25
 4 Gin-Tanqueray Juice-StoreLemon TripleSec-Cointreau SimpleSyrup-1To1Caster 30 35 30 10
-4 Gin-Tanqueray Juice-StoreLemon Maraschino-Luxardo SimpleSyrup-1To1Caster 45 30 10 15
 4 Gin-Tanqueray Juice-StoreLemon VioletLiqueur-TheBitterTruth SimpleSyrup-1To1Caster 45 30 10 30
 3 Tequila-1800Silver Juice-Lime SimpleSyrup-1To1Caster 45 30 20
 3 RyeWhiskey-RussellsReserve Juice-StoreLemon SimpleSyrup-1To1Caster 60 35 25
@@ -29,13 +28,13 @@
 3 AppleBrandy-LairdsStraight Juice-StoreLemon SimpleSyrup-1To1Caster 60 40 30
 4 Gin-Beefeater ApricotLiqueur-RothmanAndWinter Juice-Lime SimpleSyrup-1To1Caster 40 20 25 15
 4 Bourbon-FourRoses Juice-StoreLemon Amaro-Averna SimpleSyrup-1To1Caster 40 35 35 10
-3 Genever-Bols Juice-StoreLemon SimpleSyrup-1To1Caster 60 30 25
+3 Genever-Bols Juice-StoreLemon SimpleSyrup-1To1Caster 50 25 20
 3 Tequila-MilagroSilver Juice-Lime AgaveNectar-MadhavaLight 65 35 15
 3 JapaneseWhisky-Hakushu12YearOld Juice-StoreLemon SimpleSyrup-1To1Caster 65 35 20
-3 Gin-Beefeater Juice-StoreLemon SimpleSyrup-1To1Caster 60 30 25
+3 Gin-Beefeater Juice-StoreLemon SimpleSyrup-1To1Caster 50 25 20
 4 Gin-Beefeater Vermouth-DolinDry Juice-StoreLemon SimpleSyrup-1To1Caster 30 40 30 25
 3 RyeWhiskey-Rittenhouse Juice-StoreLemon SimpleSyrup-1To1Caster 60 35 25
-3 Gin-BlueLadyBlackTeaInfusedBeefeater Juice-StoreLemon SimpleSyrup-1To1Caster 55 30 25
 3 Cognac-RemyMartinVS Juice-StoreLemon SimpleSyrup-1To1Caster 50 25 20
 4 Cognac-RemyMartinVS Chartreuse-Yellow Juice-StoreLemon SimpleSyrup-1To1Caster 50 15 30 10
 3 WhiteRum-WrayAndNephew Juice-Lime SimpleSyrup-1To1Caster 45 30 20
+4 WhiteRum-WrayAndNephew Juice-Lime SimpleSyrup-1To1Caster Maraschino-Luxardo 35 30 10 20
