@@ -20,7 +20,7 @@ JapaneseWhisky Hakushu12YearOld 0.538462 0.14302 0
 Juice Lime 0 0 1.29136
 Juice StoreLemon 0 0 1
 Juice TreeLemon 0 0 1.20704
-Maraschino Luxardo 0.430455 0.78745 0
+Maraschino Luxardo 0.242131 0.724075 0
 OrangeCuracao PierreFerrand 0.5 0.28642 0
 RyeWhiskey Rittenhouse 0.583333 0.0478395 0
 RyeWhiskey RussellsReserve 0.583333 0 0
@@ -34,4 +34,4 @@ Vermouth DolinDry 0.375 0 0
 VioletLiqueur TheBitterTruth 0.75 0 0
 Vodka Gvori 0.5 0 0
 WhiteRum FlorDeCana4YearOldExtraDry 0.645682 0.217287 0
-WhiteRum WrayAndNephew 0.860909 0.289716 0
+WhiteRum WrayAndNephew 0.968523 0.32593 0

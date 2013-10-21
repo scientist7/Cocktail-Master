@@ -36,5 +36,5 @@
 3 RyeWhiskey-Rittenhouse Juice-StoreLemon SimpleSyrup-1To1Caster 60 35 25
 3 Cognac-RemyMartinVS Juice-StoreLemon SimpleSyrup-1To1Caster 50 25 20
 4 Cognac-RemyMartinVS Chartreuse-Yellow Juice-StoreLemon SimpleSyrup-1To1Caster 50 15 30 10
-3 WhiteRum-WrayAndNephew Juice-Lime SimpleSyrup-1To1Caster 45 30 20
+3 WhiteRum-WrayAndNephew Juice-Lime SimpleSyrup-1To1Caster 40 30 20
 4 WhiteRum-WrayAndNephew Juice-Lime SimpleSyrup-1To1Caster Maraschino-Luxardo 35 30 10 20
