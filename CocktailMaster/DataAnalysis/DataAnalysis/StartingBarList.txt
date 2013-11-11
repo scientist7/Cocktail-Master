@@ -20,6 +20,7 @@ WhiteRum FlorDeCana4YearOldExtraDry -10 -10 0
 DarkRum AppletonEstate12YearOld -10 -10 0
 Vodka Gvori -10 0 0
 FlavoredSyrup 1To1StrawberryCaster 0 -10 0
+FlavoredSyrup 1To1PomegranateCaster 0 -10 0
 Bitters BittermensOrangeCreamCitrate -10 0 -10
 Bitters Campari -10 0 0
 Cachaca Pitu -10 -10 0

@@ -173,7 +173,7 @@ void Cocktail::scale_recipe() {
 		return;
 	}
 	scale_bounds[0] = 1.0/booze_total;
-	scale_bounds[1] = 2.2/booze_total;
+	scale_bounds[1] = 2.5/booze_total;
 	ideal_scale = 2.0/booze_total;
 
 	//--Fill ingredient matrix and vector
