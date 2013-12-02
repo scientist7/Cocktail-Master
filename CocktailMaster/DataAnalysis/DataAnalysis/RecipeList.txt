@@ -1,7 +1,7 @@
 3 Gin-Tanqueray Juice-TreeLemon SimpleSyrup-1To1Caster 50 25 20
 3 Gin-Tanqueray Juice-StoreLemon SimpleSyrup-1To1Caster 60 30 25
 4 Gin-Tanqueray Juice-StoreLemon TripleSec-Cointreau SimpleSyrup-1To1Caster 30 35 30 10
-4 Gin-Tanqueray Juice-StoreLemon VioletLiqueur-TheBitterTruth SimpleSyrup-1To1Caster 45 30 10 30
+4 Gin-Tanqueray Juice-StoreLemon VioletLiqueur-RothmanAndWinter SimpleSyrup-1To1Caster 50 35 25 15
 3 Tequila-1800Silver Juice-Lime SimpleSyrup-1To1Caster 45 30 20
 3 RyeWhiskey-RussellsReserve Juice-StoreLemon SimpleSyrup-1To1Caster 60 35 25
 3 RyeWhiskey-RussellsReserve Juice-TreeLemon SimpleSyrup-1To1Caster 60 30 25
@@ -14,7 +14,6 @@
 3 Vodka-Gvori Juice-Lime SimpleSyrup-1To1Caster 60 25 25
 3 Bourbon-BuffaloTrace Juice-StoreLemon FlavoredSyrup-1To1StrawberryCaster 60 35 40
 3 Gin-Tanqueray Juice-StoreLemon FlavoredSyrup-1To1StrawberryCaster 60 30 35
-4 Vodka-Gvori Juice-StoreLemon VioletLiqueur-TheBitterTruth SimpleSyrup-1To1Caster 45 30 10 25
 3 Gin-Tanqueray Juice-StoreLemon SimpleSyrup-1To1RawCaneSugar 60 30 25
 3 Scotch-JohnnieWalkerBlackLabel Juice-StoreLemon SimpleSyrup-1To1RawCaneSugar 60 35 25
 4 Bitters-BittermensOrangeCreamCitrate Bourbon-BuffaloTrace Juice-StoreLemon SimpleSyrup-1To1RawCaneSugar 1.471 55 30 25
@@ -39,3 +38,5 @@
 3 WhiteRum-WrayAndNephew Juice-Lime SimpleSyrup-1To1Caster 40 30 20
 3 Gin-Beefeater Juice-StoreLemon FlavoredSyrup-1To1PomegranateCaster 50 25 20
 4 Gin-Tanqueray Juice-StoreLemon SimpleSyrup-1To1Caster Maraschino-Luxardo 40 25 10 15
+4 Gin-Tanqueray Juice-StoreLemon SimpleSyrup-1To1Caster VioletLiqueur-Test 50 35 12.5 25
+3 Gin-HaymansOldTom Juice-StoreLemon SimpleSyrup-1To1Caster 60 30 10

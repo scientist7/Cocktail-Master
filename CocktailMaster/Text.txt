@@ -15,6 +15,7 @@ FlavoredSyrup 1To1PomegranateCaster 0 1.25 0
 FlavoredSyrup 1To1StrawberryCaster 0 0.866071 0
 Genever Bols 0.5 0 0
 Gin Beefeater 0.5 0 0
+Gin HaymansOldTom 0.5 0.285802 0
 Gin Plymouth 0.5 0 0
 Gin Tanqueray 0.5 0 0
 JapaneseWhisky Hakushu12YearOld 0.538462 0.14302 0
@@ -32,7 +33,8 @@ Tequila 1800Silver 0.860909 0.289716 0
 Tequila MilagroSilver 0.69535 0.299908 0
 TripleSec Cointreau 0.666667 0.738272 0
 Vermouth DolinDry 0.375 0 0
-VioletLiqueur TheBitterTruth 0.75 0 0
+VioletLiqueur RothmanAndWinter 0.4 0.628889 0
+VioletLiqueur Test 0.4 0.757407 0
 Vodka Gvori 0.5 0 0
 WhiteRum FlorDeCana4YearOldExtraDry 0.645682 0.217287 0
 WhiteRum WrayAndNephew 0.968523 0.32593 0
