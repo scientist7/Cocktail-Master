@@ -163,10 +163,13 @@ void Cocktail::scale_recipe() {
 	//--Place upper bound, that sum of alcoholic ingredients <= scale_bounds[1] oz
 	//--lower bound, at scale_bounds[0] oz
 	//--Ideal scaling give total of 2 oz
-	double booze_total = 0, scale_bounds[2], ideal_scale;
+	//--Also find smallest amount in recipe
+	double booze_total = 0, scale_bounds[2], ideal_scale, min_amount=1e6, scale_bin=0;
 	for(eindex i = 0; i < elements.size(); ++i) {
 		if(std::get<0>(elements[i]).get_alcoholic_bite())
 			booze_total += std::get<1>(elements[i]);
+		if(std::get<1>(elements[i])<min_amount)
+			min_amount = std::get<1>(elements[i]);
 	}
 	if(!booze_total) {
 		std::cerr << "NO BOOZE IN RECIPE!" << std::endl;
@@ -174,6 +177,11 @@ void Cocktail::scale_recipe() {
 	}
 	scale_bounds[0] = 1.0/booze_total;
 	scale_bounds[1] = 2.5/booze_total;
+	scale_bin = 0.025;
+	//--When a small amount is present, upper bound must be large enough to 
+	//--reach a non-zero value when rounded to nearest mlincrement
+	double min_scale_up = Cocktail::mlincrements/(2*min_amount*Cocktail::mlperoz) + scale_bin;
+	scale_bounds[1] = std::max(2.5/booze_total,min_scale_up);
 	ideal_scale = 2.0/booze_total;
 
 	//--Fill ingredient matrix and vector
@@ -191,7 +199,7 @@ void Cocktail::scale_recipe() {
 	//--Search range of scale factors on recipe and choose the best
 	bool rounded_to_zero = false;
 	double total_discrepancy, min_scale_dev = 100, curr_scale_dev, best_scale = 1, best_discrepancy = 100;
-	for(double scale = scale_bounds[0]; scale <= scale_bounds[1]; scale = scale + 0.025) {
+	for(double scale = scale_bounds[0]; scale <= scale_bounds[1]; scale = scale + scale_bin) {
 		rounded_to_zero = false;
         //--Loop through ingredients
 		for(eindex i = 0; i < elements.size(); ++i) {

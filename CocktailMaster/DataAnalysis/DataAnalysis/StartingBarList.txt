@@ -10,6 +10,7 @@ Tequila 1800Silver -10 -10 0
 Tequila MilagroSilver -10 -10 0
 Armagnac ChateauDuTariquet -10 0 0
 TripleSec Cointreau -10 -10 0
+TripleSec Combier -10 -10 0
 Juice StoreLemon 0 0 1
 Juice TreeLemon 0 0 -10
 Juice Lime 0 0 -10
@@ -17,7 +18,6 @@ SimpleSyrup 1To1Caster 0 -10 0
 SimpleSyrup 1To1RawCaneSugar 0 -10 0
 Maraschino Luxardo -10 -10 0
 VioletLiqueur RothmanAndWinter -10 -10 0
-VioletLiqueur Test -10 -10 0
 WhiteRum FlorDeCana4YearOldExtraDry -10 -10 0
 DarkRum AppletonEstate12YearOld -10 -10 0
 Vodka Gvori -10 0 0
@@ -38,3 +38,4 @@ RyeWhiskey Rittenhouse -10 -10 0
 Cognac RemyMartinVS -10 0 0
 Chartreuse Yellow -10 -10 0
 WhiteRum WrayAndNephew -10 -10 0
+Mezcal DelMagueyVida -10 -10 0
