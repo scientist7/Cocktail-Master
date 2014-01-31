@@ -41,3 +41,6 @@
 4 Gin-Tanqueray Juice-StoreLemon SimpleSyrup-1To1Caster Maraschino-Luxardo 40 25 10 15
 3 Gin-HaymansOldTom Juice-StoreLemon SimpleSyrup-1To1Caster 60 30 10
 3 Mezcal-DelMagueyVida Juice-Lime SimpleSyrup-1To1Caster 55 30 15
+4 WhiteRum-FlorDeCana4YearOldExtraDry GrapefruitLiqueur-CombierCremeDePamplemousseRose Juice-Lime SimpleSyrup-1To1Caster 45 20 25 5
+4 Cognac-RemyMartinVS Juice-StoreLemon SimpleSyrup-1To1Caster NutLiqueur-Frangelico 40 25 10 15
+3 DarkRum-ElDorado12YearOld Juice-Lime SimpleSyrup-1To1Caster 45 20 10

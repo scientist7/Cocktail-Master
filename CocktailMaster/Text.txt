@@ -11,6 +11,7 @@ Cachaca Pitu 0.753295 0.211629 0
 Chartreuse Yellow 0.333333 1.14321 0
 Cognac RemyMartinVS 0.5 0 0
 DarkRum AppletonEstate12YearOld 0.774818 0.389263 0
+DarkRum ElDorado12YearOld 0.573939 0.288343 0
 FlavoredSyrup 1To1PomegranateCaster 0 1.25 0
 FlavoredSyrup 1To1StrawberryCaster 0 0.866071 0
 Genever Bols 0.5 0 0
@@ -18,12 +19,14 @@ Gin Beefeater 0.5 0 0
 Gin HaymansOldTom 0.5 0.285802 0
 Gin Plymouth 0.5 0 0
 Gin Tanqueray 0.5 0 0
+GrapefruitLiqueur CombierCremeDePamplemousseRose 0.16142 0.804013 0
 JapaneseWhisky Hakushu12YearOld 0.538462 0.14302 0
 Juice Lime 0 0 1.29136
 Juice StoreLemon 0 0 1
 Juice TreeLemon 0 0 1.12611
 Maraschino Luxardo 0.333333 0.809877 0
 Mezcal DelMagueyVida 0.70438 0.353875 0
+NutLiqueur Frangelico 0.333333 0.809877 0
 OrangeCuracao PierreFerrand 0.5 0.28642 0
 RyeWhiskey Rittenhouse 0.583333 0.0478395 0
 RyeWhiskey RussellsReserve 0.583333 0 0

@@ -20,6 +20,7 @@ Maraschino Luxardo -10 -10 0
 VioletLiqueur RothmanAndWinter -10 -10 0
 WhiteRum FlorDeCana4YearOldExtraDry -10 -10 0
 DarkRum AppletonEstate12YearOld -10 -10 0
+DarkRum ElDorado12YearOld -10 -10 0
 Vodka Gvori -10 0 0
 FlavoredSyrup 1To1StrawberryCaster 0 -10 0
 FlavoredSyrup 1To1PomegranateCaster 0 -10 0
@@ -39,3 +40,5 @@ Cognac RemyMartinVS -10 0 0
 Chartreuse Yellow -10 -10 0
 WhiteRum WrayAndNephew -10 -10 0
 Mezcal DelMagueyVida -10 -10 0
+GrapefruitLiqueur CombierCremeDePamplemousseRose -10 -10 0
+NutLiqueur Frangelico -10 -10 0
