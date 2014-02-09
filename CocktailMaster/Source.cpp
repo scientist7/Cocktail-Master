@@ -36,7 +36,7 @@ int main() {
 
 	do {
 		//--Ask user for ingredients and create cocktail object
-		Cocktail cocktail(getIngredients(bar), getReserveIngredients(bar));
+		Cocktail cocktail(getIngredients(bar), getReserveIngredients(bar), true);
 		//--Calculate correct proportions
 		cocktail.balance_drink();
 		//--Scale recipe for convenience

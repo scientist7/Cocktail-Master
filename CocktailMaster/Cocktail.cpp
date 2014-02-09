@@ -20,7 +20,8 @@ double round_to_multiple(const double input,
 
 //--Constructors
 Cocktail::Cocktail(const std::vector<Ingredient> &list, 
-				   const std::vector<Ingredient> &backup) {
+				   const std::vector<Ingredient> &backup,
+				   const bool pinfo) {
 	
 	//--fill elements of cocktail
 	for(auto el : list)
@@ -30,6 +31,8 @@ Cocktail::Cocktail(const std::vector<Ingredient> &list,
 	for(auto el : backup)
 		reserves.push_back(el);
 
+	//--Set whether or not information should be printed
+	printinfo = pinfo;
 }
 
 void Cocktail::balance_drink() {
@@ -106,7 +109,8 @@ void Cocktail::balance_drink() {
 		else solve_squarematrix(A,x,true);
 										 
 	} catch(const no_solution &e) { 
-		std::cerr << e.what() << std::endl;
+		if(printinfo)
+			std::cerr << e.what() << std::endl;
 		bool success = false;
         //--Try adding some standard ingredients to find a solution
 		for(eindex i = 0; i < reserves.size(); ++i) {
@@ -140,9 +144,10 @@ void Cocktail::balance_drink() {
 			return;
 		}
 	} catch(const multiple_solutions &e) {
-		std::cerr << e.what() << std::endl;
+		if (printinfo) 
+			std::cerr << e.what() << std::endl;
 		//--Send to optimizer
-		if(!find_optimum(x,A,b)) {
+		if(!find_optimum(x,A,b,printinfo)) {
 			this->give_up();
 			return;
 		}
@@ -171,7 +176,7 @@ void Cocktail::scale_recipe() {
 		if(std::get<1>(elements[i])<min_amount)
 			min_amount = std::get<1>(elements[i]);
 	}
-	if(!booze_total) {
+	if(!booze_total && printinfo) {
 		std::cerr << "NO BOOZE IN RECIPE!" << std::endl;
 		return;
 	}
@@ -235,7 +240,7 @@ void Cocktail::scale_recipe() {
 		}
 	}
 
-	if(min_scale_dev == 100) 
+	if(min_scale_dev == 100 && printinfo) 
 		std::cerr << "Using scaling with least error = " << best_discrepancy << std::endl; 
 
 	//--Here we have a good rescale factor, apply it to recipe
@@ -269,7 +274,7 @@ bool Cocktail::add_ingredient(const CMatrix &A, CMatrix &Anew, Eigen::VectorXd &
 	
 	//--Check for solution	
 	if(Anew.cols()>3 && (check_nosolutions(Anew,b) 
-	   || !find_optimum(x,Anew,b))) return false; 
+	   || !find_optimum(x,Anew,b,printinfo))) return false; 
 	if(Anew.cols()==3 && !solve_squarematrix(Anew,x,false)) return false;
 	if(Anew.cols()<3 && !solve_overdetermined(Anew,x,false)) return false;
 	
@@ -316,7 +321,8 @@ void Cocktail::give_up() {
 	for(auto el : elements)
 		std::get<1>(el) = 0;
 
-	std::cerr << "Can't deal with this set of ingredients" << std::endl;
+	if(printinfo)
+		std::cerr << "Can't deal with this set of ingredients" << std::endl;
 }
 
 bool solve_overdetermined(const CMatrix &A, Eigen::VectorXd &x, bool throwflag) {
@@ -383,7 +389,7 @@ bool check_nosolutions(const CMatrix &A, const Eigen::Vector3d &b) {
 	return true;
 }
 
-bool find_optimum(Eigen::VectorXd &x, const CMatrix &A, const Eigen::Vector3d &b) {
+bool find_optimum(Eigen::VectorXd &x, const CMatrix &A, const Eigen::Vector3d &b, bool printinfo) {
 	double fom = 1.e9; 
 	bool success = false;
 	x.setZero(A.cols());
@@ -395,9 +401,11 @@ bool find_optimum(Eigen::VectorXd &x, const CMatrix &A, const Eigen::Vector3d &b
 	//--Search candidate solutions from best to worst until 1st local min in fom is found
 	std::multimap<double, Eigen::VectorXd>::iterator it;
 	for(it=solutions.begin(); it != solutions.end(); ++it) {
-			std::cout<<"Error = "<<it->first<<std::endl;
+			if (printinfo)
+				std::cout<<"Error = "<<it->first<<std::endl;
 			tfom = figure_of_merit(it->second,A);
-			std::cout<<"-----fom = "<<tfom<<std::endl;
+			if (printinfo)
+				std::cout<<"-----fom = "<<tfom<<std::endl;
 			if(tfom>fom) break;
 			fom=tfom;
 			bestx=it->second;
@@ -408,9 +416,11 @@ bool find_optimum(Eigen::VectorXd &x, const CMatrix &A, const Eigen::Vector3d &b
 	++it;
 	while(it != solutions.end()) {
 		if(it->first-locmin1err>maxErrorInc) break;
-		std::cout<<"Error = "<<it->first<<std::endl;
+		if (printinfo) 
+			std::cout<<"Error = "<<it->first<<std::endl;
 		tfom = figure_of_merit(it->second,A);
-		std::cout<<"-----fom = "<<tfom<<std::endl;
+		if (printinfo)
+			std::cout<<"-----fom = "<<tfom<<std::endl;
 		//--Require a decrease in fom by some fraction of fom
 		const double fomdecthresh=.05;
 		if(tfom<(1.-fomdecthresh)*fom) {
@@ -419,7 +429,8 @@ bool find_optimum(Eigen::VectorXd &x, const CMatrix &A, const Eigen::Vector3d &b
 		}
 		++it;
 	}
-	std::cout<<"best fom= "<<fom<<std::endl;
+	if (printinfo)
+		std::cout<<"best fom= "<<fom<<std::endl;
 	x = bestx;
 	return success;
 }

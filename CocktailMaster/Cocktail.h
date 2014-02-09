@@ -23,7 +23,8 @@ class Cocktail
 public:
 	//--Constructors
 	Cocktail(const std::vector<Ingredient> &, 
-		     const std::vector<Ingredient> &);
+		     const std::vector<Ingredient> &,
+			 const bool pinfo = false);
 	
 	friend std::ostream &operator<<(std::ostream &os, 
 		                            const Cocktail &item);
@@ -48,11 +49,12 @@ private:
 	eindex classify_ingredients();
 	void give_up();
 	friend bool solve_overdetermined(const CMatrix &, Eigen::VectorXd &, 
-		                            bool throwflag = false);
+									 bool throwflag = false);
 	friend bool solve_squarematrix(const CMatrix &, Eigen::VectorXd &, 
-		                            bool throwflag = false);
+								   bool throwflag = false);
 	friend bool check_nosolutions(const CMatrix &, const Eigen::Vector3d &);
-	friend bool find_optimum(Eigen::VectorXd &, const CMatrix &, const Eigen::Vector3d &);
+	friend bool find_optimum(Eigen::VectorXd &, const CMatrix &, const Eigen::Vector3d &,
+		                     bool printinfo);
 	friend void search(eindex, const CMatrix &, Eigen::VectorXd &, const Eigen::Vector3d &,
 		               bool &, Eigen::VectorXd &, candsolutions &);
 	friend double figure_of_merit(const Eigen::VectorXd &x, const CMatrix &A);
@@ -60,6 +62,7 @@ private:
 	//--Data members
 	std::vector<element> elements;
 	std::vector<Ingredient> reserves;
+	bool printinfo;
 };
 
 
