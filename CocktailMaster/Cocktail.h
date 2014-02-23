@@ -10,15 +10,30 @@
 #include "no_solution.h"
 #include "multiple_solutions.h"
 
+//--Types
 typedef Eigen::Matrix<double, 3, Eigen::Dynamic> CMatrix;
+typedef std::tuple<Ingredient, double, int> element;
+typedef std::vector<element>::size_type eindex;
+typedef std::multimap<double, Eigen::VectorXd> candsolutions;
+
+//--Non-member functions
+bool solve_overdetermined(const CMatrix &, Eigen::VectorXd &, 
+					      bool throwflag = false);
+bool solve_squarematrix(const CMatrix &, Eigen::VectorXd &, 
+					    bool throwflag = false);
+bool check_nosolutions(const CMatrix &, const Eigen::Vector3d &);
+bool find_optimum(Eigen::VectorXd &, const CMatrix &, const Eigen::Vector3d &,
+		          bool printinfo);
+void search(eindex, const CMatrix &, Eigen::VectorXd &, const Eigen::Vector3d &,
+		    bool &, Eigen::VectorXd &, candsolutions &);
+double figure_of_merit(const Eigen::VectorXd &x, const CMatrix &A);
+double round_to_multiple(const double, const double);
+inline bool compare_group(const element &lhs, const element &rhs) 
+                         {return std::get<2>(lhs) < std::get<2>(rhs);};
+
 
 class Cocktail
 {
-	typedef std::tuple<Ingredient, double, int> element;
-	typedef std::vector<element>::size_type eindex;
-	typedef std::multimap<double, Eigen::VectorXd> candsolutions;
-
-	double round_to_multiple(const double, const double);
 	
 public:
 	//--Constructors
@@ -48,17 +63,7 @@ private:
 		                const Eigen::Vector3d &, eindex, eindex j = 0);
 	eindex classify_ingredients();
 	void give_up();
-	friend bool solve_overdetermined(const CMatrix &, Eigen::VectorXd &, 
-									 bool throwflag = false);
-	friend bool solve_squarematrix(const CMatrix &, Eigen::VectorXd &, 
-								   bool throwflag = false);
-	friend bool check_nosolutions(const CMatrix &, const Eigen::Vector3d &);
-	friend bool find_optimum(Eigen::VectorXd &, const CMatrix &, const Eigen::Vector3d &,
-		                     bool printinfo);
-	friend void search(eindex, const CMatrix &, Eigen::VectorXd &, const Eigen::Vector3d &,
-		               bool &, Eigen::VectorXd &, candsolutions &);
-	friend double figure_of_merit(const Eigen::VectorXd &x, const CMatrix &A);
-
+	
 	//--Data members
 	std::vector<element> elements;
 	std::vector<Ingredient> reserves;

@@ -17,19 +17,18 @@ double round_to_multiple(const double input,
 		   + floor((remainder/multiple) + 0.5)*multiple;		 
 }
 
-
 //--Constructors
 Cocktail::Cocktail(const std::vector<Ingredient> &list, 
 				   const std::vector<Ingredient> &backup,
 				   const bool pinfo) {
 	
 	//--fill elements of cocktail
-	for(auto el : list)
-		elements.push_back(std::make_tuple(el,0,-1));
+	for(auto el = list.begin(); el != list.end(); ++el)
+		elements.push_back(std::make_tuple(*el,0.,-1));
 
 	//--fill reserve ingredients 
-	for(auto el : backup)
-		reserves.push_back(el);
+	for(auto el = backup.begin(); el != backup.end(); ++el)
+		reserves.push_back(*el);
 
 	//--Set whether or not information should be printed
 	printinfo = pinfo;
@@ -42,8 +41,7 @@ void Cocktail::balance_drink() {
 	
 	//--sort by group number
 	sort(this->elements.begin(), this->elements.end(),
-		[] (const element &lhs, const element &rhs)
-	       {return std::get<2>(lhs) < std::get<2>(rhs);});
+		 compare_group);
 
 	//--compute overall flavor vector for each group
 	//--for a group of collinear ingredients, the overall flavor
@@ -279,16 +277,16 @@ bool Cocktail::add_ingredient(const CMatrix &A, CMatrix &Anew, Eigen::VectorXd &
 	if(Anew.cols()<3 && !solve_overdetermined(Anew,x,false)) return false;
 	
 	//--Here we can successfully add the ingredient
-	eindex currgindex=std::get<2>(elements[elements.size()-1]);
-	elements.push_back(std::make_tuple(reserves[i],0,++currgindex));
+	int currgindex=std::get<2>(elements[elements.size()-1]);
+	elements.push_back(std::make_tuple(reserves[i],0.,++currgindex));
 	if(j) {
 		currgindex=std::get<2>(elements[elements.size()-1]);
-		elements.push_back(std::make_tuple(reserves[j],0,++currgindex));
+		elements.push_back(std::make_tuple(reserves[j],0.,++currgindex));
 	}
 	return true;
 }
 
-Cocktail::eindex Cocktail::classify_ingredients() {
+eindex Cocktail::classify_ingredients() {
 	//--Any two vectors in flavor space are classified
 	//--as equivalent if they are collinear
 	eindex group_number=0;
@@ -318,12 +316,15 @@ Cocktail::eindex Cocktail::classify_ingredients() {
 
 void Cocktail::give_up() {
 	//--Just flag all amounts to zero
-	for(auto el : elements)
-		std::get<1>(el) = 0;
+	for(auto el = elements.begin(); el != elements.end(); ++el)
+		std::get<1>(*el) = 0;
 
 	if(printinfo)
 		std::cerr << "Can't deal with this set of ingredients" << std::endl;
 }
+
+
+//--Non-member stuff
 
 bool solve_overdetermined(const CMatrix &A, Eigen::VectorXd &x, bool throwflag) {
 	const Eigen::Vector3d b(1,1,1);
@@ -336,7 +337,7 @@ bool solve_overdetermined(const CMatrix &A, Eigen::VectorXd &x, bool throwflag) 
 		return false;
 	}
 	//--check for unphysical solution
-	for(Cocktail::eindex i = 0; i < Cocktail::eindex(A.cols()); ++i) {
+	for(eindex i = 0; i < eindex(A.cols()); ++i) {
 		if(x(i) < 0) {
 			if(throwflag) throw no_solution("Overdetermined system with unphysical solution");
 			return false;
@@ -379,7 +380,7 @@ bool solve_squarematrix(const CMatrix &A, Eigen::VectorXd &x, bool throwflag) {
 bool check_nosolutions(const CMatrix &A, const Eigen::Vector3d &b) {
 	//--Construct augmented matrix
 	CMatrix Atest(3,A.cols()+1);
-	for(Cocktail::eindex gindex = 0; gindex < Cocktail::eindex(A.cols()); ++gindex) {
+	for(eindex gindex = 0; gindex < eindex(A.cols()); ++gindex) {
 				Atest.col(gindex) = A.col(gindex);
 	}
 	Atest.col(A.cols()) = b;
@@ -395,7 +396,7 @@ bool find_optimum(Eigen::VectorXd &x, const CMatrix &A, const Eigen::Vector3d &b
 	x.setZero(A.cols());
 	Eigen::VectorXd bestx(A.cols());
 	bestx.setZero(A.cols());
-	Cocktail::candsolutions solutions;
+	candsolutions solutions;
 	search(0,A,x,b,success,bestx,solutions); 
 	double tfom,locmin1err=0;
 	//--Search candidate solutions from best to worst until 1st local min in fom is found
@@ -435,24 +436,24 @@ bool find_optimum(Eigen::VectorXd &x, const CMatrix &A, const Eigen::Vector3d &b
 	return success;
 }
 
-void search(Cocktail::eindex i, const CMatrix &A, Eigen::VectorXd &x, 
+void search(eindex i, const CMatrix &A, Eigen::VectorXd &x, 
 			const Eigen::Vector3d &b, bool &success, Eigen::VectorXd &bestx, 
-			Cocktail::candsolutions &solutions) {
+			candsolutions &solutions) {
 	const double maxError=.1;
 	Eigen::Vector3d minvec;
 	minvec.setZero();
 	//--calculate total vector from fixed amounts so far
-	for(Cocktail::eindex j = 0; j < i; ++j) {
+	for(eindex j = 0; j < i; ++j) {
 		minvec += x(j)*A.col(j);
 	}
 	//--calculate 3 upper bounds and take smallest
 	//--when i=n-1, get lower bound as well (highest of 3)
 	double minubound = 1/A.col(i).maxCoeff(), maxlbound=0;
-	for(Cocktail::eindex j = 0; j < 3; ++j) {
+	for(eindex j = 0; j < 3; ++j) {
 		if(x(j) > 0 && A(j,i) > 0) {
 			double tempubound = (1-minvec(j))/A(j,i);
 			if(tempubound < minubound) minubound = tempubound;
-			if(i == Cocktail::eindex(A.cols()-1) 
+			if(i == eindex(A.cols()-1) 
 			   && tempubound > maxlbound) maxlbound = tempubound;
 		}
 	}
@@ -462,22 +463,22 @@ void search(Cocktail::eindex i, const CMatrix &A, Eigen::VectorXd &x,
 	//--compute nbins
 	if(minubound < 0) minubound = 0;
 	//--Allow search to extend one bin beyond that expected, which may still have small error
-	Cocktail::eindex nbins = 
-		Cocktail::eindex(minubound/binsize)+2;
+	eindex nbins = 
+		eindex(minubound/binsize)+2;
 	//--force each ingredient to be >0
 	//--Allow search to extend one bin beyond that expected, which may still have small error
-	Cocktail::eindex minbins = 
+	eindex minbins = 
 			std::max(int(maxlbound/binsize)-1,1);
 
-	if(i < Cocktail::eindex(A.cols()-1)) {
-		for(Cocktail::eindex bin = minbins; bin < nbins; ++bin) {
+	if(i < eindex(A.cols()-1)) {
+		for(eindex bin = minbins; bin < nbins; ++bin) {
 			x(i) = bin*binsize;
 			search(i+1,A,x,b,success,bestx,solutions);
 		}
 	}
 	else {
 		double prevErr=1;
-		for(Cocktail::eindex bin = minbins; bin < nbins; ++bin) {
+		for(eindex bin = minbins; bin < nbins; ++bin) {
 			x(i) = bin*binsize;
 			double currErr = ( A* x - b ).norm() / b.norm();
 			if(currErr>prevErr) break;
@@ -493,8 +494,8 @@ void search(Cocktail::eindex i, const CMatrix &A, Eigen::VectorXd &x,
 
 double figure_of_merit(const Eigen::VectorXd &x, const CMatrix &A) {
 	double sum = 0;
-	for(Cocktail::eindex i = 0; i < Cocktail::eindex(A.cols()-1); ++i) {
-		for(Cocktail::eindex j = i+1; j < Cocktail::eindex(A.cols()); ++j) {
+	for(eindex i = 0; i < eindex(A.cols()-1); ++i) {
+		for(eindex j = i+1; j < eindex(A.cols()); ++j) {
 			//--New way just minimizes difference in total flavors regardless of angle
 			sum += (pow((x(i)*A.col(i).norm()-x(j)*A.col(j).norm()),2));
 			//--Old way weighs difference in flavor by cos(theta)
@@ -511,13 +512,13 @@ std::ostream &operator<<(std::ostream &os, const Cocktail &item) {
 	   << std::string(10,' ') << "APPROX [ml]" << std::string(10,' ') 
 	   << "EXACT [ml]" << std::endl;
 	os << std::string(130,'-') << std::endl;
-	for(auto el : item.elements) {
+	for(auto el = item.elements.begin(); el != item.elements.end(); ++el) {
 		//--First convert raw oz amount to oz + tsp and to ml
-		oz = std::get<1>(el);
+		oz = std::get<1>(*el);
 		ml = oz*Cocktail::mlperoz;
 		exact = ml;
 		//--Report small amounts of strong flavors in tsp (e.g. sugar)
-		if(oz <= 0.5 && std::get<0>(el).get_flavor_magnitude() >= 3) {
+		if(oz <= 0.5 && std::get<0>(*el).get_flavor_magnitude() >= 3) {
 			tsp = oz;
 			oz = 0;
 		}
@@ -535,7 +536,7 @@ std::ostream &operator<<(std::ostream &os, const Cocktail &item) {
 		ml = round_to_multiple(ml,Cocktail::mlincrements);
 
 
-		os << std::left << std::setw(65) << std::get<0>(el) 
+		os << std::left << std::setw(65) << std::get<0>(*el) 
 		   << " " << std::right;
 		if(oz > 0 || tsp > 0) os << std::setw(10) << oz << " oz " << tsp << " tsp"; 
 		if(ml > 0) os << std::setprecision(3) << std::setw(18) << std::right << ml << " ml";
