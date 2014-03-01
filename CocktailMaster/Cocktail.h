@@ -46,6 +46,7 @@ public:
 
 	void balance_drink();
 	void scale_recipe();
+	void output_webpage();
 	
     //--Members controlling output
 	static const double ozincrements;

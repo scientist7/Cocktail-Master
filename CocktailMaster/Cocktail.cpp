@@ -505,6 +505,32 @@ double figure_of_merit(const Eigen::VectorXd &x, const CMatrix &A) {
 	return sum;
 }
 
+//--Function to output recipe in html friendly format
+void Cocktail::output_webpage() {
+
+	//--Table header
+	std::cout << "<table border=\"1\" style=\"width:300px\">" << std::endl;
+	std::cout << "<tr>" << std::endl;
+    std::cout << "<td>INGREDIENT</td>" << std::endl;
+    std::cout << "<td>AMOUNT [ml]</td>" << std::endl;
+    std::cout << "</tr>" << std::endl;
+
+	//--Loop through each ingredient in recipe
+	for(auto el = elements.begin(); el != elements.end(); ++el) {
+		std::cout << "<tr>" << std::endl;
+		std::cout << "<td>" << std::get<0>(*el)<<"</td>" << std::endl;
+		std::cout << "<td>";
+		std::cout << round_to_multiple(std::get<1>(*el)*Cocktail::mlperoz,Cocktail::mlincrements);
+		std::cout << "</td>" << std::endl;
+		std::cout << "</tr>" << std::endl;
+	}
+
+	//--End table
+	std::cout <<"</table>"<<std::endl;
+	
+	return;
+}
+
 //--overloaded operators
 std::ostream &operator<<(std::ostream &os, const Cocktail &item) {
 	double oz = 0, tsp = 0, ml = 0, mlrem = 0, exact = 0;
