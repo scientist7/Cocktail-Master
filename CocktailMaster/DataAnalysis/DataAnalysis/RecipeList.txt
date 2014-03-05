@@ -35,6 +35,7 @@
 4 Gin-Beefeater Vermouth-DolinDry Juice-StoreLemon SimpleSyrup-1To1Caster 30 40 30 25
 3 RyeWhiskey-Rittenhouse Juice-StoreLemon SimpleSyrup-1To1Caster 60 35 25
 3 Cognac-RemyMartinVS Juice-StoreLemon SimpleSyrup-1To1Caster 50 25 20
+3 Cognac-PierreFerrandAmbre Juice-StoreLemon SimpleSyrup-1To1Caster 40 20 15
 4 Cognac-RemyMartinVS Chartreuse-Yellow Juice-StoreLemon SimpleSyrup-1To1Caster 50 15 30 10
 3 WhiteRum-WrayAndNephew Juice-Lime SimpleSyrup-1To1Caster 40 30 20
 3 Gin-Beefeater Juice-StoreLemon FlavoredSyrup-1To1PomegranateCaster 50 25 20

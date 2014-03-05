@@ -9,6 +9,7 @@ Bourbon BuffaloTrace 0.583333 0 0
 Bourbon FourRoses 0.5 0.0716049 0
 Cachaca Pitu 0.753295 0.211629 0
 Chartreuse Yellow 0.333333 1.14321 0
+Cognac PierreFerrandAmbre 0.5 0.0180556 0
 Cognac RemyMartinVS 0.5 0 0
 DarkRum AppletonEstate12YearOld 0.774818 0.389263 0
 DarkRum ElDorado12YearOld 0.573939 0.288343 0

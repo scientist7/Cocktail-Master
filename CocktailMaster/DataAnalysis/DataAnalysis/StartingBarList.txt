@@ -37,6 +37,7 @@ JapaneseWhisky Hakushu12YearOld -10 -10 0
 Vermouth DolinDry -10 0 0
 RyeWhiskey Rittenhouse -10 -10 0
 Cognac RemyMartinVS -10 0 0
+Cognac PierreFerrandAmbre -10 -10 0
 Chartreuse Yellow -10 -10 0
 WhiteRum WrayAndNephew -10 -10 0
 Mezcal DelMagueyVida -10 -10 0
