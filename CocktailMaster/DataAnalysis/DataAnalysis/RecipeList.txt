@@ -45,3 +45,4 @@
 4 WhiteRum-FlorDeCana4YearOldExtraDry GrapefruitLiqueur-CombierCremeDePamplemousseRose Juice-Lime SimpleSyrup-1To1Caster 45 20 25 5
 4 Cognac-RemyMartinVS Juice-StoreLemon SimpleSyrup-1To1Caster NutLiqueur-Frangelico 40 25 10 15
 3 DarkRum-ElDorado12YearOld Juice-Lime SimpleSyrup-1To1Caster 45 20 10
+4 DarkRum-AppletonEstate12YearOld Falernum-JohnDTaylorVelvet Juice-Lime SimpleSyrup-1To1Caster 55 20 35 5
