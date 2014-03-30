@@ -508,11 +508,19 @@ double figure_of_merit(const Eigen::VectorXd &x, const CMatrix &A) {
 //--Function to output recipe in html friendly format
 void Cocktail::output_webpage() {
 
+	//--Header 
+	std::cout << "<center>";
+	std::cout << "<font size=\"5\">";
+	std::cout << "Recipe calculated by Project Calcuhol.";
+	std::cout <<"</font>";
+    std::cout <<"<img src =\"coupecomputericon.png\">";
+	std::cout <<"</center>" << std:: endl;
+
 	//--Table header
-	std::cout << "<table border=\"1\" style=\"width:300px\">" << std::endl;
+	std::cout << "<table border=\"1\" style=\"width:600px\" align=\"center\">"<< std::endl;
 	std::cout << "<tr>" << std::endl;
-    std::cout << "<td>INGREDIENT</td>" << std::endl;
-    std::cout << "<td>AMOUNT [ml]</td>" << std::endl;
+    std::cout << "<th>INGREDIENT</th>" << std::endl;
+    std::cout << "<th>AMOUNT [ml]</th>" << std::endl;
     std::cout << "</tr>" << std::endl;
 
 	//--Loop through each ingredient in recipe
@@ -526,8 +534,12 @@ void Cocktail::output_webpage() {
 	}
 
 	//--End table
-	std::cout <<"</table>"<<std::endl;
+	std::cout << "</table>" << std::endl;
 	
+	//--Instructions
+	std::cout << "<center>";
+	std::cout << "Shake with ice for about 12 seconds.  Strain into a chilled glass.  Enjoy.";
+	std::cout << "</center>" << std::endl;
 	return;
 }
 
