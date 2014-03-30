@@ -514,7 +514,7 @@ void Cocktail::output_webpage() {
 	std::cout << "Recipe calculated by Project Calcuhol.";
 	std::cout <<"</font>";
     std::cout <<"<img src =\"coupecomputericon.png\">";
-	std::cout <<"</center>" << std:: endl;
+	std::cout <<"</center>" << std::endl;
 
 	//--Table header
 	std::cout << "<table border=\"1\" style=\"width:600px\" align=\"center\">"<< std::endl;
@@ -540,6 +540,7 @@ void Cocktail::output_webpage() {
 	std::cout << "<center>";
 	std::cout << "Shake with ice for about 12 seconds.  Strain into a chilled glass.  Enjoy.";
 	std::cout << "</center>" << std::endl;
+
 	return;
 }
 
