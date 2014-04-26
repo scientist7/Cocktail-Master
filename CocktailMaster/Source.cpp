@@ -173,7 +173,7 @@ string SeparateWords(string text)
 	string newText;
 	newText.append(1,text[0]);
         for (size_t i = 1; i < text.length(); ++i) {
-            if ((isupper(text[i]) && text[i - 1] != ' ') 
+            if ((isupper(text[i]) && text[i - 1] != ' ' && !isupper(text[i - 1])) 
 				|| isdigit(text[i]) && !isdigit(text[i - 1]))
                 newText.append(" ");
             newText.append(1,text[i]);
