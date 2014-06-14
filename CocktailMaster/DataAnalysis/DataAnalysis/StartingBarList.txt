@@ -2,6 +2,7 @@ Gin Tanqueray -10 0 0
 Gin Plymouth -10 0 0
 Gin Beefeater -10 0 0
 Gin HaymansOldTom -10 -10 0
+Gin RansomOldTom -10 -10 0
 RyeWhiskey RussellsReserve -10 -10 0
 Bourbon BuffaloTrace -10 0 0
 Bourbon FourRoses -10 -10 0
@@ -14,16 +15,19 @@ TripleSec Combier -10 -10 0
 Juice StoreLemon 0 0 1
 Juice TreeLemon 0 0 -10
 Juice Lime 0 0 -10
+Juice NavelOrange 0 -10 -10
 SimpleSyrup 1To1Caster 0 -10 0
 SimpleSyrup 1To1RawCaneSugar 0 -10 0
 Maraschino Luxardo -10 -10 0
 VioletLiqueur RothmanAndWinter -10 -10 0
 WhiteRum FlorDeCana4YearOldExtraDry -10 -10 0
 DarkRum AppletonEstate12YearOld -10 -10 0
+DarkRum AppletonEstateVX -10 -10 0
 DarkRum ElDorado12YearOld -10 -10 0
 Vodka Gvori -10 0 0
 FlavoredSyrup 1To1StrawberryCaster 0 -10 0
 FlavoredSyrup 1To1PomegranateCaster 0 -10 0
+FlavoredSyrup 1To1Pineapple 0 -10 -10
 Bitters BittermensOrangeCreamCitrate -10 0 -10
 Bitters Campari -10 0 0
 Cachaca Pitu -10 -10 0
@@ -43,4 +47,7 @@ WhiteRum WrayAndNephew -10 -10 0
 Mezcal DelMagueyVida -10 -10 0
 GrapefruitLiqueur CombierCremeDePamplemousseRose -10 -10 0
 NutLiqueur Frangelico -10 -10 0
-Falernum JohnDTaylorVelvet -10 -10 0
+Falernum JohnD.TaylorVelvet -10 -10 0
+CherryLiqueur Heering -10 -10 0
+Test Benedictine -10 -10 0
+IrishWhiskey Jameson -10 -10 0

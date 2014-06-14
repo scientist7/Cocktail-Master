@@ -156,6 +156,7 @@ void Cocktail::balance_drink() {
 		std::get<1>(elements[i]) = x(std::get<2>(elements[i]))
 					               *(group_norm[std::get<2>(elements[i])]
 					    		     /std::get<0>(elements[i]).get_flavor_magnitude());
+      
 	return;
 }
 
@@ -251,6 +252,7 @@ void Cocktail::scale_recipe() {
 
 bool Cocktail::add_ingredient(const CMatrix &A, CMatrix &Anew, Eigen::VectorXd &x, 
 							  const Eigen::Vector3d &b, const eindex i, const eindex j) {
+								 
 	//--Don't add anything collinear with existing elements
 	for(eindex test = 0; test < elements.size(); ++test) {
 		if(collinear(reserves[i],std::get<0>(elements[test]))) return false;
@@ -270,7 +272,6 @@ bool Cocktail::add_ingredient(const CMatrix &A, CMatrix &Anew, Eigen::VectorXd &
 			    			    reserves[j].get_sourness();
 	} 
 	
-	//--Check for solution	
 	if(Anew.cols()>3 && (check_nosolutions(Anew,b) 
 	   || !find_optimum(x,Anew,b,printinfo))) return false; 
 	if(Anew.cols()==3 && !solve_squarematrix(Anew,x,false)) return false;
@@ -386,7 +387,19 @@ bool check_nosolutions(const CMatrix &A, const Eigen::Vector3d &b) {
 	Atest.col(A.cols()) = b;
 	Eigen::ColPivHouseholderQR<CMatrix> lu(A);
 	Eigen::ColPivHouseholderQR<CMatrix> lutest(Atest);
-	if(lu.rank() == lutest.rank()) return false;
+	if(lu.rank() == lutest.rank()) {
+	    //--This still does not guarantee a physical solution
+        //--For each component (bite,sweet,sour), need at least one 
+		//--ingredient where it is not smaller than the others
+		for(eindex comp = 0; comp < 3; ++comp) {
+			bool success = false;
+			for(eindex gindex = 0; gindex < eindex(A.cols()); ++gindex) {
+				if(A(comp,gindex) == A.col(gindex).maxCoeff()) success = true;
+			}
+			if (!success) return true;
+		}
+		return false;
+	}
 	return true;
 }
 
@@ -462,13 +475,13 @@ void search(eindex i, const CMatrix &A, Eigen::VectorXd &x,
 	
 	//--compute nbins
 	if(minubound < 0) minubound = 0;
-	//--Allow search to extend one bin beyond that expected, which may still have small error
+	//--Allow search to extend a few bins beyond that expected, which may still have small error
 	eindex nbins = 
 		eindex(minubound/binsize)+2;
 	//--force each ingredient to be >0
-	//--Allow search to extend one bin beyond that expected, which may still have small error
+	//--Allow search to extend a few bins beyond that expected, which may still have small error
 	eindex minbins = 
-			std::max(int(maxlbound/binsize)-1,1);
+			std::max(int(maxlbound/binsize)-2,1);
 
 	if(i < eindex(A.cols()-1)) {
 		for(eindex bin = minbins; bin < nbins; ++bin) {

@@ -45,4 +45,11 @@
 4 WhiteRum-FlorDeCana4YearOldExtraDry GrapefruitLiqueur-CombierCremeDePamplemousseRose Juice-Lime SimpleSyrup-1To1Caster 45 20 25 5
 4 Cognac-RemyMartinVS Juice-StoreLemon SimpleSyrup-1To1Caster NutLiqueur-Frangelico 40 25 10 15
 3 DarkRum-ElDorado12YearOld Juice-Lime SimpleSyrup-1To1Caster 45 20 10
-4 DarkRum-AppletonEstate12YearOld Falernum-JohnDTaylorVelvet Juice-Lime SimpleSyrup-1To1Caster 55 20 35 5
+4 DarkRum-AppletonEstate12YearOld Falernum-JohnD.TaylorVelvet Juice-Lime SimpleSyrup-1To1Caster 55 20 35 5
+4 Gin-Beefeater Juice-StoreLemon CherryLiqueur-Heering SimpleSyrup-1To1Caster 35 25 25 10
+3 Gin-Beefeater Juice-NavelOrange SimpleSyrup-1To1Caster 35 55 5
+4 Gin-Beefeater Juice-StoreLemon Test-Benedictine SimpleSyrup-1To1Caster 45 30 15 10 
+3 Gin-RansomOldTom Juice-StoreLemon SimpleSyrup-1To1Caster 50 25 15
+4 Cognac-PierreFerrandAmbre Juice-StoreLemon FlavoredSyrup-1To1Pineapple TripleSec-Combier 45 30 20 25
+3 IrishWhiskey-Jameson Juice-StoreLemon SimpleSyrup-1To1Caster 65 30 15
+3 DarkRum-AppletonEstateVX Juice-Lime SimpleSyrup-1To1Caster 60 30 20
