@@ -9,6 +9,7 @@ Bourbon FourRoses -10 -10 0
 Scotch JohnnieWalkerBlackLabel -10 0 0
 Tequila 1800Silver -10 -10 0
 Tequila MilagroSilver -10 -10 0
+Tequila HerraduraReposado -10 -10 0
 Armagnac ChateauDuTariquet -10 0 0
 TripleSec Cointreau -10 -10 0
 TripleSec Combier -10 -10 0
@@ -51,3 +52,4 @@ Falernum JohnD.TaylorVelvet -10 -10 0
 CherryLiqueur Heering -10 -10 0
 Test Benedictine -10 -10 0
 IrishWhiskey Jameson -10 -10 0
+Amaro RabarbaroZucca -10 -10 0

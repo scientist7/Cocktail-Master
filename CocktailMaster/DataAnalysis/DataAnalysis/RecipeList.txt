@@ -54,3 +54,4 @@
 3 IrishWhiskey-Jameson Juice-StoreLemon SimpleSyrup-1To1Caster 65 30 15
 3 DarkRum-AppletonEstateVX Juice-Lime SimpleSyrup-1To1Caster 60 30 20
 4 Mezcal-DelMagueyVida Juice-Lime Amaro-RabarbaroZucca SimpleSyrup-1To1Caster 30 20 30 5
+3 Tequila-HerraduraReposado Juice-Lime SimpleSyrup-1To1Caster 60 30 20
