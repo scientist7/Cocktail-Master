@@ -94,7 +94,7 @@ void readRecipes(vector<Recipe> &recipes, BarType &bar, string Dir) {
 			//--Retrieve correct ingredient from database
 			auto it=bar.find(temp);
 			if(it == bar.end()) {
-				cerr << "Ingredient: " << temp << "not found in database!" << endl;
+				cerr << "Ingredient: " << temp << " not found in database!" << endl;
 				badRecipe = true;
 				break;
 			}
@@ -282,24 +282,32 @@ void outputIngredientProperties(string fname, BarType &bar) {
 	ofstream out(fname);
 	if(out) {
 		for(auto it = bar.begin(); it != bar.end(); ++it) 
-			it->second.print_properties(out);
+			if(it->second.get_alcoholic_bite() > -10
+				&& it->second.get_sweetness() > -10
+				&& it->second.get_sourness() > -10) {
+
+				it->second.print_properties(out);
+			}
 	}
 	out.close();
 }
 
 void outputIngredientMeasurements(BarType &bar, string Dir) {
 	for(auto it = bar.begin(); it != bar.end(); ++it) {
-		if(it->second.get_num_alcoholic_bite_measures()!=Ingredient::num_meas_fixed) {
+		if(it->second.get_num_alcoholic_bite_measures()!=Ingredient::num_meas_fixed &&
+			it->second.get_num_alcoholic_bite_measures()) {
 			ofstream outab(Dir+it->second.get_name()+it->second.get_category()+"_bite.txt");
 			it->second.print_alcoholic_bite(outab);
 			outab.close();
 		}
-		if(it->second.get_num_sweetness_measures()!=Ingredient::num_meas_fixed) {
+		if(it->second.get_num_sweetness_measures()!=Ingredient::num_meas_fixed &&
+			it->second.get_num_sweetness_measures()) {
 			ofstream outsw(Dir+it->second.get_name()+it->second.get_category()+"_sweet.txt");
 			it->second.print_sweetness(outsw);
 			outsw.close();
 		}
-		if(it->second.get_num_sourness_measures()!=Ingredient::num_meas_fixed) {
+		if(it->second.get_num_sourness_measures()!=Ingredient::num_meas_fixed &&
+			it->second.get_num_sourness_measures()) {
 			ofstream outsr(Dir+it->second.get_name()+it->second.get_category()+"_sour.txt");
 			it->second.print_sourness(outsr);
 			outsr.close();
