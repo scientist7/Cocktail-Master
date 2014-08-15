@@ -17,6 +17,7 @@ Juice StoreLemon 0 0 1
 Juice TreeLemon 0 0 -10
 Juice Lime 0 0 -10
 Juice NavelOrange 0 -10 -10
+Juice RedGrapefruit 0 -10 -10
 SimpleSyrup 1To1Caster 0 -10 0
 SimpleSyrup 1To1RawCaneSugar 0 -10 0
 Maraschino Luxardo -10 -10 0
@@ -30,7 +31,7 @@ FlavoredSyrup 1To1StrawberryCaster 0 -10 0
 FlavoredSyrup 1To1PomegranateCaster 0 -10 0
 FlavoredSyrup 1To1Pineapple 0 -10 -10
 Bitters BittermensOrangeCreamCitrate -10 0 -10
-Bitters Campari -10 0 0
+Bitters Campari -10 -10 0
 Cachaca Pitu -10 -10 0
 OrangeCuracao PierreFerrand -10 -10 0
 AppleBrandy LairdsStraight -10 0 0
@@ -39,7 +40,7 @@ Amaro Averna -10 -10 0
 Genever Bols -10 -10 0
 AgaveNectar MadhavaLight 0 -10 0
 JapaneseWhisky Hakushu12YearOld -10 -10 0
-Vermouth DolinDry -10 0 0
+Vermouth DolinDry -10 -10 0
 RyeWhiskey Rittenhouse -10 0 0
 Cognac RemyMartinVS -10 0 0
 Cognac PierreFerrandAmbre -10 -10 0

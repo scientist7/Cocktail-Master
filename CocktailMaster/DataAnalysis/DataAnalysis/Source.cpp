@@ -27,6 +27,7 @@ using std::make_tuple;
 using std::get;
 
 typedef map<string, Ingredient> BarType;
+typedef tuple<Recipe*, size_t> indexedrecipe;
 
 void readStartList(BarType &, string);
 void readRecipes(vector<Recipe> &,  BarType &, string);
@@ -114,7 +115,7 @@ void readRecipes(vector<Recipe> &recipes, BarType &bar, string Dir) {
 }
 
 //--function to calculate unknown parameters in a recipe
-bool analyzeRecipe(Recipe &recipe) { 
+bool analyzeRecipe(indexedrecipe &irecipe) { 
 	vector<double> measurements, weights;
 	//--For each unknown parameter, need the corresponding ingredient, 
 	//--which flavor space direction, the rest of the sum, and the amount 
@@ -123,50 +124,51 @@ bool analyzeRecipe(Recipe &recipe) {
 	
 	double sum = 0, effnummeas = 0; 
 	size_t unknownpar = 0, index = 300; 
-
+	auto recipe = get<0>(irecipe);
+	
 	//--Find total alcoholic bite 
-	unknownpar = recipe.check_alcoholic_bite_sum(sum,effnummeas,index);
+	unknownpar = recipe->check_alcoholic_bite_sum(sum,effnummeas,index);
 	 //--Don't deal with >1 free parameter
-	if(unknownpar > 1) return false; 
+	//if(unknownpar > 1) return false; 
 	//--Here record info for one free parameter
-	else if(unknownpar == 1) {
-		parameters.push_back(make_tuple(recipe.getingredientat(index),0,
-			                            sum,recipe.getamountat(index)));
+	if(unknownpar == 1) {
+		parameters.push_back(make_tuple(recipe->getingredientat(index),0,
+			                            sum,recipe->getamountat(index)));
 	}
 	//--If no unknowns, record a measure of total flavor
-	else {
+	else if(!unknownpar){
 		measurements.push_back(sum);
 		weights.push_back(effnummeas);
 	}
 	
 	//--Find total sweetness
 	sum = 0; effnummeas = 0; index = 300;
-	unknownpar = recipe.check_sweetness_sum(sum,effnummeas,index);
+	unknownpar = recipe->check_sweetness_sum(sum,effnummeas,index);
 	 //--Don't deal with >1 free parameter
-	if(unknownpar > 1) return false; 
+	//if(unknownpar > 1) return false; 
 	//--Here record info for one free parameter
-	else if(unknownpar == 1) {
-		parameters.push_back(make_tuple(recipe.getingredientat(index),1,
-			                            sum,recipe.getamountat(index)));
+	if(unknownpar == 1) {
+		parameters.push_back(make_tuple(recipe->getingredientat(index),1,
+			                            sum,recipe->getamountat(index)));
 	}
 	//--If no unknowns, record a measure of total flavor
-	else {
+	else if(!unknownpar){
 		measurements.push_back(sum);
 		weights.push_back(effnummeas);
 	}
 
 	//--Find total sourness
 	sum = 0; effnummeas = 0; index = 300;
-	unknownpar = recipe.check_sourness_sum(sum,effnummeas,index);
+	unknownpar = recipe->check_sourness_sum(sum,effnummeas,index);
 	 //--Don't deal with >1 free parameter
-	if(unknownpar > 1) return false; 
+	//if(unknownpar > 1) return false; 
 	//--Here record info for one free parameter
-	else if(unknownpar == 1) {
-		parameters.push_back(make_tuple(recipe.getingredientat(index),2,
-			                            sum,recipe.getamountat(index)));
+	if(unknownpar == 1) {
+		parameters.push_back(make_tuple(recipe->getingredientat(index),2,
+			                            sum,recipe->getamountat(index)));
 	}
 	//--If no unknowns, record a measure of total flavor
-	else {
+	else if(!unknownpar){
 		measurements.push_back(sum);
 		weights.push_back(effnummeas);
 	}
@@ -174,7 +176,7 @@ bool analyzeRecipe(Recipe &recipe) {
 
 	//--Too many free parameters 
 	if(!measurements.size()) return false;
-
+	
 	//--Get best estimate of average flavor
 	double best_measure = 0, sum_weights = 0;
 	for(size_t m = 0; m < measurements.size(); ++m) {
@@ -185,24 +187,25 @@ bool analyzeRecipe(Recipe &recipe) {
 
 	//--If no free parameters, use recipe as additional info
 	//--on all ingredients
-	if(!parameters.size()) {
+	if(measurements.size() == 3) {
+		cout << "Recipe " << get<1>(irecipe) << " used for ingredient readjustment." << endl;
 		//--First identify unconstrained flavor parameters
 		vector<double> unconstrained_sum(3,0);
-		for(size_t i = 0; i < recipe.getnumberofingredients(); ++i) {
-			if(recipe.getingredientat(i)->get_num_alcoholic_bite_measures() 
+		for(size_t i = 0; i < recipe->getnumberofingredients(); ++i) {
+			if(recipe->getingredientat(i)->get_num_alcoholic_bite_measures() 
 			   != Ingredient::num_meas_fixed)
-			   unconstrained_sum[0] += recipe.getingredientat(i)->get_alcoholic_bite()
-									 * recipe.getamountat(i);
+			   unconstrained_sum[0] += recipe->getingredientat(i)->get_alcoholic_bite()
+									 * recipe->getamountat(i);
 
-			if(recipe.getingredientat(i)->get_num_sweetness_measures() 
+			if(recipe->getingredientat(i)->get_num_sweetness_measures() 
 			   != Ingredient::num_meas_fixed)
-			   unconstrained_sum[1] += recipe.getingredientat(i)->get_sweetness()
-									 * recipe.getamountat(i);
+			   unconstrained_sum[1] += recipe->getingredientat(i)->get_sweetness()
+									 * recipe->getamountat(i);
 
-			if(recipe.getingredientat(i)->get_num_sourness_measures() 
+			if(recipe->getingredientat(i)->get_num_sourness_measures() 
 			   != Ingredient::num_meas_fixed)
-			   unconstrained_sum[2] += recipe.getingredientat(i)->get_sourness()
-									 * recipe.getamountat(i);
+			   unconstrained_sum[2] += recipe->getingredientat(i)->get_sourness()
+									 * recipe->getamountat(i);
 		}
 
 	    //--Then adjust all unconstrained flavor parameters according to this recipe;
@@ -215,21 +218,24 @@ bool analyzeRecipe(Recipe &recipe) {
 				              /unconstrained_sum[i];
 		}
 		//--Then calculate a new measurement for all unconstrained flavor parameters
-		for(size_t i = 0; i < recipe.getnumberofingredients(); ++i) {
-			if(recipe.getingredientat(i)->get_num_alcoholic_bite_measures() 
+		for(size_t i = 0; i < recipe->getnumberofingredients(); ++i) {
+			if(recipe->getingredientat(i)->get_num_alcoholic_bite_measures() 
 			   != Ingredient::num_meas_fixed)
-			   recipe.getingredientat(i)->add_ab_measurement(scale_adjust[0]
-			                                                 *recipe.getingredientat(i)->get_alcoholic_bite());
+			   recipe->getingredientat(i)->add_ab_measurement(scale_adjust[0]
+			                                                 *recipe->getingredientat(i)->get_alcoholic_bite(),
+															  get<1>(irecipe));
 
-			if(recipe.getingredientat(i)->get_num_sweetness_measures() 
+			if(recipe->getingredientat(i)->get_num_sweetness_measures() 
 			   != Ingredient::num_meas_fixed)
-			   recipe.getingredientat(i)->add_sw_measurement(scale_adjust[1]
-			                                                 *recipe.getingredientat(i)->get_sweetness());
+			   recipe->getingredientat(i)->add_sw_measurement(scale_adjust[1]
+			                                                 *recipe->getingredientat(i)->get_sweetness(),
+															  get<1>(irecipe));
 
-			if(recipe.getingredientat(i)->get_num_sourness_measures() 
+			if(recipe->getingredientat(i)->get_num_sourness_measures() 
 			   != Ingredient::num_meas_fixed)
-			   recipe.getingredientat(i)->add_sr_measurement(scale_adjust[2]
-			                                                 *recipe.getingredientat(i)->get_sourness());
+			   recipe->getingredientat(i)->add_sr_measurement(scale_adjust[2]
+			                                                 *recipe->getingredientat(i)->get_sourness(),
+															  get<1>(irecipe));
 		}
 	}
 
@@ -240,41 +246,53 @@ bool analyzeRecipe(Recipe &recipe) {
 			measure = (best_measure-get<2>(p))/get<3>(p);
 			switch(get<1>(p)){
 			case 0:
-				get<0>(p)->add_ab_measurement(measure>0 ? measure : 0);
+				get<0>(p)->add_ab_measurement(measure>0 ? measure : 0, get<1>(irecipe));
 				break;
 			case 1:
-				get<0>(p)->add_sw_measurement(measure>0 ? measure : 0);
+				get<0>(p)->add_sw_measurement(measure>0 ? measure : 0, get<1>(irecipe));
 				break;
 			case 2:
-				get<0>(p)->add_sr_measurement(measure>0 ? measure : 0);
+				get<0>(p)->add_sr_measurement(measure>0 ? measure : 0, get<1>(irecipe));
 				break;
 			}
 		}
+	}
+
+	//--If any ingredient still has parameter with no measurements, return false
+	for(size_t i = 0; i < recipe->getnumberofingredients(); ++i) {
+		if(!recipe->getingredientat(i)->are_measures_avail()) return false;
 	}
 	return true;
 }
 
 //--function to go through all the recipes to do the analysis
 void analyzeRecipes(vector<Recipe> &recipes, BarType &bar) {
-	vector<Recipe*> unprocessed_data;
+
+	vector<indexedrecipe> unprocessed_data;
 	for(size_t r = 0; r < recipes.size(); ++r)
-		unprocessed_data.push_back(&recipes[r]);
-	size_t passcounter = 0;
+		unprocessed_data.push_back(make_tuple(&recipes[r],r));
+	size_t passcounter = 0, prevleftovers = unprocessed_data.size();
 
 	//--Process list of recipes
-	while(unprocessed_data.size() && passcounter<10) {
-		vector<Recipe*> leftover_recipes;
+	while(unprocessed_data.size()) {
+		vector<indexedrecipe> leftover_recipes;
 		for(size_t i = 0; i < unprocessed_data.size(); ++i) {
-			if(!analyzeRecipe(*unprocessed_data[i])) 
+			if(!analyzeRecipe(unprocessed_data[i])) 
 				leftover_recipes.push_back(unprocessed_data[i]);
 		}
 		++passcounter;
 		clog << "Completed pass " << passcounter << ", " 
 			 << leftover_recipes.size() << " recipes remain." << endl;
+		//--If no new recipes could be processed, end the loop
+		if(leftover_recipes.size() == prevleftovers) break;
 		unprocessed_data = leftover_recipes;
+		prevleftovers = unprocessed_data.size();
 		//--Update flavor vectors
 		for(auto it = bar.begin(); it != bar.end(); ++it) 
-			it->second.update_flavor_vector();
+			//--Only update ingredients if measurements available for all 3 components
+				if (it->second.are_measures_avail()) {
+						it->second.update_flavor_vector();
+				}
 	}
 }
 

@@ -30,17 +30,21 @@ void Ingredient::print_properties(std::ostream & os) {
 
 void Ingredient::print_alcoholic_bite(std::ostream & os) {
 	for(size_t m = 0; m < alcoholic_bite_measurements.size(); ++m) 
-		os << alcoholic_bite_measurements[m] << std::endl;
+		os << alcoholic_bite_measurements[m] << " "
+		   << ab_recipe_indices[m] << std::endl;
+		  
 }
 
 void Ingredient::print_sweetness(std::ostream & os) { 
 	for(size_t m = 0; m < sweetness_measurements.size(); ++m) 
-		os << sweetness_measurements[m] << std::endl;
+		os << sweetness_measurements[m] << " "
+		   << sw_recipe_indices[m] << std::endl;
 }
 
 void Ingredient::print_sourness(std::ostream & os) {
 	for(size_t m = 0; m < sourness_measurements.size(); ++m) 
-		os << sourness_measurements[m] << std::endl;
+		os << sourness_measurements[m] << " "
+		   << sr_recipe_indices[m] << std::endl;
 }
 
 std::ostream &operator<<(std::ostream &os, const Ingredient &item) {
