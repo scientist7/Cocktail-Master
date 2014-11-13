@@ -36,7 +36,7 @@
 3 RyeWhiskey-Rittenhouse Juice-StoreLemon SimpleSyrup-1To1Caster 60 35 25
 3 Cognac-RemyMartinVS Juice-StoreLemon SimpleSyrup-1To1Caster 50 25 20
 3 Cognac-PierreFerrandAmbre Juice-StoreLemon SimpleSyrup-1To1Caster 40 20 15
-4 Cognac-RemyMartinVS Chartreuse-Yellow Juice-StoreLemon SimpleSyrup-1To1Caster 50 15 30 10
+4 Cognac-RemyMartinVSOP Chartreuse-Yellow Juice-StoreLemon SimpleSyrup-1To1Caster 45 15 30 15
 3 WhiteRum-WrayAndNephew Juice-Lime SimpleSyrup-1To1Caster 40 30 20
 3 Gin-Beefeater Juice-StoreLemon FlavoredSyrup-1To1PomegranateCaster 50 25 20
 4 Gin-Tanqueray Juice-StoreLemon SimpleSyrup-1To1Caster Maraschino-Luxardo 40 25 10 15
@@ -55,3 +55,8 @@
 3 DarkRum-AppletonEstateVX Juice-Lime SimpleSyrup-1To1Caster 60 30 20
 4 Mezcal-DelMagueyVida Juice-Lime Amaro-RabarbaroZucca SimpleSyrup-1To1Caster 30 20 30 5
 3 Tequila-HerraduraReposado Juice-Lime SimpleSyrup-1To1Caster 60 30 20
+4 WhiteRum-FlorDeCana4YearOldExtraDry Juice-Lime Juice-RedGrapefruit SimpleSyrup-1To1Caster 60 15 25 20
+3 Pisco-LaBlancoQuebranta Juice-Lime SimpleSyrup-1To1Caster 55 30 30
+3 DarkRum-AppletonEstateVX Juice-Lime FlavoredSyrup-1To1Cinammon 40 20 20
+4 Cognac-PierreFerrandAmbre Juice-StoreLemon JasmineLiqueur-Fruitlab SimpleSyrup-1To1Caster 25 15 25 5
+3 Cognac-RemyMartinVSOP Juice-StoreLemon SimpleSyrup-1To1Caster 50 25 20

@@ -30,6 +30,7 @@ Vodka Gvori -10 0 0
 FlavoredSyrup 1To1StrawberryCaster 0 -10 0
 FlavoredSyrup 1To1PomegranateCaster 0 -10 0
 FlavoredSyrup 1To1Pineapple 0 -10 -10
+FlavoredSyrup 1To1Cinammon 0 -10 0
 Bitters BittermensOrangeCreamCitrate -10 0 -10
 Bitters Campari -10 -10 0
 Cachaca Pitu -10 -10 0
@@ -43,6 +44,7 @@ JapaneseWhisky Hakushu12YearOld -10 -10 0
 Vermouth DolinDry -10 -10 0
 RyeWhiskey Rittenhouse -10 0 0
 Cognac RemyMartinVS -10 0 0
+Cognac RemyMartinVSOP -10 -10 0
 Cognac PierreFerrandAmbre -10 -10 0
 Chartreuse Yellow -10 -10 0
 WhiteRum WrayAndNephew -10 -10 0
@@ -54,3 +56,5 @@ CherryLiqueur Heering -10 -10 0
 Test Benedictine -10 -10 0
 IrishWhiskey Jameson -10 -10 0
 Amaro RabarbaroZucca -10 -10 0
+Pisco LaBlancoQuebranta -10 -10 0
+JasmineLiqueur Fruitlab -10 -10 0
