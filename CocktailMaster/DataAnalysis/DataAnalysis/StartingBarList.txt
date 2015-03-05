@@ -7,6 +7,7 @@ RyeWhiskey RussellsReserve -10 -10 0
 Bourbon BuffaloTrace -10 0 0
 Bourbon FourRoses -10 -10 0
 Scotch JohnnieWalkerBlackLabel -10 0 0
+Scotch BlackGrouse -10 -10 0
 Tequila 1800Silver -10 -10 0
 Tequila MilagroSilver -10 -10 0
 Tequila HerraduraReposado -10 -10 0
@@ -33,6 +34,8 @@ FlavoredSyrup 1To1Pineapple 0 -10 -10
 FlavoredSyrup 1To1Cinammon 0 -10 0
 Bitters BittermensOrangeCreamCitrate -10 0 -10
 Bitters Campari -10 -10 0
+Bitters Angostura -10 -10 0
+Bitters Peychauds -10 -10 0
 Cachaca Pitu -10 -10 0
 OrangeCuracao PierreFerrand -10 -10 0
 AppleBrandy LairdsStraight -10 0 0
@@ -42,6 +45,7 @@ Genever Bols -10 -10 0
 AgaveNectar MadhavaLight 0 -10 0
 JapaneseWhisky Hakushu12YearOld -10 -10 0
 Vermouth DolinDry -10 -10 0
+Vermouth CarpanoAnticaFormulaSweet -10 -10 0
 RyeWhiskey Rittenhouse -10 0 0
 Cognac RemyMartinVS -10 0 0
 Cognac RemyMartinVSOP -10 -10 0
