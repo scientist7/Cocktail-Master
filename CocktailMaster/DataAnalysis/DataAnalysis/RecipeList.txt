@@ -41,19 +41,19 @@
 3 Gin-Beefeater Juice-StoreLemon FlavoredSyrup-1To1PomegranateCaster 50 25 20
 4 Gin-Tanqueray Juice-StoreLemon SimpleSyrup-1To1Caster Maraschino-Luxardo 40 25 10 15
 3 Gin-HaymansOldTom Juice-StoreLemon SimpleSyrup-1To1Caster 60 30 10
-3 Mezcal-DelMagueyVida Juice-Lime SimpleSyrup-1To1Caster 55 30 15
+3 Mezcal-DelMagueyVida Juice-Lime SimpleSyrup-1To1Caster 50 30 25
 4 WhiteRum-FlorDeCana4YearOldExtraDry GrapefruitLiqueur-CombierCremeDePamplemousseRose Juice-Lime SimpleSyrup-1To1Caster 45 20 25 5
 4 Cognac-RemyMartinVS Juice-StoreLemon SimpleSyrup-1To1Caster NutLiqueur-Frangelico 40 25 10 15
 3 DarkRum-ElDorado12YearOld Juice-Lime SimpleSyrup-1To1Caster 45 20 10
 4 DarkRum-AppletonEstate12YearOld Falernum-JohnD.TaylorVelvet Juice-Lime SimpleSyrup-1To1Caster 55 20 35 5
 4 Gin-Beefeater Juice-StoreLemon CherryLiqueur-Heering SimpleSyrup-1To1Caster 35 25 25 10
 4 RyeWhiskey-Rittenhouse Juice-NavelOrange Juice-StoreLemon SimpleSyrup-1To1Caster 65 65 20 30
-4 Gin-Beefeater Juice-StoreLemon Test-Benedictine SimpleSyrup-1To1Caster 45 30 15 10 
+4 Cognac-RemyMartinVSOP Juice-StoreLemon Benedictine-DOM SimpleSyrup-1To1Caster 35 35 30 15 
 3 Gin-RansomOldTom Juice-StoreLemon SimpleSyrup-1To1Caster 50 25 15
 4 Cognac-PierreFerrandAmbre Juice-StoreLemon FlavoredSyrup-1To1Pineapple TripleSec-Combier 45 30 20 25
 3 IrishWhiskey-Jameson Juice-StoreLemon SimpleSyrup-1To1Caster 65 30 15
 3 DarkRum-AppletonEstateVX Juice-Lime SimpleSyrup-1To1Caster 65 30 25
-4 Mezcal-DelMagueyVida Juice-Lime Amaro-RabarbaroZucca SimpleSyrup-1To1Caster 30 20 30 5
+4 Cognac-RemyMartinVSOP Juice-StoreLemon Amaro-RabarbaroZucca SimpleSyrup-1To1Caster 30 30 30 20
 3 Tequila-HerraduraReposado Juice-Lime SimpleSyrup-1To1Caster 60 30 20
 4 WhiteRum-FlorDeCana4YearOldExtraDry Juice-Lime Juice-RedGrapefruit SimpleSyrup-1To1Caster 60 15 25 20
 3 Pisco-LaBlancoQuebranta Juice-Lime SimpleSyrup-1To1Caster 55 30 30
@@ -64,3 +64,5 @@
 3 Bitters-Angostura Juice-StoreLemon SimpleSyrup-1To1Caster 35 30 25
 3 Bitters-Peychauds Juice-Lime SimpleSyrup-1To1Caster 35 20 20
 4 Vermouth-CarpanoAnticaFormulaSweet Gin-Beefeater Juice-StoreLemon SimpleSyrup-1To1Caster 50 25 25 15
+3 GoldRum-Angostura1919 Juice-Lime SimpleSyrup-1To1Caster 60 30 25
+3 WhiteRum-CanaBrava Juice-Lime SimpleSyrup-1To1Caster 60 35 30

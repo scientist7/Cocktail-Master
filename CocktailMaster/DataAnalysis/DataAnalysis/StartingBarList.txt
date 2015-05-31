@@ -57,8 +57,10 @@ GrapefruitLiqueur CombierCremeDePamplemousseRose -10 -10 0
 NutLiqueur Frangelico -10 -10 0
 Falernum JohnD.TaylorVelvet -10 -10 0
 CherryLiqueur Heering -10 -10 0
-Test Benedictine -10 -10 0
+Benedictine DOM -10 -10 0
 IrishWhiskey Jameson -10 -10 0
 Amaro RabarbaroZucca -10 -10 0
 Pisco LaBlancoQuebranta -10 -10 0
 JasmineLiqueur Fruitlab -10 -10 0
+GoldRum Angostura1919 -10 -10 0
+WhiteRum CanaBrava -10 -10 0
