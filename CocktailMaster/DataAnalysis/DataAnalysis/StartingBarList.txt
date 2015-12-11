@@ -32,6 +32,7 @@ FlavoredSyrup 1To1StrawberryCaster 0 -10 0
 FlavoredSyrup 1To1PomegranateCaster 0 -10 0
 FlavoredSyrup 1To1Pineapple 0 -10 -10
 FlavoredSyrup 1To1Cinammon 0 -10 0
+FlavoredSyrup 1To1Hibiscus 0 -10 -10
 Bitters BittermensOrangeCreamCitrate -10 0 -10
 Bitters Campari -10 -10 0
 Bitters Angostura -10 -10 0
@@ -64,3 +65,5 @@ Pisco LaBlancoQuebranta -10 -10 0
 JasmineLiqueur Fruitlab -10 -10 0
 GoldRum Angostura1919 -10 -10 0
 WhiteRum CanaBrava -10 -10 0
+Brandy GermainRobinCraftMethod -10 -10 0
+ChileLiqueur AnchoReyes -10 -10 0
