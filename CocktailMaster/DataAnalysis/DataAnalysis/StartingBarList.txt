@@ -27,7 +27,6 @@ Maraschino Luxardo -10 -10 0
 VioletLiqueur RothmanAndWinter -10 -10 0
 WhiteRum FlorDeCana4YearOldExtraDry -10 -10 0
 DarkRum AppletonEstate12YearOld -10 -10 0
-DarkRum AppletonEstate12YearOld2 -10 -10 0
 DarkRum AppletonEstateVX -10 -10 0
 DarkRum ElDorado12YearOld -10 -10 0
 DarkRum DiplimaticoReservaExclusiva -10 -10 0
