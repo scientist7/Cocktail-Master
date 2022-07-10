@@ -1,0 +1,11 @@
+﻿  no_solution.cpp
+c:\users\ben\documents\github\cocktail-master\cocktailmaster\no_solution.h(2): fatal error C1083: Cannot open include file: 'stdexcept': No such file or directory
+  multiple_solutions.cpp
+c:\users\ben\documents\github\cocktail-master\cocktailmaster\multiple_solutions.h(2): fatal error C1083: Cannot open include file: 'stdexcept': No such file or directory
+  Source.cpp
+c:\users\ben\documents\github\cocktail-master\cocktailmaster\source.cpp(1): fatal error C1083: Cannot open include file: 'iostream': No such file or directory
+  Ingredient.cpp
+c:\users\ben\documents\github\cocktail-master\cocktailmaster\ingredient.h(2): fatal error C1083: Cannot open include file: 'iostream': No such file or directory
+  Cocktail.cpp
+c:\users\ben\documents\github\cocktail-master\cocktailmaster\cocktail.h(2): fatal error C1083: Cannot open include file: 'iomanip': No such file or directory
+  Generating Code...

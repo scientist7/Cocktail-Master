@@ -1,0 +1,59 @@
+
+        Welcome
+          to
+    Cocktail Master	                  
+	                  
+     ____________
+    |            |
+    \            /
+      -.__  __.-  
+          ..        
+          ||
+          ||
+          ||
+       _.-  -._ 
+      <________>
+
+
+Please select an ingredient category, or 0 if done
+(1) Agave Nectar
+(2) Amaro
+(3) Apple Brandy
+(4) Apricot Liqueur
+(5) Armagnac
+(6) Bitters
+(7) Bourbon
+(8) Cachaca
+(9) Chartreuse
+(10) Cherry Liqueur
+(11) Cognac
+(12) Dark Rum
+(13) Falernum
+(14) Flavored Syrup
+(15) Genever
+(16) Gin
+(17) Grapefruit Liqueur
+(18) Irish Whiskey
+(19) Japanese Whisky
+(20) Juice
+(21) Maraschino
+(22) Mezcal
+(23) Nut Liqueur
+(24) Orange Curacao
+(25) Rye Whiskey
+(26) Scotch
+(27) Simple Syrup
+(28) Tequila
+(29) Test
+(30) Triple Sec
+(31) Vermouth
+(32) Violet Liqueur
+(33) Vodka
+(34) White Rum
+Please choose a product
+(1) Chateau Du Tariquet
+Invalid choice, please select again: 
+Invalid choice, please select again: 
+Invalid choice, please select again: 
+Invalid choice, please select again: 
+Invalid choice, please select again: 
