@@ -86,6 +86,8 @@ Mezcal LosAmantesJoven -10 -10 0
 Bourbon AngelsEnvy -10 -10 0
 Chartreuse Green -10 -10 0
 CassisLiqueur Mathilde -10 -10 0
+CassisLiqueur Mathilde2 -10 -10 0
+CassisLiqueur Mathilde3 -10 -10 0
 OatWhiskey CorsairOatrage -10 -10 0
 Bourbon Bookers -10 -10 0
 Scotch BalveniePeatWeek -10 -10 0
@@ -108,3 +110,5 @@ Gin MartinMillerWestbourne -10 -10 0
 AppleBrandy ChateauDuBreuilFineCalvados -10 -10 0
 Tequila AvionSilver -10 -10 0
 CoffeeLiqueur MrBlack -10 -10 0
+ElderflowerLiqueur StGermain2 -10 -10 0
+ElderflowerLiqueur StGermain3 -10 -10 0

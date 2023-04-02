@@ -15,7 +15,7 @@
 3 Bourbon-FourRoses Juice-Lemon SimpleSyrup-1To1Caster 60 30 20
 3 Tequila-MilagroSilver Juice-Lime SimpleSyrup-1To1Caster 65 35 25
 3 Gin-Plymouth Juice-Lemon SimpleSyrup-1To1Caster 60 30 25
-3 AppleBrandy-LairdsStraight Juice-Lemon SimpleSyrup-1To1Caster 60 40 30
+3 AppleBrandy-LairdsStraight Juice-Lemon SimpleSyrup-1To1Caster 35 30 25
 3 Genever-Bols Juice-Lemon SimpleSyrup-1To1Caster 50 25 20
 3 Tequila-MilagroSilver Juice-Lime AgaveNectar-MadhavaLight 65 35 15
 3 JapaneseWhisky-Hakushu12YearOld Juice-Lemon SimpleSyrup-1To1Caster 65 35 20
@@ -73,8 +73,6 @@
 4 Gin-Tanqueray Juice-Lemon Absinthe-StGeorge SimpleSyrup-1To1Caster 35 25 10 15
 4 Gin-Tanqueray Juice-Lemon OrangeCuracao-RoyalCombier SimpleSyrup-1To1Caster 45 30 15 20
 3 DarkRum-AppletonEstate12YearOld Juice-Lime SimpleSyrup-1To1Caster 50 35 35
-3 Amaro-FernetBranca Juice-Lemon SimpleSyrup-1To1Caster 35 25 20
-4 Gin-Tanqueray Juice-Lemon ElderflowerLiqueur-StGermain SimpleSyrup-1To1Caster 30 25 30 10
 3 Cognac-PierreFerrand1840 Juice-Lemon SimpleSyrup-1To1Caster 40 30 25
 3 Mezcal-LosAmantesJoven Juice-Lime SimpleSyrup-1To1Caster 45 30 20
 3 Bourbon-AngelsEnvy Juice-Lemon SimpleSyrup-1To1Caster 65 40 30
@@ -107,3 +105,7 @@
 4 DarkRum-AppletonEstate12YearOld Juice-Lime CoffeeLiqueur-MrBlack SimpleSyrup-1To1Caster 30 40 35 30
 4 DarkRum-AppletonEstate12YearOld Juice-Lime GrapefruitLiqueur-CombierCremeDePamplemousseRose SimpleSyrup-1To1Caster 30 35 25 15
 3 Bitters-Peychauds Juice-Lime SimpleSyrup-1To1Caster 60 55 45
+3 Amaro-FernetBranca Juice-Lemon SimpleSyrup-1To1Caster 40 30 25
+4 PineappleRum-Plantation Juice-Lime ElderflowerLiqueur-StGermain SimpleSyrup-1To1Caster 35 35 40 20
+4 Tequila-AvionSilver Juice-Lime CassisLiqueur-Mathilde2 SimpleSyrup-1To1Caster 35 40 35 20
+4 PineappleRum-Plantation Juice-Lime CassisLiqueur-Mathilde3 SimpleSyrup-1To1Caster 35 35 20 25
